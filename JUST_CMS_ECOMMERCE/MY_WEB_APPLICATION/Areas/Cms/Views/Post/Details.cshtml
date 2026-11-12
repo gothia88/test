@@ -1,0 +1,85 @@
+﻿@model Models.Cms.Post
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.Cms.Post.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Title)
+
+@Html.DtxDisplayNameAndValueFor(model => model.PostCategory.Name,
+	caption: Resources.Models.Cms.PostCategory.EntityName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.DisplayCreatorUser)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsCommentingEnabled)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsDraft)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsFeatured)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Password)
+
+@Html.DtxDisplayNameAndValueFor(model => model.AccessType.Name,
+	caption: Resources.Models.AccessType.EntityName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.StartPublishingDateTime,
+	Infrastructure.Enums.DisplayValueTypes.Date)
+
+@Html.DtxDisplayNameAndValueFor(model => model.FinishPublishingDateTime,
+	Infrastructure.Enums.DisplayValueTypes.Date)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Tags)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Keywords)
+
+@Html.DtxDisplayNameAndValueFor(model => model.DoesSearchEnginesIndexIt)
+
+@Html.DtxDisplayNameAndValueFor(model => model.DoesSearchEnginesFollowIt)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Author)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Classification)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Copyright)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Hits,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.ImageUrl,
+	Infrastructure.Enums.DisplayValueTypes.Url)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Introduction,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Body,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Cms.Post.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Delete,
+	MVC.Cms.Post.Delete(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Cms.Post.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

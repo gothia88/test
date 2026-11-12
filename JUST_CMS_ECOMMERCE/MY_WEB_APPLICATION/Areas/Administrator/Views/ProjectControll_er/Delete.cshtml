@@ -1,0 +1,67 @@
+﻿@model Models.ProjectController
+
+@{
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.DeleteOf,
+		Resources.Models.ProjectController.EntityName,
+		Model.ProjectArea.DisplayName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.IsVisibleJustForProgrammer)
+
+	@Html.DtxDisplayNameAndValueFor(model => model.Name)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.DisplayName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+
+@{
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+
+	int intProjectActionCount =
+		oUnitOfWork.ProjectActionRepository.Get()
+		.Where(current => current.ProjectControllerId == Model.Id)
+		.Count();
+
+	if ((intProjectActionCount == 0) &&
+		(Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer))
+	{
+		using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(excludePropertyErrors: true)
+
+			@Html.DtxDelete()
+		}
+	}
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Details,
+	MVC.Administrator.ProjectControll_er.Details(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.ProjectControll_er.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.ProjectControll_er.Index(Model.ProjectAreaId))
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

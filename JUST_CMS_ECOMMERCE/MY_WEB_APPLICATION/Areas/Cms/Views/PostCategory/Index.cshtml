@@ -1,0 +1,143 @@
+﻿@model IEnumerable<ViewModels.Areas.Cms.PostCategory.IndexViewModel>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.Cms.PostCategory.EntitiesName);
+
+	ViewBag.Title = strTitle;
+
+	Models.Cms.PostCategory oParentPostCategory =
+		ViewBag.ParentPostCategory as Models.Cms.PostCategory;
+
+	@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayPostCategoryPath,
+		oParentPostCategory, new ViewDataDictionary())
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.Cms.PostCategory.EntityName);
+
+	if (oParentPostCategory == null)
+	{
+		@Html.DtxActionLink(strCreate,
+			MVC.Cms.PostCategory.Create())
+	}
+	else
+	{
+		@Html.DtxActionLink(strCreate,
+			MVC.Cms.PostCategory.Create(oParentPostCategory.Id))
+	}
+}
+
+<br />
+<br />
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 70px;">
+				&nbsp;
+			</th>
+			<th style="width: 90px;">
+				@Html.DisplayNameFor(model => model.ImageUrl)
+			</th>
+			<th style="width: 70px;">
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th style="width: 70px;">
+				@Html.DisplayNameFor(model => model.IsFeatured)
+			</th>
+			<th style="width: 70px;">
+				@Html.DisplayNameFor(model => model.Ordering)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th style="width: 150px;">
+				@Html.DisplayNameFor(model => model.ChildCount)
+			</th>
+			<th style="width: 150px;">
+				@Html.DisplayNameFor(model => model.PostCount)
+			</th>
+			<th style="width: 160px;">
+				@Resources.Models.General.InsertAndUpdateDateTime
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.Cms.PostCategory.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@Html.DtxActionLink(Resources.Actions.Edit,
+						MVC.Cms.PostCategory.Edit(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Edit)
+
+					@if ((item.ChildCount == 0) && (item.PostCount == 0))
+					{
+						@Html.DtxActionLink(Resources.Actions.Delete,
+							MVC.Cms.PostCategory.Delete(item.Id),
+							Infrastructure.Enums.ActionLinksTypes.Delete)
+					}
+				</td>
+				<td>
+					@if (string.IsNullOrWhiteSpace(item.ImageUrl) == false)
+					{
+						<img src="@item.ImageUrl" class="img-responsive img-rounded" alt="@item.Name" title="@item.Name" width="80" />
+					}
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsFeatured)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.Ordering)
+				</td>
+				<td>
+					@Html.DtxActionLink(item.Name,
+						MVC.Cms.PostCategory.Index(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+						checkPermission: false)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.ChildCount)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.PostCount)
+				</td>
+				<td>
+					@Html.DisplayDateTime(item.InsertDateTime, displayTime: true)
+					<br />
+					@Html.DisplayDateTime(item.UpdateDateTime, displayTime: true)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

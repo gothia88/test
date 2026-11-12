@@ -1,0 +1,125 @@
+﻿@model Models.ECommerce.Plan
+
+<div class="row">
+	<div class="col-sm-12">
+		<h3>
+			@Html.ActionLink(Model.Name, MVC.ECommerce.Plan.DisplayPlan(Model.Id))
+		</h3>
+	</div>
+</div>
+
+<div class="row bg-info">
+	<div class="col-sm-4">
+		@Resources.Models.General.Price
+		(@Resources.Models.General.Currency)
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.Price)
+		(@Resources.Models.General.Currency)
+	</div>
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.Duration
+		(@Resources.Models.General.Months)
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.DurationInMonth)
+		(@Resources.Models.General.Months)
+	</div>
+</div>
+
+<div class="row bg-warning">
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.SiteCommissionRate
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.SiteCommissionRate)
+		(@Resources.Models.General.Percent)
+	</div>
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.ExtraSiteCommissionRateForIsFeaturedProducts
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.ExtraSiteCommissionRateForIsFeaturedProducts)
+		(@Resources.Models.General.Percent)
+	</div>
+</div>
+
+<div class="row bg-info">
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.MinCreditForPayment
+		(@Resources.Models.General.Currency)
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.MinCreditForPayment)
+		(@Resources.Models.General.Currency)
+	</div>
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.MaxTimeForPaymentInHour
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.MaxTimeForPaymentInHour)
+		(@Resources.Models.General.Hours)
+	</div>
+</div>
+
+<div class="row bg-warning">
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.MaxDownloadSpeedInKB
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.MaxDownloadSpeedInKB)
+		(@Resources.Models.General.KiloBytes)
+	</div>
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.MaxFileLengthForUploadingInMB
+	</div>
+	<div class="col-sm-2">
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.MaxFileLengthForUploadingInMB)
+		(@Resources.Models.General.MegaBytes)
+	</div>
+</div>
+
+<div class="row bg-info">
+	<div class="col-sm-4">
+		@Resources.Models.ECommerce.Plan.SmsNotification
+	</div>
+	<div class="col-sm-2">
+		@if (Model.SmsNotification)
+		{
+			@Resources.Models.General.Yes
+		}
+		else
+		{
+			@Resources.Models.General.No
+		}
+	</div>
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-2">
+	</div>
+</div>
+
+<br />
+
+@if (Model.Price == 0)
+{
+	<div class="row">
+		<div class="col-sm-2">
+			<a href="~/ECommerce/Plan/SelectFreePlan/@(Model.Id)">
+				<img src="~/Content/Images/SelectFreePlan.png" alt="Select Free Plan" title="Select Free Plan" class="img-responsive img-rounded" />
+			</a>
+		</div>
+	</div>
+}
+else
+{
+	<div class="row">
+		<div class="col-sm-2">
+			<a href="~/ECommerce/Transaction/BuyPlanByCredit/@(Model.Id)">
+				<img src="~/Content/Images/PayByCredit.png" alt="Pay By Credit" title="Pay By Credit" class="img-responsive img-rounded" />
+			</a>
+		</div>
+	</div>
+}
+
+<hr />

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ViewModels.Areas.Cms.Tag.IndexViewModel>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.Common.Tag.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.Common.Tag.EntityName);
+}
+
+@Html.DtxActionLink(strCreate,
+	MVC.Cms.Tag.Create())
+
+<br />
+<br />
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 100px;">
+				&nbsp;
+			</th>
+			<th style="width: 100px;">
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th style="width: 100px;">
+				@Html.DisplayNameFor(model => model.IsVerified)
+			</th>
+			<th style="width: 100px;">
+				@Html.DisplayNameFor(model => model.Ordering)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th style="width: 100px;">
+				@Html.DisplayNameFor(model => model.PageCount)
+			</th>
+			<th style="width: 100px;">
+				@Html.DisplayNameFor(model => model.PostCount)
+			</th>
+			<th style="width: 160px;">
+				@Html.DisplayNameFor(model => model.UpdateDateTime)
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.Cms.Tag.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@Html.DtxActionLink(Resources.Actions.Edit,
+						MVC.Cms.Tag.Edit(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Edit)
+
+					@Html.DtxActionLink(Resources.Actions.Delete,
+						MVC.Cms.Tag.Delete(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Delete)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsVerified)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.Ordering)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.PageCount)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.PostCount)
+				</td>
+				<td>
+					@Html.DisplayDateTime(item.UpdateDateTime, displayTime: true)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

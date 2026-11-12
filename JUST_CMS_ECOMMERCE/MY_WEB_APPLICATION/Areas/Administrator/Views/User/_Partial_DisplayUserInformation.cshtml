@@ -1,0 +1,44 @@
+﻿@model Models.User
+
+<fieldset>
+	<legend>
+		@Html.DtxActionLink(Model.FullName,
+			MVC.Administrator.User.Details(Model.Id))
+	</legend>
+
+	<div class="field">
+		<div class="caption">
+			@Html.DisplayNameFor(model => model.IsActive)
+		</div>
+		<div class="controls">
+			@Html.DisplayFor(model => model.IsActive)
+		</div>
+	</div>
+
+	<div class="field">
+		<div class="caption">
+			@Html.DisplayNameFor(model => model.RoleId)
+		</div>
+		<div class="controls">
+			@Html.DisplayFor(model => model.Role.Name)
+		</div>
+	</div>
+
+	<div class="field">
+		<div class="caption">
+			@Html.DisplayNameFor(model => model.EmailAddress)
+		</div>
+		<div class="controls">
+			@Html.DisplayFor(model => model.EmailAddress)
+		</div>
+	</div>
+
+	<div class="field">
+		<div class="caption">
+			@Html.DisplayNameFor(model => model.CellPhoneNumber)
+		</div>
+		<div class="controls">
+			@Html.DisplayFor(model => model.CellPhoneNumber)
+		</div>
+	</div>
+</fieldset>

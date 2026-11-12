@@ -1,0 +1,136 @@
+﻿@model IList<Models.Cms.PostCategory>
+
+@section headSection
+{
+	@switch(Infrastructure.Utility.CultureLcid)
+	{
+		case 1065:
+		{
+			<link href="~/Content/TreeView/rtl/treeview.css" rel="stylesheet" />
+			break;
+		}
+
+		default:
+		{
+			<link href="~/Content/TreeView/ltr/treeview.css" rel="stylesheet" />
+			break;
+		}
+	}
+
+	<script>
+
+		$(document).ready(function () {
+
+			$('.tree li:first').show();
+
+			$('.tree li').each(function () {
+
+				if ($(this).find("> ul").length > 0)
+				{
+
+					$(this).find("> a > span").addClass("glyphicon-folder-open");
+
+				}
+
+			});
+
+			$('.tree li').on('click', function (e) {
+
+				var children = $(this).find('> ul > li');
+
+				if (children.is(":visible")) {
+
+					children.hide('fast');
+
+					$(this).find("> a > span").addClass("glyphicon-folder-close");
+					$(this).find("> a > span").removeClass("glyphicon-folder-open");
+
+				}
+				else {
+
+					children.show('fast');
+
+					$(this).find("> a > span").addClass("glyphicon-folder-open");
+					$(this).find("> a > span").removeClass("glyphicon-folder-close");
+
+				}
+
+				e.stopPropagation();
+
+			});
+
+		});
+
+	</script>
+}
+
+@{
+	string strTitle =
+		Resources.Models.Cms.General.DisplayPostCategories;
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<div class="tree">
+	<ul>
+		<li>
+			<a href="#" onclick="return(false);">
+				<span class="glyphicon" aria-hidden="true"></span>
+				@Resources.Models.Cms.PostCategory.EntitiesName
+			</a>
+			<ul>
+				@DisplayItems(Model.Where(current => current.ParentPostCategory == null).ToList())
+			</ul>
+		</li>
+	</ul>
+</div>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()
+
+@helper DisplayItems(IList<Models.Cms.PostCategory> items)
+{
+	foreach (Models.Cms.PostCategory item in items)
+	{
+		<li>
+			@DisplayItem(item)
+
+			@if (item.Children.Count != 0)
+			{
+				<ul>
+					@DisplayItems(item.Children)
+				</ul>
+			}
+		</li>
+	}
+}
+
+@helper DisplayItem(Models.Cms.PostCategory item)
+{
+	if (item.Children.Count != 0)
+	{
+		<a href="#" onclick="return(false);">
+			<span class="glyphicon" aria-hidden="true"></span>
+			@item.Name
+		</a>
+	}
+	else
+	{
+		<a href="~/Cms/General/DisplayPostsOfPostCategory/@item.Id">
+			@item.Name
+			[@Resources.Models.Cms.General.DisplayPosts]
+		</a>
+	}
+}

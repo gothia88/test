@@ -1,0 +1,561 @@
+﻿@model ViewModels.Areas.Administrator.User.SearchViewModel
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.User.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		// **************************************************
+		$("div#divSearch").dblclick(function(e){
+
+			$(this).next().slideToggle();
+
+		});
+		// **************************************************
+
+		// **************************************************
+		var varDataSourceSettings = {
+
+			pageSize: 10,
+
+			serverPaging: true,
+			serverSorting: true,
+			serverGrouping: false,
+			serverFiltering: false,
+			serverAggregates: false,
+
+			transport: {
+
+				read: {
+
+					data: null,
+					type: "POST",
+					dataType: "json",
+					url: "/Administrator/User/GetData",
+
+				},
+
+			},
+
+			requestStart: function(e) {
+
+				$("button#btnReset").hide();
+				$("button#btnSearch").hide();
+
+			},
+
+			requestEnd: function(e) {
+
+				$("button#btnReset").show();
+				$("button#btnSearch").show();
+
+			},
+
+			schema: {
+
+				data: function (e) {
+
+					return (e.Data);
+
+				},
+				total: function (e) {
+
+					return (e.Total);
+
+				},
+
+			},
+
+		};
+		// **************************************************
+
+		// **************************************************
+		var varDataSource =
+			new kendo.data.DataSource(varDataSourceSettings);
+		// **************************************************
+
+		$("div#grid").kendoGrid({
+
+			// **************************************************
+			sortable: {
+				//mode: "single",
+				mode: "multiple",
+				allowUnsort: true,
+			},
+
+			pageable: {
+				info: true,
+				input: true,
+				refresh: true,
+				numeric: true,
+				buttonCount: 5,
+				previousNext: true,
+				pageSizes: [5, 10, 25, 50, 100],
+				messages: {
+					morePages: "صفحات بيشتر",
+					page: "شماره صفحه",
+				}
+			},
+
+			groupable: false,
+			filterable: false,
+			scrollable: false,
+			reorderable: true,
+
+			columnMenu: {
+				columns: true,
+				sortable: true,
+				filterable: false,
+				messages: {
+					lock: "قفل شده",
+					unlock: "قفل نشده",
+				}
+			},
+
+			navigatable: true,
+			selectable: "multiple row",
+
+			dataSource: varDataSource,
+
+			dataBinding: function () {
+
+				rowNumber =
+					(this.dataSource.page() - 1) * this.dataSource.pageSize();
+
+			},
+
+			dataBound: function () {
+
+				doSomeEffects();
+
+			},
+			// **************************************************
+
+			columns:
+			[
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "رديف",
+					template: "#= ++rowNumber #",
+				},
+
+				{
+					width: "150px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "",
+					template: function (dataItem) {
+
+						var strTemplate = "";
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Display)" href="/Administrator/User/Details/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-eye-open"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Edit)" href="/Administrator/User/Edit/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-edit"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Delete)" href="/Administrator/User/Delete/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-trash"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.ChangePassword)" href="/Administrator/User/ChangePassword/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-transfer"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.SelectGroups)" href="/Administrator/User/SelectGroups/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-link"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.SelectActions)" href="/Administrator/User/SelectProjectActions/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-align-right"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.DisplayUserLoginLogs)" href="/Administrator/UserLoginLog/DisplayUserLoginLogs/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-align-justify"></span></a>';
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "85px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "تاييد ايميل",
+					field: "@Resources.Models.Strings.UserKeys.IsEmailAddressVerified",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.UserKeys.IsEmailAddressVerified) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "60px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "@Resources.Models.General.IsActive",
+					field: "@Resources.Models.Strings.GeneralKeys.IsActive",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.GeneralKeys.IsActive) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "60px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "تاييد",
+					field: "@Resources.Models.Strings.GeneralKeys.IsVerified",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.GeneralKeys.IsVerified) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "85px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "@Resources.Models.User.IsDirectContactable",
+					field: "@Resources.Models.Strings.UserKeys.IsDirectContactable",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.UserKeys.IsDirectContactable) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "60px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "خاتمه",
+					field: "@Resources.Models.Strings.UserKeys.IsAccountTerminated",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.UserKeys.IsAccountTerminated) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "60px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "حذف",
+					field: "@Resources.Models.Strings.GeneralKeys.IsDeleted",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.GeneralKeys.IsDeleted) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "@Resources.Models.User.FullName",
+					template: function (dataItem) {
+
+						var strTemplate =
+							"<a href='/Account/DisplayProfile/" + dataItem.Id + "'>" + dataItem.FullName + "</a>";
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "85px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "@Resources.Models.User.Role",
+					template: function (dataItem) {
+
+						var strTemplate =
+							dataItem.RoleName;
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "@Resources.Models.User.Plan",
+					template: function (dataItem) {
+
+						var strTemplate = '';
+
+						if (dataItem.PlanId != null) {
+
+							strTemplate =
+								"<a href='/ECommerce/Plan/Details/" + dataItem.PlanId + "'>" + dataItem.PlanName + "</a>";
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "60px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "@Resources.Models.User.HasAvatar",
+					field: "@Resources.Models.Strings.UserKeys.HasAvatar",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.HasAvatar) {
+
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+			]
+
+		});
+
+		$("button#btnSearch").click(function(){
+
+			//var varData =
+			//	$("form#frmData").serialize();
+
+			var varData = {
+
+				PlanId: function () {
+
+					return ($("select#PlanId").val());
+
+				},
+
+				RoleId: function () {
+
+					return ($("select#RoleId").val());
+
+				},
+
+				GenderId: function () {
+
+					return ($("select#GenderId").val());
+
+				},
+
+				CultureLcid: function () {
+
+					return ($("select#CultureLcid").val());
+
+				},
+
+				FirstName: function () {
+
+					return ($("input#FirstName").val());
+
+				},
+
+				LastName: function () {
+
+					return ($("input#LastName").val());
+
+				},
+
+				EmailAddress: function () {
+
+					return ($("input#EmailAddress").val());
+
+				},
+
+				CellPhoneNumber: function () {
+
+					return ($("input#CellPhoneNumber").val());
+
+				},
+
+			};
+
+			varDataSourceSettings.transport.read.data = varData;
+
+			varDataSource =
+				new kendo.data.DataSource(varDataSourceSettings);
+
+			var varGrid =
+				$('div#grid').data("kendoGrid");
+
+			varGrid.setDataSource(varDataSource);
+
+		});
+
+	});
+</script>
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading(id: "divSearch")
+@Html.DtxPanelTitle(Resources.Actions.Search)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxBeginForm(id: "frmData")
+@Html.DtxLabelDropDownListFor(model => model.CultureLcid)
+
+@Html.DtxLabelDropDownListFor(model => model.GenderId)
+
+@Html.DtxLabelDropDownListFor(model => model.RoleId)
+
+@Html.DtxLabelDropDownListFor(model => model.PlanId)
+
+@Html.DtxLabelTextBoxFor(model => model.FirstName)
+
+@Html.DtxLabelTextBoxFor(model => model.LastName)
+
+@Html.DtxLabelTextBoxFor(model => model.EmailAddress,
+	leftToRight: true)
+
+@Html.DtxLabelTextBoxFor(model => model.CellPhoneNumber,
+	leftToRight: true)
+
+@Html.DtxSimpleButton(id: "btnSearch",
+	caption: Resources.Buttons.Search)
+@Html.DtxSimpleReset()
+@Html.DtxEndForm()
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.User.EntityName);
+}
+
+@Html.DtxActionLink(strCreate,
+	MVC.Administrator.User.Create())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
+
+
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxGrid(id: "grid")
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

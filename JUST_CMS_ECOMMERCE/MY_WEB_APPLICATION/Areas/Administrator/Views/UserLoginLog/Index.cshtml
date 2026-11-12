@@ -1,0 +1,229 @@
+﻿@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.UserLoginLog.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		// **************************************************
+		var varDataSource =
+			new kendo.data.DataSource({
+
+				pageSize: 10,
+
+				serverPaging: true,
+				serverSorting: true,
+				serverGrouping: false,
+				serverFiltering: false,
+				serverAggregates: false,
+
+				transport: {
+					read: {
+						type: "POST",
+						dataType: "json",
+						url: "/Administrator/UserLoginLog/GetData",
+					},
+				},
+
+				schema: {
+					data: function (e) {
+						return (e.Data);
+					},
+					total: function (e) {
+						return (e.Total);
+					},
+				},
+
+			});
+		// **************************************************
+
+		$("div#grid").kendoGrid({
+
+			// **************************************************
+			sortable: {
+				//mode: "single",
+				mode: "multiple",
+				allowUnsort: true,
+			},
+
+			pageable: {
+				info: true,
+				input: true,
+				refresh: true,
+				numeric: true,
+				buttonCount: 5,
+				previousNext: true,
+				pageSizes: [5, 10, 25, 50, 100],
+				messages: {
+					morePages: "صفحات بيشتر",
+					page: "شماره صفحه",
+				}
+			},
+
+			groupable: false,
+			filterable: false,
+			scrollable: false,
+			reorderable: true,
+
+			columnMenu: {
+				columns: true,
+				sortable: true,
+				filterable: false,
+				messages: {
+					lock: "قفل شده",
+					unlock: "قفل نشده",
+				}
+			},
+
+			navigatable: true,
+			selectable: "multiple row",
+
+			dataSource: varDataSource,
+
+			dataBinding: function () {
+
+				rowNumber =
+					(this.dataSource.page() - 1) * this.dataSource.pageSize();
+
+			},
+
+			dataBound: function () {
+
+				doSomeEffects();
+
+			},
+			// **************************************************
+
+			columns:
+			[
+				{
+					hidden: false,
+					locked: true,
+					lockable: true,
+					width: "50px",
+					title: "#",
+					template: "#= ++rowNumber #",
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					width: "60px",
+					title: "",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Edit)" href="/Administrator/User/Edit/'
+							+ dataItem.UserId + '"><span class="glyphicon glyphicon-edit"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Display)" href="/Administrator/User/Details/'
+							+ dataItem.UserId + '"><span class="glyphicon glyphicon-eye-open"></span></a>';
+
+						return (strTemplate);
+					},
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.UserLoginLog.Hidden",
+					field: "@Resources.Models.Strings.UserLoginLogKeys.IsHidden",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@Resources.Models.Strings.UserLoginLogKeys.IsHidden) {
+							strTemplate =
+								'<span class="glyphicon glyphicon-check"></span>';
+						}
+
+						return (strTemplate);
+					},
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.User.Gender",
+					field: "@Resources.Models.Strings.UserKeys.Gender"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.User.FirstName",
+					field: "@Resources.Models.Strings.UserKeys.FirstName"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.User.LastName",
+					field: "@Resources.Models.Strings.UserKeys.LastName"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.User.EmailAddress",
+					field: "@Resources.Models.Strings.UserKeys.EmailAddress"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.User.CellPhoneNumber",
+					field: "@Resources.Models.Strings.UserKeys.CellPhoneNumber"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@Resources.Models.UserLoginLog.IP",
+					field: "@Resources.Models.Strings.UserLoginLogKeys.IP"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					sortable: false,
+					title: "@Resources.Models.UserLoginLog.LoginDateTime",
+					field: "LoginDateTime.DisplayDateTime"
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					sortable: false,
+					title: "@Resources.Models.UserLoginLog.LogoutDateTime",
+					field: "LogoutDateTime.DisplayDateTime"
+				},
+			]
+		});
+	})
+</script>
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxGrid(id: "grid")
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

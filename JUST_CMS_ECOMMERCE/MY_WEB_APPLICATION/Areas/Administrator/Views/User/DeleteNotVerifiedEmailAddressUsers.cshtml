@@ -1,0 +1,30 @@
+﻿@model ViewModels.Areas.Administrator.User.DeleteNotVerifiedEmailAddressUsersViewModel
+
+@{
+	string strTitle =
+		Resources.Models.User.DeleteNotVerifiedEmailAddressUsers;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Hours,
+		leftToRight: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Submit)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

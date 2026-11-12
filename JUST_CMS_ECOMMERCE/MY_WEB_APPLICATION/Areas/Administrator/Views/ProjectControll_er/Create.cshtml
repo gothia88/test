@@ -1,0 +1,57 @@
+﻿@model Models.ProjectController
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	Models.ProjectArea oProjectArea =
+		ViewBag.ProjectArea as Models.ProjectArea;
+
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.CreateOf,
+		Resources.Models.ProjectController.EntityName,
+		oProjectArea.DisplayName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.ProjectAreaId)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsVisibleJustForProgrammer)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.DisplayName)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxSubmit(Resources.Buttons.Create)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.ProjectControll_er.Index(oProjectArea.Id))
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

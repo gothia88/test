@@ -1,0 +1,24 @@
+﻿@model Models.Common.Tag
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(Resources.Models.Common.Tag.PageList)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<ul>
+	@foreach (Models.Cms.Page oPage in Model.Pages)
+	{
+		<li>
+			@Html.DtxActionLink(oPage.Title + " [" + oPage.Name + "]",
+				MVC.Cms.Page.Details(oPage.Id))
+		</li>
+	}
+</ul>
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

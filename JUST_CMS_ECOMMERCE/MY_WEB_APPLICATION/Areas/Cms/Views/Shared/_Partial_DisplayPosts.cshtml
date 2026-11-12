@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ViewModels.Areas.Cms.Shared.DisplayPostsViewModel>
+
+@foreach (var varPost in Model)
+{
+	@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayPost, varPost)
+}

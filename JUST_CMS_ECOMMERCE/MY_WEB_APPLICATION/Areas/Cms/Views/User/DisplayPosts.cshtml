@@ -1,0 +1,339 @@
+﻿@model IEnumerable<Models.Cms.Post>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.Cms.Post.DisplayMyPosts);
+
+	ViewBag.Title = strTitle;
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		// **************************************************
+		var varDataSource =
+			new kendo.data.DataSource({
+
+				pageSize: 10,
+
+				serverPaging: true,
+				serverSorting: true,
+				serverGrouping: false,
+				serverFiltering: false,
+				serverAggregates: false,
+
+				transport: {
+					read: {
+						type: "POST",
+						dataType: "json",
+						url: "/Cms/User/GetPosts",
+					},
+				},
+
+				schema: {
+					data: function (e) {
+						return (e.Data);
+					},
+					total: function (e) {
+						return (e.Total);
+					},
+				},
+			});
+		// **************************************************
+
+		$("div#grid").kendoGrid({
+
+			// **************************************************
+			sortable: {
+				//mode: "single",
+				mode: "multiple",
+				allowUnsort: true,
+			},
+
+			pageable: {
+				info: true,
+				input: true,
+				refresh: true,
+				numeric: true,
+				buttonCount: 5,
+				previousNext: true,
+				pageSizes: [5, 10, 25, 50, 100],
+				messages: {
+					morePages: "صفحات بيشتر",
+					page: "شماره صفحه",
+				}
+			},
+
+			groupable: false,
+			filterable: false,
+			scrollable: false,
+			reorderable: true,
+
+			columnMenu: {
+				columns: true,
+				sortable: true,
+				filterable: false,
+				messages: {
+					lock: "قفل شده",
+					unlock: "قفل نشده",
+				}
+			},
+
+			navigatable: true,
+			selectable: "multiple row",
+
+			dataSource: varDataSource,
+
+			dataBinding: function () {
+
+				rowNumber =
+					(this.dataSource.page() - 1) * this.dataSource.pageSize();
+
+			},
+
+			dataBound: function () {
+
+				doSomeEffects();
+
+			},
+			// **************************************************
+
+			columns:
+			[
+				{
+					hidden: false,
+					locked: true,
+					lockable: true,
+					width: "50px",
+					title: "#",
+					template: "#= ++rowNumber #",
+				},
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					width: "100px",
+					title: "",
+					template: function (dataItem) {
+
+						var strTemplate = "";
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Display)" href="/Cms/User/DisplayPost/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-eye-open"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Edit)" href="/Cms/User/EditPost/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-edit"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.Delete)" href="/Cms/User/DeletePost/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-trash"></span></a> | ';
+
+						strTemplate +=
+							'<a data-toggle="tooltip" data-placement="top" title="@(Resources.Actions.UploadFile)" href="/Cms/User/UploadFile/'
+							+ dataItem.Id + '"><span class="glyphicon glyphicon-file"></span></a>';
+
+						return (strTemplate);
+					},
+				},
+
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@(Resources.Models.Cms.General.IsDraft)",
+					field: "@(Resources.Models.Cms.Strings.GeneralKeys.IsDraft)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Cms.Strings.GeneralKeys.IsDraft)) {
+
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.Cms.General.IsDraft)" class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+					},
+				},
+
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@(Resources.Models.General.IsActive)",
+					field: "@(Resources.Models.Strings.GeneralKeys.IsActive)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.IsActive)) {
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.IsActive)" class="glyphicon glyphicon-check"></span>';
+						}
+
+						return (strTemplate);
+					},
+				},
+
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@(Resources.Models.General.IsVerified)",
+					field: "@(Resources.Models.Strings.GeneralKeys.IsVerified)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.IsVerified)) {
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.IsVerified)" class="glyphicon glyphicon-check"></span>';
+						}
+
+						return (strTemplate);
+					},
+				},
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@(Resources.Models.General.IsFeatured)",
+					field: "@(Resources.Models.Strings.GeneralKeys.IsFeatured)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.IsFeatured)) {
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.IsFeatured)" class="glyphicon glyphicon-check"></span>';
+						}
+
+						return (strTemplate);
+					},
+				},
+				{
+					width: "200px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					sortable: false,
+					title: "@(Resources.Models.Cms.PostCategory.EntityName)",
+					template: function(dataItem) {
+
+						var strResult =
+							'<a href="/Cms/PostCategory/Details/' + dataItem.PostCategoryId + '">' + dataItem.PostCategoryName + '</a>';
+
+						return(strResult);
+					},
+				},
+
+				{
+					hidden: false,
+					locked: false,
+					lockable: true,
+					sortable: false,
+					title: "@(Resources.Models.General.Title)",
+					template: function(dataItem) {
+
+						var strResult =
+							'<a href="/Cms/General/DisplayPost/' + dataItem.Id + '">' + dataItem.Title + '</a>';
+
+						return(strResult);
+					},
+				},
+
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					sortable: false,
+					title: "نظرات",
+					template: function(dataItem) {
+
+						var strResult =
+							dataItem.DisplayCommentCount;
+
+						return(strResult);
+					},
+				},
+
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					title: "@(Resources.Models.General.HasAttachment)",
+					field: "@(Resources.Models.Strings.GeneralKeys.HasAttachment)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.HasAttachment)) {
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.HasAttachment)" class="glyphicon glyphicon-check"></span>';
+						}
+
+						return (strTemplate);
+					},
+				},
+
+				{
+					width: "140px",
+					hidden: false,
+					locked: false,
+					lockable: true,
+					sortable: false,
+					title: "@Resources.Models.General.LastUpdateDateTime",
+					template: function(dataItem) {
+
+						var strResult =
+							dataItem.UpdateDateTime.DisplayDateTime;
+
+						return(strResult);
+					},
+				},
+			]
+		});
+	})
+</script>
+
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.Cms.Post.EntityName);
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxActionLink(strCreate,
+	MVC.Cms.User.CreatePost())
+
+<br />
+<br />
+
+@Html.DtxGrid(id: "grid")
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

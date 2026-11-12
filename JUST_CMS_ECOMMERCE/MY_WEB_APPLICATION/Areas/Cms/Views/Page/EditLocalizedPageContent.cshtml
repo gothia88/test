@@ -1,0 +1,46 @@
+﻿@model ViewModels.Areas.Cms.Page.EditLocalizedPageContentViewModel
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		Resources.Actions.EditLocalizedPageContent;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.AreaName)
+	@Html.HiddenFor(model => model.ActionName)
+	@Html.HiddenFor(model => model.ControllerName)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextAreaFor(model => model.LocalizedPageContent,
+		ignoreLabel: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Save,
+		columnOffset: 0)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	<a href="@Model.ToString()" class="@Infrastructure.HtmlHelpers.ActionLinkClassNames">
+		@Resources.Actions.Return
+	</a>
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

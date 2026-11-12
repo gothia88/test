@@ -1,0 +1,35 @@
+﻿@model ViewModels.Areas.ECommerce.Transaction.IncreaseCreditByOnlinePaymentViewModel
+
+@{
+	string strTitle =
+		Resources.Models.ECommerce.Transaction.IncreaseCreditByOnlinePayment;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Amount,
+		leftToRight: true)
+
+	@Html.DtxSubmit("آغاز عمليات مربوط به پرداخت آنلاين")
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Models.ECommerce.Transaction.DisplayMyTransaction,
+		MVC.ECommerce.Transaction.DisplayDataForUser())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

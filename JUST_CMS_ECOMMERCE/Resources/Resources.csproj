@@ -1,0 +1,1591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E5944192-375E-4CD5-93D0-363F5E3E6D7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Resources</RootNamespace>
+    <AssemblyName>Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SmartStringResources">
+      <HintPath>..\packages\SmartStringResources.1.2.0\lib\net40\SmartStringResources.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Actions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Actions.fa-IR.Designer.cs">
+      <DependentUpon>Actions.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Actions.tt.cs">
+      <DependentUpon>Actions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AutoCompleteActions.fa-IR.Designer.cs">
+      <DependentUpon>AutoCompleteActions.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AutoCompleteActions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutoCompleteActions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoCompleteActions.tt.cs">
+      <DependentUpon>AutoCompleteActions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons.fa-IR.Designer.cs">
+      <DependentUpon>Buttons.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Buttons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Buttons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons.tt.cs">
+      <DependentUpon>Buttons.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaptchaImage.fa-IR.Designer.cs">
+      <DependentUpon>CaptchaImage.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CaptchaImage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaptchaImage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CaptchaImage.tt.cs">
+      <DependentUpon>CaptchaImage.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Captions.fa-IR.Designer.cs">
+      <DependentUpon>Captions.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Captions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Captions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Captions.tt.cs">
+      <DependentUpon>Captions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Controllers.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers.fa-IR.Designer.cs">
+      <DependentUpon>Controllers.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controllers.tt.cs">
+      <DependentUpon>Controllers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Errors.fa-IR.Designer.cs">
+      <DependentUpon>Errors.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Errors.tt.cs">
+      <DependentUpon>Errors.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hints.fa-IR.Designer.cs">
+      <DependentUpon>Hints.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Hints.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hints.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuItems.fa-IR.Designer.cs">
+      <DependentUpon>MenuItems.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MenuItems.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuItems.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Messages.fa-IR.Designer.cs">
+      <DependentUpon>Messages.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Messages.tt.cs">
+      <DependentUpon>Messages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccessType.Designer.cs">
+      <DependentUpon>AccessType.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\AccessType.fa-IR.Designer.cs">
+      <DependentUpon>AccessType.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\AccessType.tt.cs">
+      <DependentUpon>AccessType.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationSettings.Designer.cs">
+      <DependentUpon>ApplicationSettings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ApplicationSettings.fa-IR.Designer.cs">
+      <DependentUpon>ApplicationSettings.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ApplicationSettings.tt.cs">
+      <DependentUpon>ApplicationSettings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseAreaControllerAction.Designer.cs">
+      <DependentUpon>BaseAreaControllerAction.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\BaseAreaControllerAction.fa-IR.Designer.cs">
+      <DependentUpon>BaseAreaControllerAction.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\BaseAreaControllerAction.tt.cs">
+      <DependentUpon>BaseAreaControllerAction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\City.Designer.cs">
+      <DependentUpon>City.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\City.fa-IR.Designer.cs">
+      <DependentUpon>City.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\City.tt.cs">
+      <DependentUpon>City.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\BaseLocalizedPageOrPost.Designer.cs">
+      <DependentUpon>BaseLocalizedPageOrPost.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\BaseLocalizedPageOrPost.fa-IR.Designer.cs">
+      <DependentUpon>BaseLocalizedPageOrPost.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\BaseLocalizedPageOrPost.tt.cs">
+      <DependentUpon>BaseLocalizedPageOrPost.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\General.fa-IR.Designer.cs">
+      <DependentUpon>General.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\General.Designer.cs">
+      <DependentUpon>General.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\General.tt.cs">
+      <DependentUpon>General.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\Layout.Designer.cs">
+      <DependentUpon>Layout.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Layout.fa-IR.Designer.cs">
+      <DependentUpon>Layout.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Layout.tt.cs">
+      <DependentUpon>Layout.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\Page.Designer.cs">
+      <DependentUpon>Page.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Page.fa-IR.Designer.cs">
+      <DependentUpon>Page.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Page.tt.cs">
+      <DependentUpon>Page.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\PageContent.Designer.cs">
+      <DependentUpon>PageContent.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\PageContent.fa-IR.Designer.cs">
+      <DependentUpon>PageContent.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\PageContent.tt.cs">
+      <DependentUpon>PageContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\Post.Designer.cs">
+      <DependentUpon>Post.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Post.fa-IR.Designer.cs">
+      <DependentUpon>Post.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Post.tt.cs">
+      <DependentUpon>Post.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\PostCategory.Designer.cs">
+      <DependentUpon>PostCategory.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\PostCategory.fa-IR.Designer.cs">
+      <DependentUpon>PostCategory.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\PostCategory.tt.cs">
+      <DependentUpon>PostCategory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\Settings.Designer.cs">
+      <DependentUpon>Settings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Settings.fa-IR.Designer.cs">
+      <DependentUpon>Settings.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\Settings.tt.cs">
+      <DependentUpon>Settings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\User.fa-IR.Designer.cs">
+      <DependentUpon>User.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Cms\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cms\User.tt.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Common\Tag.Designer.cs">
+      <DependentUpon>Tag.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Common\Tag.fa-IR.Designer.cs">
+      <DependentUpon>Tag.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Common\Tag.tt.cs">
+      <DependentUpon>Tag.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Common\BaseSeo.fa-IR.Designer.cs">
+      <DependentUpon>BaseSeo.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Common\BaseSeo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseSeo.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Common\BaseSeo.tt.cs">
+      <DependentUpon>BaseSeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.Designer.cs">
+      <DependentUpon>Country.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Country.fa-IR.Designer.cs">
+      <DependentUpon>Country.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Country.tt.cs">
+      <DependentUpon>Country.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECommerce\Settings.Designer.cs">
+      <DependentUpon>Settings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ECommerce\Settings.fa-IR.Designer.cs">
+      <DependentUpon>Settings.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ECommerce\Settings.tt.cs">
+      <DependentUpon>Settings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECommerce\Transaction.tt.cs">
+      <DependentUpon>Transaction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECommerce\Plan.fa-IR.Designer.cs">
+      <DependentUpon>Plan.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ECommerce\Plan.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Plan.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECommerce\Plan.tt.cs">
+      <DependentUpon>Plan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECommerce\Transaction.fa-IR.Designer.cs">
+      <DependentUpon>Transaction.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ECommerce\Transaction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transaction.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.Designer.cs">
+      <DependentUpon>Gender.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Gender.fa-IR.Designer.cs">
+      <DependentUpon>Gender.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Gender.tt.cs">
+      <DependentUpon>Gender.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General.Designer.cs">
+      <DependentUpon>General.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\General.fa-IR.Designer.cs">
+      <DependentUpon>General.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\General.tt.cs">
+      <DependentUpon>General.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Group.Designer.cs">
+      <DependentUpon>Group.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Group.fa-IR.Designer.cs">
+      <DependentUpon>Group.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Group.tt.cs">
+      <DependentUpon>Group.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HttpReferer.Designer.cs">
+      <DependentUpon>HttpReferer.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\HttpReferer.fa-IR.Designer.cs">
+      <DependentUpon>HttpReferer.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\HttpReferer.tt.cs">
+      <DependentUpon>HttpReferer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MailSettings.Designer.cs">
+      <DependentUpon>MailSettings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\MailSettings.fa-IR.Designer.cs">
+      <DependentUpon>MailSettings.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\MailSettings.tt.cs">
+      <DependentUpon>MailSettings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyCulture.Designer.cs">
+      <DependentUpon>MyCulture.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\MyCulture.fa-IR.Designer.cs">
+      <DependentUpon>MyCulture.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\MyCulture.tt.cs">
+      <DependentUpon>MyCulture.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectAction.Designer.cs">
+      <DependentUpon>ProjectAction.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ProjectAction.fa-IR.Designer.cs">
+      <DependentUpon>ProjectAction.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ProjectAction.tt.cs">
+      <DependentUpon>ProjectAction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectArea.Designer.cs">
+      <DependentUpon>ProjectArea.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ProjectArea.fa-IR.Designer.cs">
+      <DependentUpon>ProjectArea.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ProjectArea.tt.cs">
+      <DependentUpon>ProjectArea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectController.Designer.cs">
+      <DependentUpon>ProjectController.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ProjectController.fa-IR.Designer.cs">
+      <DependentUpon>ProjectController.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\ProjectController.tt.cs">
+      <DependentUpon>ProjectController.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.Designer.cs">
+      <DependentUpon>Role.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Role.fa-IR.Designer.cs">
+      <DependentUpon>Role.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Role.tt.cs">
+      <DependentUpon>Role.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.fa-IR.Designer.cs">
+      <DependentUpon>State.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\State.Designer.cs">
+      <DependentUpon>State.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\State.tt.cs">
+      <DependentUpon>State.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.Designer.cs">
+      <DependentUpon>User.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\User.fa-IR.Designer.cs">
+      <DependentUpon>User.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\User.tt.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserAddress.fa-IR.Designer.cs">
+      <DependentUpon>UserAddress.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\UserAddress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAddress.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserAddress.tt.cs">
+      <DependentUpon>UserAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserLoginLog.Designer.cs">
+      <DependentUpon>UserLoginLog.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\UserLoginLog.fa-IR.Designer.cs">
+      <DependentUpon>UserLoginLog.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\UserLoginLog.tt.cs">
+      <DependentUpon>UserLoginLog.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageMessages.fa-IR.Designer.cs">
+      <DependentUpon>PageMessages.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="PageMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PageMessages.tt.cs">
+      <DependentUpon>PageMessages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Titles.fa-IR.Designer.cs">
+      <DependentUpon>Titles.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Titles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Titles.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Account\ChangePasswordViewModel.Designer.cs">
+      <DependentUpon>ChangePasswordViewModel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Account\ChangePasswordViewModel.fa-IR.Designer.cs">
+      <DependentUpon>ChangePasswordViewModel.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Account\ChangePasswordViewModel.tt.cs">
+      <DependentUpon>ChangePasswordViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Account\RegisterViewModel.Designer.cs">
+      <DependentUpon>RegisterViewModel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Account\RegisterViewModel.fa-IR.Designer.cs">
+      <DependentUpon>RegisterViewModel.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Account\RegisterViewModel.tt.cs">
+      <DependentUpon>RegisterViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel.Designer.cs">
+      <DependentUpon>ChangePasswordViewModel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel.fa-IR.Designer.cs">
+      <DependentUpon>ChangePasswordViewModel.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel.tt.cs">
+      <DependentUpon>ChangePasswordViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel.Designer.cs">
+      <DependentUpon>DownloadViewModel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel.fa-IR.Designer.cs">
+      <DependentUpon>DownloadViewModel.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel.tt.cs">
+      <DependentUpon>DownloadViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel.Designer.cs">
+      <DependentUpon>EditLayoutContentViewModel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel.fa-IR.Designer.cs">
+      <DependentUpon>EditLayoutContentViewModel.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel.tt.cs">
+      <DependentUpon>EditLayoutContentViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Home\ContactViewModel.Designer.cs">
+      <DependentUpon>ContactViewModel.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Home\ContactViewModel.fa-IR.Designer.cs">
+      <DependentUpon>ContactViewModel.fa-IR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\Home\ContactViewModel.tt.cs">
+      <DependentUpon>ContactViewModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Common\BaseSeo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseSeo1.txt</LastGenOutput>
+    </None>
+    <Content Include="AutoCompleteActions1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutoCompleteActions.tt</DependentUpon>
+    </Content>
+    <Content Include="Buttons1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Buttons.tt</DependentUpon>
+    </Content>
+    <Content Include="Captions1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Captions.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\ApplicationSettings1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationSettings.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\BaseLocalizedPageOrPost1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseLocalizedPageOrPost.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\General1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>General.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\Layout1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Layout.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\Page1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Page.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\PageContent1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageContent.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\Post1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Post.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\PostCategory1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostCategory.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Cms\Settings.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.tt</DependentUpon>
+    </Content>
+    <None Include="Models\Cms\User.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>User1.txt</LastGenOutput>
+    </None>
+    <Content Include="Models\Cms\User1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Common\BaseSeo1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseSeo.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Common\Tag1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tag.tt</DependentUpon>
+    </Content>
+    <None Include="Models\ECommerce\Settings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Settings.txt</LastGenOutput>
+    </None>
+    <Content Include="Models\ECommerce\Plan1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Plan.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\ECommerce\Settings.txt">
+      <DependentUpon>Settings.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\ECommerce\Transaction1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transaction.tt</DependentUpon>
+    </Content>
+    <None Include="Models\ECommerce\Plan.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Plan1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\ECommerce\Transaction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Transaction1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\UserAddress.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UserAddress1.txt</LastGenOutput>
+    </None>
+    <Content Include="Models\General1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>General.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\UserAddress1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAddress.tt</DependentUpon>
+    </Content>
+    <Content Include="PageMessages1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageMessages.tt</DependentUpon>
+    </Content>
+    <None Include="AutoCompleteActions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AutoCompleteActions1.txt</LastGenOutput>
+    </None>
+    <Content Include="ViewModels\Home\ContactViewModel1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactViewModel.tt</DependentUpon>
+    </Content>
+    <EmbeddedResource Include="Actions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Actions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Actions.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoCompleteActions.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AutoCompleteActions.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoCompleteActions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AutoCompleteActions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Buttons.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Buttons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaptchaImage.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CaptchaImage.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaptchaImage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CaptchaImage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Captions.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Captions.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Captions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Captions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Controllers.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Controllers.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Errors.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hints.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Hints.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hints.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Hints.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuItems.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuItems.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuItems.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuItems.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Messages.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\AccessType.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccessType.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\AccessType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccessType.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ApplicationSettings.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationSettings.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ApplicationSettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\BaseAreaControllerAction.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseAreaControllerAction.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\BaseAreaControllerAction.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseAreaControllerAction.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\City.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>City.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\City.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>City.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\BaseLocalizedPageOrPost.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseLocalizedPageOrPost.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\BaseLocalizedPageOrPost.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseLocalizedPageOrPost.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\General.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\General.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Layout.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Layout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Page.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Page.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Page.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Page.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\PageContent.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageContent.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\PageContent.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageContent.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Post.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Post.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Post.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Post.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\PostCategory.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostCategory.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\PostCategory.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostCategory.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Settings.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\Settings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\User.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Cms\User.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Common\Tag.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tag.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Common\Tag.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tag.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Common\BaseSeo.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseSeo.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Common\BaseSeo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseSeo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Country.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Country.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Country.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Country.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ECommerce\Settings.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ECommerce\Settings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ECommerce\Plan.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Plan.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ECommerce\Plan.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Plan.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ECommerce\Transaction.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Transaction.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ECommerce\Transaction.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Transaction.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Gender.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Gender.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Gender.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Gender.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\General.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\General.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Group.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Group.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Group.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Group.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\HttpReferer.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HttpReferer.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\HttpReferer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HttpReferer.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\MailSettings.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MailSettings.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\MailSettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MailSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\MyCulture.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyCulture.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\MyCulture.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyCulture.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ProjectAction.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectAction.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ProjectAction.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectAction.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ProjectArea.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectArea.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ProjectArea.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectArea.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ProjectController.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectController.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ProjectController.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectController.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Role.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Role.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Role.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Role.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\State.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>State.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\State.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>State.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\User.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\User.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\UserAddress.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserAddress.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\UserAddress.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserAddress.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\UserLoginLog.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserLoginLog.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\UserLoginLog.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserLoginLog.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageMessages.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageMessages.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="Errors1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.tt</DependentUpon>
+    </Content>
+    <Content Include="Messages.txt">
+      <DependentUpon>Messages.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\BaseAreaControllerAction1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseAreaControllerAction.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\City1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>City.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\Country1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Country.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\HttpReferer1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HttpReferer.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\MailSettings1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MailSettings.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\State1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.tt</DependentUpon>
+    </Content>
+    <Content Include="Models\UserLoginLog1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserLoginLog.tt</DependentUpon>
+    </Content>
+    <None Include="Errors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Errors1.txt</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Titles.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Titles.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Titles.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Titles.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Account\ChangePasswordViewModel.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangePasswordViewModel.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Account\ChangePasswordViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangePasswordViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Account\RegisterViewModel.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterViewModel.fa-IR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Account\RegisterViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangePasswordViewModel.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangePasswordViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadViewModel.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditLayoutContentViewModel.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditLayoutContentViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Home\ContactViewModel.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactViewModel.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Home\ContactViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Actions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Actions.txt</LastGenOutput>
+    </None>
+    <None Include="Controllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Controllers.txt</LastGenOutput>
+    </None>
+    <None Include="Messages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Messages.txt</LastGenOutput>
+    </None>
+    <None Include="Models\AccessType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AccessType.txt</LastGenOutput>
+    </None>
+    <None Include="Models\ApplicationSettings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ApplicationSettings1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\BaseAreaControllerAction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseAreaControllerAction1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\City.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>City1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\BaseLocalizedPageOrPost.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseLocalizedPageOrPost1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\General.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>General1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\Layout.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Layout1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\Page.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Page1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\PageContent.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageContent1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\Post.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Post1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\PostCategory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PostCategory1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Cms\Settings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Settings.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Common\Tag.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tag1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Country.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Country1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Gender.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gender.txt</LastGenOutput>
+    </None>
+    <None Include="Models\General.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>General1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Group.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Group.txt</LastGenOutput>
+    </None>
+    <None Include="Models\HttpReferer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HttpReferer1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\MailSettings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MailSettings1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\MyCulture.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyCulture.txt</LastGenOutput>
+    </None>
+    <None Include="Models\ProjectAction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ProjectAction.txt</LastGenOutput>
+    </None>
+    <None Include="Models\ProjectArea.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ProjectArea.txt</LastGenOutput>
+    </None>
+    <None Include="Models\ProjectController.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ProjectController.txt</LastGenOutput>
+    </None>
+    <None Include="Models\Role.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Role.txt</LastGenOutput>
+    </None>
+    <None Include="Models\State.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>State1.txt</LastGenOutput>
+    </None>
+    <None Include="Models\User.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>User.txt</LastGenOutput>
+    </None>
+    <None Include="Models\UserLoginLog.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UserLoginLog1.txt</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="ViewModels\Account\ChangePasswordViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangePasswordViewModel.txt</LastGenOutput>
+    </None>
+    <None Include="ViewModels\Account\RegisterViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RegisterViewModel.txt</LastGenOutput>
+    </None>
+    <None Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChangePasswordViewModel1.txt</LastGenOutput>
+    </None>
+    <None Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DownloadViewModel1.txt</LastGenOutput>
+    </None>
+    <None Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EditLayoutContentViewModel1.txt</LastGenOutput>
+    </None>
+    <None Include="ViewModels\Home\ContactViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContactViewModel1.txt</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Actions.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Actions.tt</DependentUpon>
+    </Content>
+    <Content Include="CaptchaImage1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaptchaImage.tt</DependentUpon>
+    </Content>
+    <Content Include="Controllers.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Controllers.tt</DependentUpon>
+    </Content>
+    <Content Include="Documents\SmartStringResourcesTemplate.txt" />
+    <Content Include="Models\AccessType.txt">
+      <DependentUpon>AccessType.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\Gender.txt">
+      <DependentUpon>Gender.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\Group.txt">
+      <DependentUpon>Group.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\MyCulture.txt">
+      <DependentUpon>MyCulture.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\ProjectAction.txt">
+      <DependentUpon>ProjectAction.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\ProjectArea.txt">
+      <DependentUpon>ProjectArea.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\ProjectController.txt">
+      <DependentUpon>ProjectController.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\Role.txt">
+      <DependentUpon>Role.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Models\User.txt">
+      <DependentUpon>User.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="ViewModels\Account\ChangePasswordViewModel.txt">
+      <DependentUpon>ChangePasswordViewModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="ViewModels\Account\RegisterViewModel.txt">
+      <DependentUpon>RegisterViewModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="ViewModels\Areas\Administrator\User\ChangePasswordViewModel1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePasswordViewModel.tt</DependentUpon>
+    </Content>
+    <Content Include="ViewModels\Areas\Administrator\WebDownloader\DownloadViewModel1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadViewModel.tt</DependentUpon>
+    </Content>
+    <Content Include="ViewModels\Areas\Cms\Layout\EditLayoutContentViewModel1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditLayoutContentViewModel.tt</DependentUpon>
+    </Content>
+    <None Include="Captions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Captions1.txt</LastGenOutput>
+    </None>
+    <None Include="Buttons.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Buttons1.txt</LastGenOutput>
+    </None>
+    <None Include="CaptchaImage.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CaptchaImage1.txt</LastGenOutput>
+    </None>
+    <None Include="PageMessages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PageMessages1.txt</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

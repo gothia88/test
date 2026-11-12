@@ -1,0 +1,91 @@
+﻿@model Models.ECommerce.ECommerceSettings
+
+@{
+	string strTitle =
+		Resources.Models.ECommerce.Settings.EntityName;
+
+	ViewBag.Title = strTitle;
+
+	int intLabelColumn = 4;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsPlansServiceEnabled,
+		labelColumn: intLabelColumn)
+
+	@Html.DtxCheckBoxFor(model => model.IsOnlinePaymentEnabled,
+		labelColumn: intLabelColumn)
+
+	<hr />
+
+	@Html.DtxCheckBoxFor(model => model.IsCreditTransferEnabled,
+		labelColumn: intLabelColumn)
+
+	@Html.DtxLabelTextBoxFor(model => model.SiteCommissionRateForCreditTransfer,
+		leftToRight: true,
+		labelColumn: intLabelColumn)
+
+	<hr />
+
+	@Html.DtxLabelTextBoxFor(model => model.Merchant.Name,
+		labelColumn: intLabelColumn, readOnly: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Merchant.ApiValue,
+		labelColumn: intLabelColumn, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Merchant.RedirectValue,
+		labelColumn: intLabelColumn, leftToRight: true)
+
+	if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+	{
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.FirstSendUrl,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.FirstSendMethod,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.ApiName,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.AmountName,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.RedirectName,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.SecondSendUrl,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.GetUrl,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.GetMethod,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.IdentityGetName,
+			labelColumn: intLabelColumn, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.Merchant.TransactionIdentityName,
+			labelColumn: intLabelColumn, leftToRight: true)
+	}
+
+	@Html.DtxSubmit(Resources.Buttons.Save,
+		columnOffset: intLabelColumn)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

@@ -1,0 +1,87 @@
+﻿@model Models.ApplicationSettings
+
+@{
+	string strTitle =
+		Resources.Controllers.Administrator_ApplicationSettings;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxLabelTextBoxFor(model => model.ApplicationName)
+
+	@Html.DtxLabelDropDownListFor(model => model.MailSettingsId)
+
+	@Html.DtxLabelTextBoxFor(model => model.ServerTimeZoneDifference, leftToRight: true)
+
+	@Html.DtxDisplayNameAndValue(Resources.Captions.Before, System.DateTime.Now,
+		Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+	@Html.DtxDisplayNameAndValue(Resources.Captions.After,
+		System.DateTime.Now.AddMinutes(Infrastructure.ApplicationSettings.Instance.ServerTimeZoneDifference),
+		Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+	if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+	{
+		@Html.DtxCheckBoxFor(model => model.IsCmsEnabled)
+
+		@Html.DtxCheckBoxFor(model => model.IsECommerceSystemEnabled)
+
+		@Html.DtxLabelTextBoxFor(model => model.ApplicationVersion, leftToRight: true)
+
+		@Html.DtxLabelTextBoxFor(model => model.ApplicationCopyrightText)
+	}
+
+	@Html.DtxCheckBoxFor(model => model.CheckNationalCode)
+
+	@Html.DtxCheckBoxFor(model => model.ForceUserToUpdateProfileAfterLogin)
+
+	@Html.DtxCheckBoxFor(model => model.IsCaptchaImageEnabled)
+
+	@Html.DtxCheckBoxFor(model => model.IsSmsServiceEnabled)
+
+	@Html.DtxCheckBoxFor(model => model.CanUserAttachFileInContactUsPage)
+
+	@Html.DtxCheckBoxFor(model => model.ShouldUserBeActivatedAfterRegistration)
+
+	@Html.DtxCheckBoxFor(model => model.IsUserEmailVerificationRequiredForLogin)
+
+	@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Info)
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Models.ApplicationSettings.SeoForHomePage)
+	@Html.DtxEndPanelHeading()
+	@Html.DtxBeginPanelBody()
+
+	@Html.DtxLabelTextBoxFor(model => model.HomePageTitle)
+
+	@Html.DtxLabelTextBoxFor(model => model.HomePageKeywords)
+
+	@Html.DtxLabelTextBoxFor(model => model.HomePageDescription)
+
+	@Html.DtxLabelTextBoxFor(model => model.HomePageClassification)
+
+	@Html.DtxLabelTextBoxFor(model => model.HomePageCopyright)
+
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

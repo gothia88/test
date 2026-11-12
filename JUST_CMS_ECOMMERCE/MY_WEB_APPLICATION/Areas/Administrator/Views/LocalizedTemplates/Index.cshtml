@@ -1,0 +1,122 @@
+﻿@{
+	string strTitle =
+		Resources.Actions.LocalizedTemplatesController_Index;
+
+	ViewBag.Title = strTitle;
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		$("button.edit").click(function () {
+
+			var varFileName = $(this).attr("data-fileName");
+			var varDirectoryName = $(this).attr("data-directoryName");
+
+			$("div#myLoadingDialog").modal({ keyboard: false, backdrop: false });
+
+			var varData =
+				'{"FileName":"' + varFileName + '","DirectoryName":"' + varDirectoryName + '"}';
+
+			$.ajax({
+				type: "POST",
+				url: "/Administrator/LocalizedTemplates/Edit",
+				data: varData,
+				dataType: "html",
+				contentType: "application/json; charset=utf-8",
+
+				success: function (e) {
+					$("div#divModalBody").html(e);
+				},
+
+				error: function (e) {
+				},
+
+				complete: function (e) {
+					$("div#myLoadingDialog").modal('toggle');
+
+					$("div#myModal").modal('toggle');
+				}
+			});
+		});
+	})
+</script>
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strRootRelativePath =
+		"~/App_Data/LocalizedTemplates";
+
+	string strPath =
+		Server.MapPath(strRootRelativePath);
+
+	System.IO.DirectoryInfo oDirectoryInfo = new DirectoryInfo(strPath);
+
+	foreach (System.IO.DirectoryInfo oCurrentDirectoryInfo
+		in oDirectoryInfo.GetDirectories().OrderBy(current => current.Name))
+	{
+		@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Info)
+
+		@Html.DtxBeginPanelHeading()
+		@Html.DtxPanelTitle(oCurrentDirectoryInfo.Name)
+		@Html.DtxEndPanelHeading()
+
+		@Html.DtxBeginPanelBody()
+		<ul>
+			@foreach (System.IO.FileInfo oCurrentFileInfo
+				in oCurrentDirectoryInfo.GetFiles().OrderBy(current => current.Name))
+			{
+				<li>
+					<button class="btn btn-default edit" data-directoryname="@oCurrentDirectoryInfo" data-filename="@oCurrentFileInfo.Name">
+						@Resources.Buttons.Edit
+					</button>
+
+					@oCurrentFileInfo.Name
+				</li>
+			}
+		</ul>
+		@Html.DtxEndPanelBody()
+
+		@*
+			@Html.DtxBeginPanelFooter()
+			@Html.DtxEndPanelFooter()
+		*@
+
+		@Html.DtxEndPanel()
+	}
+}
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()
+
+@Html.Partial(MVC.Shared.Views._Partial_LoadingDialog)
+
+<div id="myModal" class="modal fade" style="z-index: 1000000" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">
+					@Resources.Actions.LocalizedTemplatesController_Edit
+				</h4>
+			</div>
+			<div id="divModalBody" class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Buttons.Close</button>
+			</div>
+		</div>
+	</div>
+</div>

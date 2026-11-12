@@ -1,0 +1,76 @@
+﻿@model Models.ECommerce.Transaction
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.ECommerce.Transaction.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle + " [" + Model.Id.ToString().ToUpper() + "]")
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsPaidOnline)
+
+	@Html.DtxCheckBoxFor(model => model.IsPending)
+	@Html.DtxLabelAutoCompleteFor(model => model.UserId,
+		MVC.AutoComplete.GetAllUsersForAdmin())
+
+	@Html.DtxLabelAutoCompleteFor(model => model.PlanId,
+		MVC.AutoComplete.GetAllPlansForAdmin())
+
+	@Html.DtxLabelTextBoxFor(model => model.ParentTransactionId,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Credit,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Debit,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SiteCredit,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SiteDebit,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.MerchantIdentityGet,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.MerchantTransactionIdentity,
+		leftToRight: true)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxLabelTextAreaFor(model => model.AdministratorDescription)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.ECommerce.Transaction.Details(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.Delete,
+		MVC.ECommerce.Transaction.Delete(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.ECommerce.Transaction.DisplayDataForAdmin())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

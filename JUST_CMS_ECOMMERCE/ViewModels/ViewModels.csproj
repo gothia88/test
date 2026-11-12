@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A01F539-3EF7-45C6-B01D-60A460BC72FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ViewModels</RootNamespace>
+    <AssemblyName>ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\UpdateUserBankInformationViewModel.cs" />
+    <Compile Include="Account\UpdateProfileViewModel.cs" />
+    <Compile Include="Areas\Administrator\ApplicationLog\EditViewModel.cs" />
+    <Compile Include="Areas\Administrator\Group\IndexViewModel.cs" />
+    <Compile Include="Areas\Administrator\LocalizedTemplates\Edit.cs" />
+    <Compile Include="Areas\Administrator\Programmer\BackupDatabaseViewModel.cs" />
+    <Compile Include="Areas\Administrator\User\DeleteNotVerifiedEmailAddressUsersViewModel.cs" />
+    <Compile Include="Areas\Administrator\WebDownloader\DownloadViewModel.cs" />
+    <Compile Include="Areas\Administrator\UserLoginLog\GetOnlineUsersViewModel.cs" />
+    <Compile Include="Areas\Administrator\UserLoginLog\GetUserLoginLogsViewModel.cs" />
+    <Compile Include="Areas\Cms\Page\IndexViewModel.cs" />
+    <Compile Include="Areas\Cms\Post\GetDataViewModel.cs" />
+    <Compile Include="Areas\Cms\PostCategory\IndexViewModel.cs" />
+    <Compile Include="Areas\Common\Rss\IndexViewModel.cs" />
+    <Compile Include="Areas\Cms\Shared\DisplayPostsViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\DeletePendingTransactionsViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\TransferCreditToAnotherUserViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\IncreaseCreditByOnlinePaymentViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Plan\IndexViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\UserSearchViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\AdminSearchViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\GetDataForUserViewModel.cs" />
+    <Compile Include="Areas\ECommerce\Transaction\GetDataForAdminViewModel.cs" />
+    <Compile Include="AutoComplete\AdminAutoCompleteViewModel.cs" />
+    <Compile Include="AutoComplete\UserAutoCompleteViewModel.cs" />
+    <Compile Include="AutoComplete\GetCitiesViewModel.cs" />
+    <Compile Include="Account\SendAgainEmailAddressVerificationKeyViewModel.cs" />
+    <Compile Include="Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Account\VerifyUserCellPhoneNumberViewModel.cs" />
+    <Compile Include="Areas\Administrator\ProjectArea\IndexViewModel.cs" />
+    <Compile Include="Areas\Administrator\ProjectController\IndexViewModel.cs" />
+    <Compile Include="Areas\Administrator\UserLoginLog\IndexViewModel.cs" />
+    <Compile Include="Areas\Administrator\User\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\Administrator\User\SearchViewModel.cs" />
+    <Compile Include="Areas\Administrator\User\GetDataViewModel.cs" />
+    <Compile Include="Areas\Cms\Layout\EditLayoutContentViewModel.cs" />
+    <Compile Include="Areas\Cms\Page\EditLocalizedPageContentViewModel.cs" />
+    <Compile Include="Areas\Cms\Tag\IndexViewModel.cs" />
+    <Compile Include="Account\ChangePasswordViewModel.cs" />
+    <Compile Include="Home\ContactViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Account\RegisterViewModel.cs" />
+    <Compile Include="Account\LoginViewModel.cs" />
+    <Compile Include="Shared\_Partial_SelectProjectActionsViewModel.cs" />
+    <Compile Include="Areas\Cms\Shared\GetActiveUserPostsViewModel.cs" />
+    <Compile Include="Areas\Cms\User\GetPostsViewModel.cs" />
+    <Compile Include="User\GetDataViewModel.cs" />
+    <Compile Include="User\SearchViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dtx\Dtx.csproj">
+      <Project>{9049ab6a-2427-4350-ae36-da1d5befee88}</Project>
+      <Name>Dtx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{bcd89127-48d8-4a1e-a8fc-7e063e4b41ec}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{e5944192-375e-4cd5-93d0-363f5e3e6d7b}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

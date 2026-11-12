@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Models.MailSettings>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.MailSettings.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.MailSettings.EntityName);
+}
+
+@Html.DtxActionLink(strCreate,
+	MVC.Administrator.MailSettings.Create())
+
+<br />
+<br />
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 100px;">
+				&nbsp;
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Ordering)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.SenderEmailAddress)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.SmtpClientHostAddress)
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.Administrator.MailSettings.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@Html.DtxActionLink(Resources.Actions.Edit,
+						MVC.Administrator.MailSettings.Edit(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Edit)
+
+					@Html.DtxActionLink(Resources.Actions.Delete,
+						MVC.Administrator.MailSettings.Delete(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Delete)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.Ordering)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td style="direction: ltr">
+					@Html.DisplayFor(modelItem => item.SenderEmailAddress)
+				</td>
+				<td style="direction: ltr">
+					@Html.DisplayFor(modelItem => item.SmtpClientHostAddress)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

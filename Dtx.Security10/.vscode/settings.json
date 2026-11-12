@@ -1,0 +1,6 @@
+{
+  "terminal.integrated.env.windows": {
+    "DOTNET_ROOT": "D:\\dotnet",
+    "NUGET_PACKAGES": "D:\\nuget-packages"
+  }
+}

@@ -1,0 +1,108 @@
+﻿@model Models.ECommerce.Transaction
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.ECommerce.Transaction.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.IsPaidOnline)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsPending)
+
+@if (Model.PlanId.HasValue)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.Plan.Name,
+		actionResult: MVC.ECommerce.Plan.DisplayPlan(Model.PlanId),
+		caption: Resources.Models.ECommerce.Transaction.PlanId)
+}
+
+@if (Model.ParentTransactionId.HasValue)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.ParentTransactionId,
+		actionResult: MVC.ECommerce.Transaction.Display(Model.ParentTransactionId),
+		caption: Resources.Models.ECommerce.Transaction.ParentTransactionId)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.Credit,
+	Infrastructure.Enums.DisplayValueTypes.Currency)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Debit,
+	Infrastructure.Enums.DisplayValueTypes.Currency)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SiteCredit,
+	Infrastructure.Enums.DisplayValueTypes.Currency)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SiteDebit,
+	Infrastructure.Enums.DisplayValueTypes.Currency)
+
+@if (string.IsNullOrWhiteSpace(Model.MerchantIdentityGet) == false)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.MerchantIdentityGet)
+}
+
+@if (string.IsNullOrWhiteSpace(Model.MerchantTransactionIdentity) == false)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.MerchantTransactionIdentity)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.InsertDateTime,
+	Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+@Html.DtxDisplayNameAndValueFor(model => model.UpdateDateTime,
+	Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+@if (Model.CreatorOrModifierUserId.HasValue)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.CreatorOrModifierUser.FullName,
+		actionResult: MVC.Account.DisplayProfile(Model.CreatorOrModifierUserId),
+		caption: Resources.Models.ECommerce.Transaction.CreatorOrModifierUserId)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.ECommerce.Transaction.DisplayDataForUser())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
+
+
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle("تراکنش‌هايی که بر اساس اين تراکنش انجام شده‌اند")
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<ul>
+	@foreach (Models.ECommerce.Transaction oCurrentTransaction in Model.Children.OrderByDescending(current => current.UpdateDateTime.Value))
+	{
+		<li>
+			@Html.DisplayDateTime(oCurrentTransaction.UpdateDateTime,
+				displayTime: true)
+			-
+			@Html.DtxActionLink(oCurrentTransaction.Id.ToString().ToUpper(),
+				MVC.ECommerce.Transaction.Display(oCurrentTransaction.Id),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+		</li>
+	}
+</ul>
+
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

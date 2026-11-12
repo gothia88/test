@@ -1,0 +1,73 @@
+﻿@model ViewModels.Areas.ECommerce.Transaction.TransferCreditToAnotherUserViewModel
+
+@{
+	string strTitle =
+		Resources.Models.ECommerce.Transaction.TransferCreditToAnotherUser;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Danger)
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle("توجه")
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<ul>
+@{
+	long lngSiteCommissionRateForCreditTransfer =
+				System.Convert.ToInt64(Infrastructure.ECommerce.Settings.Instance.SiteCommissionRateForCreditTransfer);
+
+	if (lngSiteCommissionRateForCreditTransfer > 0)
+	{
+		<li>
+			کاربر گرامی، به ازای هر مبلغی که به شخص ديگری منتقل می‌کنيد،
+			@Dtx.Text.Convert.DisplayFormattedNumber(lngSiteCommissionRateForCreditTransfer)
+			درصد به عنوان حق پايگاه، کسر شده و مابقی به حساب کاربری شخص مورد نظر واريز خواهد شد!
+		</li>
+	}
+}
+		<li>
+			کاربر گرامی، مبلغی که برای انتقال به کاربر ديگری در نظر گرفته‌ايد، نمی‌تواند از
+			@Dtx.Text.Convert.DisplayFormattedNumber(10000)
+			ريال (معادل يک هزار تومان) کمتر بوده و از
+			@Dtx.Text.Convert.DisplayFormattedNumber(10000000)
+			ريال (معادل يک ميليون تومان) بيشتر باشد!
+		</li>
+	</ul>
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+
+
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.RecipientUserId,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Amount,
+		leftToRight: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Models.ECommerce.Transaction.DisplayMyTransaction,
+		MVC.ECommerce.Transaction.DisplayDataForUser())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

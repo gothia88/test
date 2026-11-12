@@ -1,0 +1,69 @@
+﻿@model Models.MailSettings
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.MailSettings.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name)
+
+	@Html.DtxLabelTextBoxFor(model => model.SenderDisplayName)
+
+	@Html.DtxLabelTextBoxFor(model => model.SenderEmailAddress, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SenderEmailPassword, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SupportDisplayName)
+
+	@Html.DtxLabelTextBoxFor(model => model.SupportEmailAddress, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.EmailSubjectTemplate, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SmtpClientPortNumber, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SmtpClientTimeout, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.SmtpClientEnableSsl)
+
+	@Html.DtxLabelTextBoxFor(model => model.SmtpClientHostAddress, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.BccAddresses, leftToRight: true)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxSubmit(Resources.Buttons.Create)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.MailSettings.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

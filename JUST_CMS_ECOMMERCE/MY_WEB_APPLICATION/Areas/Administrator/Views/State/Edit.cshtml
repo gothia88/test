@@ -1,0 +1,72 @@
+﻿@model Models.State
+
+@{
+	Models.Country oCountry =
+		ViewBag.Country as Models.Country;
+
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.State.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(Resources.Models.Country.EntityName)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxActionLink(oCountry.Name,
+	MVC.Administrator.Country.Details(oCountry.Id))
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Models.Country.EntitiesName,
+	MVC.Administrator.Country.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.HiddenFor(model => model.Id)
+	@Html.HiddenFor(model => model.CountryId)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.MasterDataCode, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Administrator.State.Details(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.Delete,
+		MVC.Administrator.State.Delete(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.State.Index(oCountry.Id))
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

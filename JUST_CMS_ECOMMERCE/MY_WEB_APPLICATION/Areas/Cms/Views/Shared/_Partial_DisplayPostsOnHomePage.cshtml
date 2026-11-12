@@ -1,0 +1,106 @@
+﻿@if (Infrastructure.ApplicationSettings.Instance.IsCmsEnabled)
+{
+	<script>
+		$(document).ready(function () {
+
+			getData();
+
+			$("button#btnDisplayMoreData").click(function () {
+
+				getData();
+
+			});
+
+		});
+
+		function getData() {
+
+			$("div#loading").show();
+			$("button#btnDisplayMoreData").hide();
+
+			var varData =
+				{
+					id: function () {
+						return ($("input#id").val());
+					},
+					pageIndex: function () {
+						return ($("input#pageIndex").val());
+					},
+				};
+
+			$.ajax({
+				type: "POST",
+				dataType: "html",
+
+				url: "/Cms/General/GetPostsForHomePage",
+
+				data: varData,
+				//contentType: "application/json; charset=utf-8",
+
+				success: function (response) {
+
+					if (response == "") {
+						$("button#btnDisplayMoreData").attr("disabled", "disabled");
+						$("button#btnDisplayMoreData").text("@Resources.Buttons.ThereIsNoMorePostForDisplaying");
+					}
+					else {
+						$("div#postList").append(response);
+					}
+
+					var varPageIndex =
+						parseInt($("input#pageIndex").val());
+
+					varPageIndex++;
+
+					$("input#pageIndex").val(varPageIndex);
+
+				},
+
+				error: function (response) {
+
+					alert(response);
+
+				},
+
+				complete: function (response) {
+
+					$("div#loading").hide();
+					$("button#btnDisplayMoreData").show();
+
+				},
+			});
+		}
+
+	</script>
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Models.Cms.General.DisplayPosts)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<div id="postList">
+	</div>
+
+	<div id="loading" class="panel panel-danger">
+		<div class="panel-heading">
+			<img src="~/Content/Images/Loading.gif" alt="Loading..." title="Loading..." />
+			@Resources.Messages.Loading
+		</div>
+	</div>
+
+	<div class="row">
+		<input type="hidden" id="pageIndex" value="0" />
+
+		<button type="button" id="btnDisplayMoreData" class="btn btn-primary btn-block">@Resources.Buttons.DisplayMorePosts</button>
+	</div>
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

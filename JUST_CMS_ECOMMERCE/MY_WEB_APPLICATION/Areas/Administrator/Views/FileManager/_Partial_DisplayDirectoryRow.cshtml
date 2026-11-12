@@ -1,0 +1,32 @@
+﻿@model Dtx.FileManager.ViewModels.DisplayDirectoryRowViewModel
+
+<tr>
+	<td>
+		<a href="#" id="@Model.DirectoryInfo.Name" data-rename onclick="return (false);"><span class="glyphicon glyphicon-pencil"></span></a>
+	</td>
+	<td>
+		<input type="checkbox" name="checkBoxes" value="@Model.DirectoryInfo.Name" />
+	</td>
+	<td>
+		<span class="glyphicon glyphicon-folder-close"></span>
+	</td>
+	<td style="direction: ltr">
+		@Html.DtxActionLink(Model.DirectoryInfo.Name,
+			MVC.Administrator.FileManager.List(Model.RootRelativePath + "/" + Model.DirectoryInfo.Name),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+	</td>
+	<td></td>
+	<td>
+		@Html.DisplayDateTime(Model.DirectoryInfo.CreationTime,
+			displayTime: true)
+	</td>
+	<td>
+		@Html.DisplayDateTime(Model.DirectoryInfo.LastWriteTime,
+			displayTime: true)
+	</td>
+	<td>
+		@Html.DisplayDateTime(Model.DirectoryInfo.LastAccessTime,
+			displayTime: true)
+	</td>
+</tr>

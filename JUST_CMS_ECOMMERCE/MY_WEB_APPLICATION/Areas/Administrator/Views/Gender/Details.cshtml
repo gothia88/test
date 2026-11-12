@@ -1,0 +1,38 @@
+﻿@model Models.Gender
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.Gender.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name1)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Name2)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Name3)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Name4)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.Gender.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.Gender.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

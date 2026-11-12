@@ -1,0 +1,75 @@
+﻿@model Models.Cms.PostCategory
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.Cms.PostCategory.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayPostCategoryPath,
+	Model.ParentPostCategory, new ViewDataDictionary())
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+	@Html.HiddenFor(model => model.ParentPostCategoryId)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxCheckBoxFor(model => model.IsFeatured)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name)
+
+	@Html.DtxLabelTextBoxFor(model => model.Hits,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.ImageUrl,
+		leftToRight: true)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	if (string.IsNullOrWhiteSpace(Model.ImageUrl) == false)
+	{
+		<hr />
+		<img src="@Model.ImageUrl" class="img-responsive img-rounded" alt="@Model.Name" title="@Model.Name" />
+		<hr />
+	}
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Cms.PostCategory.Details(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.Delete,
+		MVC.Cms.PostCategory.Delete(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Cms.PostCategory.Index(Model.ParentPostCategoryId))
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

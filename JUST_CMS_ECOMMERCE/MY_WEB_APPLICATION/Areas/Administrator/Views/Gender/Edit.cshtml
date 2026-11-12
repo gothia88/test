@@ -1,0 +1,53 @@
+﻿@model Models.Gender
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.Gender.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering)
+
+	@Html.DtxLabelTextBoxFor(model => model.MasterDataCode)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name1)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name2)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name3)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name4)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Administrator.Gender.Details(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.Gender.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

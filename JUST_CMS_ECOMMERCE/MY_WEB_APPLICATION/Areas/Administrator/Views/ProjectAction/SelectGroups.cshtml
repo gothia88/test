@@ -1,0 +1,76 @@
+﻿@model Models.ProjectAction
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.SelectGroups,
+		Resources.Models.ProjectAction.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.Partial(MVC.Administrator.ProjectAction.Views._Partial_DisplayProjectActionInformation, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<input type="hidden" id="id" value="@Model.Id" />
+
+	var varGroups =
+		(IEnumerable<Models.Group>)ViewBag.Groups;
+
+	foreach (Models.Group oGroup in varGroups)
+	{
+		bool blnChecked = false;
+
+		foreach (Models.Group oCurrentGroup in Model.Groups)
+		{
+			if (oCurrentGroup.Id == oGroup.Id)
+			{
+				blnChecked = true;
+				break;
+			}
+		}
+
+		<br />
+
+		if (blnChecked)
+		{
+			<input type="checkbox" name="checkBoxes" value="@oGroup.Id" checked="checked" />
+		}
+		else
+		{
+			<input type="checkbox" name="checkBoxes" value="@oGroup.Id" />
+		}
+
+		@Html.DtxActionLink(oGroup.Name,
+			MVC.Administrator.Group.Details(oGroup.Id),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+
+		if (oGroup.IsActive == false)
+		{
+			<text>- غير فعال</text>
+		}
+	}
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.BackToList + " " +
+	Resources.Models.ProjectAction.EntitiesName,
+	MVC.Administrator.ProjectAction.Index(Model.ProjectControllerId))
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

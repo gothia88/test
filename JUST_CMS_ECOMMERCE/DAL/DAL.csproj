@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFF96AAB-65D9-49F0-B576-3482C7B4B857}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessTypeRepository.cs" />
+    <Compile Include="Cms\SettingsRepository.cs" />
+    <Compile Include="Cms\ISettingsRepository.cs" />
+    <Compile Include="ECommerce\ISettingsRepository.cs" />
+    <Compile Include="ECommerce\IUnitOfWork.cs" />
+    <Compile Include="ECommerce\SettingsRepository.cs" />
+    <Compile Include="ECommerce\UnitOfWork.cs" />
+    <Compile Include="ECommerce\ITransactionRepository.cs" />
+    <Compile Include="ECommerce\TransactionRepository.cs" />
+    <Compile Include="ECommerce\PlanRepository.cs" />
+    <Compile Include="ECommerce\IPlanRepository.cs" />
+    <Compile Include="ICityRepository.cs" />
+    <Compile Include="CityRepository.cs" />
+    <Compile Include="IUserAddressRepository.cs" />
+    <Compile Include="UserAddressRepository.cs" />
+    <Compile Include="StateRepository.cs" />
+    <Compile Include="CountryRepository.cs" />
+    <Compile Include="GlobalApplicationSettingsRepository.cs" />
+    <Compile Include="Cms\IUnitOfWork.cs" />
+    <Compile Include="Cms\UnitOfWork.cs" />
+    <Compile Include="CultureRepository.cs" />
+    <Compile Include="HttpRefererRepository.cs" />
+    <Compile Include="IStateRepository.cs" />
+    <Compile Include="ICountryRepository.cs" />
+    <Compile Include="IGlobalApplicationSettingsRepository.cs" />
+    <Compile Include="IHttpRefererRepository.cs" />
+    <Compile Include="UserLoginLogRepository.cs" />
+    <Compile Include="ICultureRepository.cs" />
+    <Compile Include="IUserLoginLogRepository.cs" />
+    <Compile Include="MailSettingsRepository.cs" />
+    <Compile Include="ApplicationSettingsRepository.cs" />
+    <Compile Include="IApplicationSettingsRepository.cs" />
+    <Compile Include="IMailSettingsRepository.cs" />
+    <Compile Include="GenderRepository.cs" />
+    <Compile Include="Cms\TagRepository.cs" />
+    <Compile Include="Cms\ITagRepository.cs" />
+    <Compile Include="Cms\PostRepository.cs" />
+    <Compile Include="Cms\IPostRepository.cs" />
+    <Compile Include="IAccessTypeRepository.cs" />
+    <Compile Include="Cms\PostCategoryRepository.cs" />
+    <Compile Include="Cms\IPostCategoryRepository.cs" />
+    <Compile Include="Cms\LayoutRepository.cs" />
+    <Compile Include="Cms\ILayoutRepository.cs" />
+    <Compile Include="Cms\PageRepository.cs" />
+    <Compile Include="Cms\IPageRepository.cs" />
+    <Compile Include="ProjectAreaRepository.cs" />
+    <Compile Include="ProjectControllerRepository.cs" />
+    <Compile Include="ProjectActionRepository.cs" />
+    <Compile Include="IProjectActionRepository.cs" />
+    <Compile Include="IProjectControllerRepository.cs" />
+    <Compile Include="IProjectAreaRepository.cs" />
+    <Compile Include="GroupRepository.cs" />
+    <Compile Include="IGroupRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="UserRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
+    <Compile Include="RoleRepository.cs" />
+    <Compile Include="IRoleRepository.cs" />
+    <Compile Include="IGenderRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dtx\Dtx.csproj">
+      <Project>{9049ab6a-2427-4350-ae36-da1d5befee88}</Project>
+      <Name>Dtx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{bcd89127-48d8-4a1e-a8fc-7e063e4b41ec}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{7a01f539-3ef7-45c6-b01d-60a460bc72fb}</Project>
+      <Name>ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

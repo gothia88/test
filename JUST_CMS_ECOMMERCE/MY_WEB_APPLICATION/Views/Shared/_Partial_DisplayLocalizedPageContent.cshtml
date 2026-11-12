@@ -1,0 +1,92 @@
+﻿@{
+	// **************************************************
+	object objAreaName =
+		ViewContext.RouteData.DataTokens["area"];
+
+	string strAreaName = string.Empty;
+	if (objAreaName != null)
+	{
+		strAreaName = objAreaName.ToString().Trim();
+	}
+	// **************************************************
+
+	// **************************************************
+	object objControllerName =
+		ViewContext.RouteData.Values["controller"];
+
+	string strControllerName =
+		objControllerName.ToString().Trim();
+	// **************************************************
+
+	// **************************************************
+	object objActionName =
+		ViewContext.RouteData.Values["action"];
+
+	string strActionName =
+		objActionName.ToString().Trim();
+	// **************************************************
+
+	string strCurrentCultureName =
+		System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+	// **************************************************
+	string strFileName = string.Empty;
+
+	if (string.IsNullOrEmpty(strAreaName))
+	{
+		strFileName =
+			string.Format("{0}_{1}.{2}.htm",
+			strControllerName, strActionName, strCurrentCultureName);
+	}
+	else
+	{
+		strFileName =
+			string.Format("{0}_{1}_{2}.{3}.htm",
+			strAreaName, strControllerName, strActionName, strCurrentCultureName);
+	}
+
+	string strRootRelativePath =
+		"~/App_Data/LocalizedPageContents";
+
+	string strRootRelativePathName =
+		string.Format("{0}/{1}", strRootRelativePath, strFileName);
+
+	string strPathName =
+		Server.MapPath(strRootRelativePathName);
+
+	string strLocalizedPageContent = Dtx.IO.File.Read(strPathName);
+	// **************************************************
+
+	if (Infrastructure.AuthenticatedUser.IsAuthenticated)
+	{
+		switch (Infrastructure.Sessions.AuthenticatedUser.Role)
+		{
+			case Models.Enums.Roles.Owner:
+			case Models.Enums.Roles.Programmer:
+			case Models.Enums.Roles.Administrator:
+			{
+				@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Info)
+
+				@Html.DtxBeginPanelBody()
+				@Html.DtxActionLink(Resources.Actions.EditLocalizedPageContent,
+					MVC.Cms.Page.EditLocalizedPageContent(strAreaName, strControllerName, strActionName))
+				@Html.DtxEndPanelBody()
+
+				@Html.DtxEndPanel()
+
+				break;
+			}
+		}
+	}
+}
+
+@if (string.IsNullOrWhiteSpace(strLocalizedPageContent) == false)
+{
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelBody()
+	@Html.Raw(strLocalizedPageContent)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

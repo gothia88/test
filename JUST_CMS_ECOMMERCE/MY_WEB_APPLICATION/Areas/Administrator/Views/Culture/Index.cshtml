@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Models.Culture>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.MyCulture.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 100px;">
+				&nbsp;
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Ordering)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Lcid)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NativeName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DisplayName)
+			</th>
+			<th>
+				@Resources.Models.General.InsertAndUpdateDateTime
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.Administrator.Culture.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@Html.DtxActionLink(Resources.Actions.Edit,
+						MVC.Administrator.Culture.Edit(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Edit)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Ordering)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Lcid)
+				</td>
+				<td style="direction: ltr">
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td style="direction: ltr">
+					@Html.DisplayFor(modelItem => item.NativeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DisplayName)
+				</td>
+				<td>
+					@Html.DisplayDateTime(item.InsertDateTime, displayTime: true)
+					<br />
+					@Html.DisplayDateTime(item.UpdateDateTime, displayTime: true)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

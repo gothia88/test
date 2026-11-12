@@ -1,0 +1,124 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<#
+	var areaName = GetAreaName(ViewDataTypeName);
+	var fullyViewDataTypeShortName = ViewDataTypeShortName;
+	if(string.IsNullOrEmpty(areaName) == false)
+	{
+		fullyViewDataTypeShortName =
+			areaName + "." + fullyViewDataTypeShortName;
+	}
+#>
+@model <#= ViewDataTypeName #>
+<#
+if(IsPartialView) {
+#>
+
+<#
+}
+else if(IsLayoutPageSelected)
+{
+#>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.<#= ViewName #>,
+		Resources.Models.<#= fullyViewDataTypeShortName #>.EntityName);
+
+	ViewBag.Title = strTitle;
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile))
+{
+#>
+	Layout = "<#= LayoutPageFile #>";
+<#
+}
+#>
+}
+
+<#
+}
+else
+{
+#>
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<title><#= ViewName #></title>
+	</head>
+	<body>
+<#
+	PushIndent("	");
+}
+#>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		@strTitle
+	</div>
+	<div class="panel-body">
+		<dl class="dl-horizontal">
+<#
+foreach (PropertyMetadata property in ModelMetadata.Properties)
+{
+	if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey)
+	{
+		if (property.IsAssociation && GetRelatedModelMetadata(property) == null)
+		{
+			continue;
+		}
+#>
+			<dt>
+				@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.<#= GetValueExpression(property) #>)
+			</dd>
+
+<#
+	}
+}
+#>
+		</dl>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(excludePropertyErrors: true)
+
+			<div class="form-actions no-color">
+				@Html.Submit(Resources.Buttons.Delete)
+			</div>
+		}
+	</div>
+	<div class="panel-footer">
+		@Html.DtxActionLink(Resources.Actions.Details,
+			MVC.<#= fullyViewDataTypeShortName #>.Details(Model.Id))
+
+		@Html.DtxActionLink(Resources.Actions.Edit,
+			MVC.<#= fullyViewDataTypeShortName #>.Edit(Model.Id))
+
+		@Html.DtxActionLink(Resources.Actions.BackToList,
+			MVC.<#= fullyViewDataTypeShortName #>.Index())
+	</div>
+</div>
+<#
+if(!IsPartialView && !IsLayoutPageSelected)
+{
+	ClearIndent();
+#>
+	</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

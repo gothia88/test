@@ -1,0 +1,19 @@
+﻿<li>
+	@Html.DtxActionLink(Resources.Models.User.EntitiesName + " <img src='/Content/Images/RssIcon.png' alt='RSS' class='img-rounded' />",
+		MVC.Rss.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+</li>
+
+@{
+	var varInstance =
+		Infrastructure.ApplicationSettings.Instance;
+}
+
+@if (varInstance.IsCmsEnabled)
+{
+	<li>
+		@Html.DtxActionLink(Resources.Models.Cms.Post.EntitiesName + " <img src='/Content/Images/RssIcon.png' alt='RSS' class='img-rounded' />",
+			MVC.Cms.Rss.Index(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+	</li>
+}

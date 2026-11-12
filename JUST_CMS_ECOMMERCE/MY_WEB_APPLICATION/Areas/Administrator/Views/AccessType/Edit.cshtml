@@ -1,0 +1,52 @@
+﻿@model Models.AccessType
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.AccessType.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Administrator.AccessType.Details(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.AccessType.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

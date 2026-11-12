@@ -1,0 +1,29 @@
+﻿@{
+	if (Infrastructure.ApplicationSettings.Instance.IsECommerceSystemEnabled)
+	{
+		if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.User)
+		{
+			MY_WEB_APPLICATION.Areas.ECommerce.BLL.CreditAndDebitSumery oCreditAndDebitSumery =
+				MY_WEB_APPLICATION.Areas.ECommerce.BLL.User.GetUserCreditAndDebitSumery(Infrastructure.Sessions.AuthenticatedUser.Id);
+
+			<div style="background-color: white; border: thin solid darkgray; margin: 8px; padding: 8px">
+				اعتبار شما به عدد:
+				@Html.Raw(oCreditAndDebitSumery.DisplayBalance)
+				@Resources.Models.General.Currency
+				<br />
+				اعتبار شما به حروف:
+				@Html.Raw(oCreditAndDebitSumery.DisplayBalanceInWord)
+				@Resources.Models.General.Currency
+				<br />
+				<br />
+				برای افزايش اعتبار، بر روی اين
+				@Html.ActionLink("[" + "لينک" + "]", MVC.ECommerce.Transaction.IncreaseCreditByOnlinePayment())
+				کليک نماييد.
+				<br />
+				برای مشاهده تراکنش‌های مالی، بر روی اين
+				@Html.ActionLink("[" + "لينک" + "]", MVC.ECommerce.Transaction.DisplayDataForUser())
+				کليک نماييد.
+			</div>
+		}
+	}
+}

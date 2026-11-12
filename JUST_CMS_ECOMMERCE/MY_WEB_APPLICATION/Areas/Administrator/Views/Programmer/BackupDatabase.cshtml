@@ -1,0 +1,108 @@
+﻿@model ViewModels.Areas.Administrator.Programmer.BackupDatabaseViewModel
+
+@{
+	string strTitle =
+		Resources.Actions.BackupDatabase;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.FileName, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.NAME, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.MEDIANAME, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.INIT)
+
+	@Html.DtxCheckBoxFor(model => model.SKIP)
+
+	@Html.DtxCheckBoxFor(model => model.FORMAT)
+
+	@Html.DtxCheckBoxFor(model => model.CHECKSUM)
+
+	@Html.DtxCheckBoxFor(model => model.CONTINUE_AFTER_ERROR)
+
+	@Html.DtxSubmit(Resources.Buttons.Create)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}
+
+@using (Html.BeginForm(MVC.Administrator.Programmer.Delete()))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(@Resources.Captions.DatabaseBackupFiles)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+
+	string strPath =
+		Server.MapPath("~/App_Data_Public/DatabaseBackups");
+
+	System.IO.DirectoryInfo oDirectoryInfo = new DirectoryInfo(strPath);
+
+	var varFiles =
+		oDirectoryInfo.GetFiles()
+		.OrderByDescending(current => current.CreationTime)
+		.ToList()
+		;
+
+		<ul>
+			@foreach (System.IO.FileInfo oFileInfo in varFiles)
+			{
+				<li>
+					<input type="checkbox" name="chkSelect" value="@oFileInfo.Name" />
+
+					<a href="~/App_Data_Public/DatabaseBackups/@oFileInfo.Name">@oFileInfo.Name</a>
+
+					<ul>
+						<li>
+							سايز:
+							@Dtx.Text.Convert.DisplayFormattedNumber(oFileInfo.Length)
+							بايت
+						</li>
+						<li>
+							زمان ايجاد:
+							@Html.DisplayDateTime(oFileInfo.CreationTime, displayTime: true)
+						</li>
+					</ul>
+				</li>
+			}
+		</ul>
+
+	if (varFiles.Count != 0)
+	{
+		@Html.DtxSubmit(Resources.Buttons.Delete)
+	}
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

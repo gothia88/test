@@ -1,0 +1,58 @@
+﻿@model Models.ProjectArea
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.ProjectArea.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.IsVisibleJustForProgrammer)
+
+	@Html.DtxDisplayNameAndValueFor(model => model.Name)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.DisplayName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.ProjectArea.Edit(Model.Id))
+
+@{
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+
+	int intProjectControllerCount =
+		oUnitOfWork.ProjectControllerRepository.Get()
+		.Where(current => current.ProjectAreaId == Model.Id)
+		.Count();
+
+	if ((intProjectControllerCount == 0) &&
+		(Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer))
+	{
+		@Html.DtxActionLink(Resources.Actions.Delete,
+		MVC.Administrator.ProjectArea.Delete(Model.Id))
+	}
+}
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.ProjectArea.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

@@ -1,0 +1,34 @@
+﻿@{
+	Func<bool?> GetValue = () =>
+	{
+		bool? value = null;
+
+		if (ViewData.Model != null)
+		{
+			value =
+				Convert.ToBoolean(ViewData.Model,
+				System.Globalization.CultureInfo.InvariantCulture);
+		}
+
+		return (value);
+	};
+}
+
+@if (ViewData.ModelMetadata.IsNullableValueType)
+{
+	var value = GetValue();
+
+	@Html.DropDownList("", new[]
+	{
+		new SelectListItem { Text = "-----", Value = String.Empty, Selected = !value.HasValue },
+		new SelectListItem { Text = "بلی", Value = "true", Selected = value.HasValue && value.Value },
+		new SelectListItem { Text = "خير", Value = "false", Selected = value.HasValue && !value.Value }
+	}, new { @class = "list-box tri-state" });
+}
+else
+{
+	<div class="field">
+		@Html.CheckBox("", GetValue().GetValueOrDefault(), new { @class = "check-box" })
+		@Html.Label("")
+	</div>
+}

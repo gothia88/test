@@ -1,0 +1,47 @@
+﻿@model Models.Cms.CmsSettings
+
+@{
+	string strTitle =
+		Resources.Models.Cms.Settings.EntityName;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.PostsPageSizeOnHomePage,
+		leftToRight: true,
+		labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.PostsPageSizeOnPostCategoryPage,
+		leftToRight: true,
+		labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.PostsPageSizeOnPostsPage,
+		leftToRight: true,
+		labelColumn: 5)
+
+	@Html.DtxSubmit(Resources.Buttons.Save,
+		columnOffset: 5)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

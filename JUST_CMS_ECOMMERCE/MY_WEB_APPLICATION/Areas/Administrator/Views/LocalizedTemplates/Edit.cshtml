@@ -1,0 +1,60 @@
+﻿@model ViewModels.Areas.Administrator.LocalizedTemplates.EditViewModel
+
+<form id="frmData">
+	@Html.HiddenFor(model => model.FileName)
+	@Html.HiddenFor(model => model.DirectoryName)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelBody()
+	<div class="row">
+		<textarea id="Content" name="Content" rows="10" style="direction: ltr; font-family: 'Courier New'; width: 100%; margin: 0; padding: 0">@Model.Content</textarea>
+	</div>
+
+	@Html.DtxButton(Resources.Buttons.Save, id: "btnSave")
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+</form>
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		$("#btnSave").click(function () {
+
+			var varData =
+				$("form#frmData").serialize();
+
+			$("div#myLoadingDialog").modal({ keyboard: false, backdrop: false });
+
+			$.ajax({
+
+				type: "POST",
+				dataType: "json",
+
+				data: varData,
+				url: "/Administrator/LocalizedTemplates/Save",
+
+				success: function (e) {
+
+					$("div#divModalBody").html("");
+
+					$("div#myLoadingDialog").modal('toggle');
+
+					$("div#myModal").modal('toggle');
+
+				},
+
+				error: function (e) {
+
+					$("div#myLoadingDialog").modal('toggle');
+
+					$("div#myModal").modal('toggle');
+
+				}
+
+			});
+		});
+	})
+
+</script>

@@ -1,0 +1,149 @@
+﻿@model IEnumerable<ViewModels.Areas.Cms.Page.IndexViewModel>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.Cms.Page.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.Cms.Page.EntityName);
+}
+
+@Html.DtxActionLink(strCreate,
+	MVC.Cms.Page.Create())
+
+<br />
+<br />
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 150px;">
+				&nbsp;
+			</th>
+			<th style="width: 80px;">
+				@Html.DisplayNameFor(model => model.IsDraft)
+			</th>
+			<th style="width: 50px;">
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th style="width: 80px;">
+				@Html.DisplayNameFor(model => model.IsSystem)
+			</th>
+			<th style="width: 80px;">
+				@Html.DisplayNameFor(model => model.IsDeleted)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+				-
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.LayoutName)
+			</th>
+			<th style="width: 150px;">
+				@Html.DisplayNameFor(model => model.DisplayAccessType)
+			</th>
+			<th style="width: 80px;">
+				@Html.DisplayNameFor(model => model.GroupCount)
+			</th>
+			@*<th style="width: 80px;">
+					@Html.DisplayNameFor(model => model.UserCount)
+				</th>*@
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.Cms.Page.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@Html.DtxActionLink(Resources.Actions.Edit,
+						MVC.Cms.Page.Edit(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Edit)
+
+					@if (item.IsSystem == false)
+					{
+						@Html.DtxActionLink(Resources.Actions.Delete,
+							MVC.Cms.Page.Delete(item.Id),
+							Infrastructure.Enums.ActionLinksTypes.Delete)
+					}
+
+					<br />
+					@Html.DtxActionLink(Resources.Actions.DisplayPage,
+						MVC.Cms.General.DisplayPage(item.Name))
+
+					@if (item.AccessTypeEnum == Models.Enums.AccessTypes.Special)
+					{
+						<br />
+						@Html.DtxActionLink(Resources.Actions.SelectGroups,
+							MVC.Cms.Page.SelectGroups(item.Id))
+					}
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsDraft)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsSystem)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsDeleted)
+				</td>
+				<td>
+					<div style="direction: ltr">
+						@Html.DisplayFor(modelItem => item.Name)
+					</div>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td style="direction: ltr">
+					@if (string.IsNullOrWhiteSpace(item.LayoutName))
+					{
+						<text>-----</text>
+					}
+					else
+					{
+						@Html.DtxActionLink(item.LayoutName,
+							MVC.Cms.Layout.Details(item.LayoutId),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+					}
+				</td>
+				<td>
+					@Html.DtxActionLink(item.DisplayAccessType,
+						MVC.Administrator.AccessType.Details(item.AccessTypeId),
+						Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.GroupCount)
+				</td>
+				@*<td>
+						@Dtx.Text.Convert.DisplayFormattedNumber(item.UserCount)
+					</td>*@
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

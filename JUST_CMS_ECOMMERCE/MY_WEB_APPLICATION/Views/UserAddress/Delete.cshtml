@@ -1,0 +1,53 @@
+﻿@model Models.UserAddress
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DeleteOf,
+		Resources.Models.UserAddress.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.IsPublic)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Title)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Address,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+<hr />
+
+@Html.DtxDisplayNameAndValueFor(model => model.PhoneNumbers,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+<hr />
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxDelete()
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.UserAddress.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Details,
+	MVC.UserAddress.Details(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.UserAddress.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

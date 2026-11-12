@@ -1,0 +1,158 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<#
+	var areaName = GetAreaName(ViewDataTypeName);
+	var fullyViewDataTypeShortName = ViewDataTypeShortName;
+	if(string.IsNullOrEmpty(areaName) == false)
+	{
+		fullyViewDataTypeShortName =
+			areaName + "." + fullyViewDataTypeShortName;
+	}
+#>
+@model IEnumerable<#= "<" + ViewDataTypeName + ">" #>
+<#
+	if(IsPartialView)
+	{
+#>
+
+<#
+	}
+	else if(IsLayoutPageSelected)
+	{
+#>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.<#= fullyViewDataTypeShortName #>.EntitiesName);
+
+	ViewBag.Title = strTitle;
+<#
+	if (String.IsNullOrEmpty(LayoutPageFile) == false)
+	{
+#>
+	Layout = "<#= LayoutPageFile #>";
+<#
+	}
+#>
+}
+<#
+	}
+	else
+	{
+#>
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<title><#= ViewName #></title>
+	</head>
+	<body>
+<#
+	PushIndent("	");
+}
+#>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		@strTitle
+	</div>
+	<div class="panel-body">
+		@{
+			string strCreate =
+				string.Format("{0} {1}",
+				Resources.Actions.CreateOf,
+				Resources.Models.<#= fullyViewDataTypeShortName #>.EntityName);
+		}
+
+		@Html.DtxActionLink(strCreate, MVC.<#= fullyViewDataTypeShortName #>.Create())
+		<br />
+		<br />
+
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover table-condensed">
+				<tr>
+					<th style="width: 100px;">
+						&nbsp;
+					</th>
+<#
+IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
+
+foreach (PropertyMetadata property in properties)
+{
+	if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey)
+	{
+#>
+<#
+		if (property.IsAssociation && GetRelatedModelMetadata(property) == null)
+		{
+			continue;
+		}
+#>
+					<th>
+						@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+					</th>
+<#
+	}
+}
+#>
+				</tr>
+
+				@foreach (var item in Model)
+				{
+					string strRowStyle =
+						Infrastructure.Utility.GetRowStyle(item);
+
+					<tr class="@strRowStyle">
+						<td>
+							@Html.DtxActionLink(Resources.Actions.Edit,
+								MVC.<#= fullyViewDataTypeShortName #>.Edit(item.Id))
+							<br />
+							@Html.DtxActionLink(Resources.Actions.Details,
+								MVC.<#= fullyViewDataTypeShortName #>.Details(item.Id))
+							<br />
+							@Html.DtxActionLink(Resources.Actions.Delete,
+								MVC.<#= fullyViewDataTypeShortName #>.Delete(item.Id))
+						</td>
+<#
+	foreach (PropertyMetadata property in properties)
+	{
+		if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey)
+		{
+			if (property.IsAssociation && GetRelatedModelMetadata(property) == null)
+			{
+				continue;
+			}
+#>
+						<td>
+							@Html.DisplayFor(modelItem => <#= "item." + GetValueExpression(property) #>)
+						</td>
+<#
+		}
+	}
+#>
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+<#
+if(!IsPartialView && !IsLayoutPageSelected)
+{
+	ClearIndent();
+#>
+	</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

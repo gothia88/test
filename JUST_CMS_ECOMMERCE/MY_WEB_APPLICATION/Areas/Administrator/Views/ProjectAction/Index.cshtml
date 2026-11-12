@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Models.ProjectAction>
+
+@{
+	Models.ProjectController oProjectController =
+		ViewBag.ProjectController as Models.ProjectController;
+
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.ListOf,
+		Resources.Models.ProjectAction.EntitiesNameOf,
+		oProjectController.DisplayName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxActionLink(Resources.Actions.ListOf + " " +
+	Resources.Models.ProjectController.EntitiesName,
+	MVC.Administrator.ProjectControll_er.Index(oProjectController.ProjectAreaId))
+
+@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.ProjectAction.EntityName);
+
+	@Html.DtxActionLink(strCreate,
+		MVC.Administrator.ProjectAction.Create(oProjectController.Id))
+}
+
+<br />
+<br />
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 150px;">
+				&nbsp;
+			</th>
+			<th style="width: 80px;">
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th style="width: 80px;">
+				@Html.DisplayNameFor(model => model.Ordering)
+			</th>
+
+			@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+			{
+				<th style="width: 150px;">
+					@Html.DisplayNameFor(model => model.IsVisibleJustForProgrammer)
+				</th>
+				<th style="width: 150px;">
+					@Html.DisplayNameFor(model => model.Name)
+				</th>
+			}
+
+			<th>
+				@Html.DisplayNameFor(model => model.DisplayName)
+			</th>
+			<th style="width: 200px;">
+				@Html.DisplayNameFor(model => model.AccessType)
+			</th>
+			<th style="width: 160px;">
+				@Resources.Models.General.InsertAndUpdateDateTime
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.Administrator.ProjectAction.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@Html.DtxActionLink(Resources.Actions.Edit,
+						MVC.Administrator.ProjectAction.Edit(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Edit)
+
+					@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+					{
+						@Html.DtxActionLink(Resources.Actions.Delete,
+							MVC.Administrator.ProjectAction.Delete(item.Id),
+							Infrastructure.Enums.ActionLinksTypes.Delete)
+					}
+
+					@if (item.AccessTypeEnum == Models.Enums.AccessTypes.Special)
+					{
+						<br />
+						@Html.DtxActionLink(Resources.Actions.SelectUsers,
+							MVC.Administrator.ProjectAction.SelectUsers(item.Id))
+
+						<br />
+						@Html.DtxActionLink(Resources.Actions.SelectGroups,
+							MVC.Administrator.ProjectAction.SelectGroups(item.Id))
+					}
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.Ordering)
+				</td>
+
+				@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+				{
+					<td>
+						@Html.DisplayFor(modelItem => item.IsVisibleJustForProgrammer)
+					</td>
+					<td style="direction: ltr">
+						@Html.DisplayFor(modelItem => item.Name)
+					</td>
+				}
+
+				<td>
+					@Html.DisplayFor(modelItem => item.DisplayName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AccessType.Name)
+				</td>
+				<td>
+					@Html.DisplayDateTime(item.InsertDateTime, displayTime: true)
+					<br />
+					@Html.DisplayDateTime(item.UpdateDateTime, displayTime: true)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

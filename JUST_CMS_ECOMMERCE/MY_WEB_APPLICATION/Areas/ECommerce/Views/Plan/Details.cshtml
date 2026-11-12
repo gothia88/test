@@ -1,0 +1,75 @@
+﻿@model Models.ECommerce.Plan
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.ECommerce.Plan.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SmsNotification,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Price,
+	Infrastructure.Enums.DisplayValueTypes.Currency,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.DurationInMonth,
+	Infrastructure.Enums.DisplayValueTypes.Number,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.MaxDownloadSpeedInKB,
+	Infrastructure.Enums.DisplayValueTypes.Number,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.MaxFileLengthForUploadingInMB,
+	Infrastructure.Enums.DisplayValueTypes.Number,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.MinCreditForPayment,
+	Infrastructure.Enums.DisplayValueTypes.Currency,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.MaxTimeForPaymentInHour,
+	Infrastructure.Enums.DisplayValueTypes.Number,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SiteCommissionRate,
+	Infrastructure.Enums.DisplayValueTypes.Percent,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.ExtraSiteCommissionRateForIsFeaturedProducts,
+	Infrastructure.Enums.DisplayValueTypes.Percent,
+	labelColumn: 5)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw,
+	labelColumn: 5)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.ECommerce.Plan.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Delete,
+	MVC.ECommerce.Plan.Delete(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.ECommerce.Plan.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

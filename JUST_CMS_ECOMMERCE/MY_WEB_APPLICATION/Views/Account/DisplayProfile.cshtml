@@ -1,0 +1,137 @@
+﻿@model Models.User
+
+@{
+	string strTitle = Model.FullName;
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<div class="row">
+	<div class="col-sm-9">
+		@if ((Model.IsEmailAddressVerified) && (Model.IsEmailAddressPublic))
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.EmailAddress,
+				Infrastructure.Enums.DisplayValueTypes.EmailAddress)
+		}
+
+		@if (string.IsNullOrWhiteSpace(Model.HomePageUrl) == false)
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.HomePageUrl,
+				Infrastructure.Enums.DisplayValueTypes.Url)
+		}
+
+		@if ((Model.IsCellPhoneNumberVerified) && (Model.IsCellPhoneNumberPublic))
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.CellPhoneNumber,
+				Infrastructure.Enums.DisplayValueTypes.PhoneNumber)
+		}
+
+		@if (Model.IsBirthDatePublic)
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.BirthDate,
+				Infrastructure.Enums.DisplayValueTypes.Date)
+		}
+
+		@if (string.IsNullOrWhiteSpace(Model.CompanyName) == false)
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.CompanyName)
+		}
+
+		@if (string.IsNullOrWhiteSpace(Model.JobTitle) == false)
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.JobTitle)
+		}
+
+		<hr />
+
+		@Html.DtxDisplayNameAndValueFor(model => model.Role.Name,
+			caption: Resources.Models.Role.EntityName)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.IsVerified)
+
+		@if (Model.IsVerified)
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.VerifyDateTime,
+				Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+			if (Model.VerifierUserId.HasValue)
+			{
+				@Html.DtxDisplayNameAndValueFor(model => model.VerifierUser.FullName,
+					actionResult: MVC.Account.DisplayProfile(Model.VerifierUserId.Value),
+					caption: Resources.Models.General.VerifierUserId)
+			}
+		}
+
+		@Html.DtxDisplayNameAndValueFor(model => model.Hits,
+			Infrastructure.Enums.DisplayValueTypes.Number)
+
+		@if (string.IsNullOrWhiteSpace(Model.Description) == false)
+		{
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-12">
+					@Html.Raw(Model.Description)
+				</div>
+			</div>
+
+			@*@Html.DtxDisplayNameAndValueFor(model => model.Description,
+				Infrastructure.Enums.DisplayValueTypes.Raw)*@
+		}
+
+		@{
+			var varAddresses =
+				Model.UserAddresses
+				.Where(current => current.IsPublic)
+				.ToList();
+
+			if (varAddresses.Count != 0)
+			{
+				<fieldset>
+					<legend>@Resources.Models.General.Addresses</legend>
+
+					<ul>
+						@foreach (Models.UserAddress oUserAddress in varAddresses)
+						{
+							<li>
+								@oUserAddress.Title:
+								@if (string.IsNullOrWhiteSpace(oUserAddress.Address) == false)
+								{
+									<br />
+									@Html.Raw(oUserAddress.Address)
+								}
+								@if (string.IsNullOrWhiteSpace(oUserAddress.PhoneNumbers) == false)
+								{
+									<br />
+									@Html.Raw(oUserAddress.PhoneNumbers)
+								}
+							</li>
+						}
+					</ul>
+				</fieldset>
+
+			}
+		}
+	</div>
+	<div class="col-sm-3">
+		@if ((Model.HasAvatar) && (Model.IsAvatarPublic))
+		{
+			<img src="~/Account/DisplayUserAvatar/@Model.Id?width=180" alt="@Model.FullName" title="@Model.FullName" class="img-responsive img-rounded" />
+		}
+	</div>
+</div>
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()
+
+@if (Infrastructure.ApplicationSettings.Instance.IsCmsEnabled)
+{
+	@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayActiveUserPosts, Model)
+}

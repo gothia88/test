@@ -1,0 +1,66 @@
+﻿@using CaptchaMvc.HtmlHelpers
+
+@model ViewModels.Home.ContactViewModel
+
+@{
+	string strTitle =
+		Resources.Actions.Contact;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<div class="row">
+		<div class="col-sm-8">
+			@Html.ValidationSummary(excludePropertyErrors: true)
+
+			@Html.DtxLabelDropDownListFor(model => model.RecipientUserId)
+
+			@if (Infrastructure.AuthenticatedUser.IsAuthenticated == false)
+			{
+				@Html.DtxLabelTextBoxFor(model => model.FullName)
+
+				@Html.DtxLabelTextBoxFor(model => model.EmailAddress,
+					leftToRight: true)
+			}
+
+			@Html.DtxLabelTextBoxFor(model => model.Subject)
+
+			@Html.DtxLabelTextAreaFor(model => model.Description)
+
+			@Html.DtxCheckBoxFor(model => model.CarbonCopyToSender)
+
+			@if (Infrastructure.ApplicationSettings.Instance.CanUserAttachFileInContactUsPage)
+			{
+				<div class="form-group">
+					<label for="Attachment" class="control-label col-sm-3">
+						@Resources.ViewModels.Home.ContactViewModel.Attachment
+					</label>
+					<div class="col-sm-9">
+						<input type="file" id="Attachment" name="Attachment" />
+					</div>
+				</div>
+			}
+
+			@Html.DtxCaptcha()
+
+			@Html.DtxSubmit(Resources.Buttons.Send)
+		</div>
+		<div class="col-sm-4">
+			<img src="~/Content/Images/Contact.jpg" alt="Register" title="Register" class="img-rounded img-responsive" />
+		</div>
+	</div>
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

@@ -1,0 +1,155 @@
+﻿/*
+Version: 1.0.3
+Date: 1394/03/09
+Author: Mr. Dariush Tasdighi
+*/
+
+/*@font-face {
+	font-family: 'webYekan';
+	src: url('../../../../fonts/Yekan.svg') format('svg'), url('../../../../fonts/Yekan.ttf') format('truetype'), url('../../../../fonts/Yekan.woff') format('woff'), url('../../../../fonts/Yekan.eot') format('embedded-opentype');
+}*/
+
+@font-face {
+	font-family: 'webYekan';
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	src: url('../../../../fonts/YekanWeb-Regular.woff') format('woff');
+}
+
+body {
+	direction: rtl;
+	font-weight: normal;
+	text-align: justify;
+	font-family: "webYekan", Tahoma, Arial;
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	background-position: left top;
+	background-image: url(../Images/Background.gif);
+}
+
+.k-rtl .k-dropdown-wrap, .k-rtl .k-picker-wrap, .k-rtl .k-numeric-wrap {
+	padding-right: 0.1em;
+	padding-left: 1.9em;
+}
+
+select.form-control {
+	padding-top: 0;
+}
+
+.dropdown-menu > li > a {
+	font-weight: normal;
+}
+
+form#frmSearch input#searchKeywords {
+	padding-top: 12px;
+}
+
+div.grid {
+	overflow: auto;
+	font-size: 8pt;
+}
+
+	div.grid tbody tr:hover {
+		color: white;
+		background: #ff6a00;
+	}
+
+		div.grid tbody tr:hover a {
+			color: white;
+		}
+
+	div.grid .k-state-selected {
+		color: blue;
+		background-color: khaki;
+	}
+
+div.pageMessages {
+	display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-align: right;
+}
+
+.rtl {
+	direction: rtl;
+	text-align: justify;
+	font-size: 10pt;
+}
+
+.ltr {
+	direction: ltr;
+	text-align: left;
+	font-size: 10pt;
+	font-family: Verdana;
+}
+
+input.city, input.education-place, input.education-branch {
+	background-color: khaki;
+}
+
+/* Styles for validation helpers */
+.field-validation-error {
+	color: #ff0000;
+}
+
+.field-validation-valid {
+	display: none;
+}
+
+.input-validation-error {
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+	color: #ff0000;
+}
+
+.validation-summary-valid {
+	display: none;
+}
+/* /Styles for validation helpers */
+
+/* Styles for E-Shop */
+div.product {
+	height: 350px;
+	font-size: 8pt;
+	border: 1px solid lightgray;
+}
+
+div.productHeader {
+	height: 200px;
+}
+
+	div.productHeader img {
+		margin: auto;
+		max-height: 174px;
+	}
+
+div.productBody {
+	height: 120px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+div.productFooter {
+	height: 30px;
+}
+
+button#btnDisplayMoreData, div#loading {
+	display: none;
+}
+
+span.oldPrice {
+	color: darkgray;
+	font-size: 14px;
+	text-decoration: line-through;
+}
+
+span.newPrice {
+	color: red;
+	font-size: 16px;
+}
+/* /Styles for E-Shop */

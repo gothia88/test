@@ -1,0 +1,82 @@
+﻿@model Models.ProjectAction
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.SelectUsers,
+		Resources.Models.ProjectAction.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+<h3 class="title">
+	@strTitle
+</h3>
+
+@Html.Partial(MVC.Administrator.ProjectAction.Views._Partial_DisplayProjectActionInformation, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<fieldset>
+		<legend>
+			@strTitle
+		</legend>
+
+		<input type="hidden" id="id" value="@Model.Id" />
+
+		@{
+			var varUsers =
+				(IEnumerable<Models.User>)ViewBag.Users;
+		}
+
+		@{
+			foreach (Models.User oUser in varUsers)
+			{
+				bool blnChecked = false;
+
+				foreach (Models.User oCurrentUser in Model.Users)
+				{
+					if (oCurrentUser.Id == oUser.Id)
+					{
+						blnChecked = true;
+						break;
+					}
+				}
+
+				<br />
+
+				if (blnChecked)
+				{
+					<input type="checkbox" name="checkBoxes" value="@oUser.Id" checked="checked" />
+				}
+				else
+				{
+					<input type="checkbox" name="checkBoxes" value="@oUser.Id" />
+				}
+
+				@Html.DtxActionLink(oUser.FullName +
+						" (" + oUser.Role.Name + ")",
+						MVC.Administrator.User.Details(oUser.Id))
+
+				if (oUser.IsActive == false)
+				{
+					<text>- غير فعال</text>
+				}
+			}
+		}
+
+		<div class="buttons">
+			<input type="submit" value="@Resources.Buttons.Save" class="button" />
+			<input type="reset" value="@Resources.Buttons.Reset" class="button" />
+		</div>
+	</fieldset>
+}
+
+<div class="links">
+	@Html.DtxActionLink(Resources.Actions.BackToList + " " +
+		Resources.Models.ProjectAction.EntitiesName,
+		MVC.Administrator.ProjectAction.Index(Model.ProjectControllerId))
+</div>

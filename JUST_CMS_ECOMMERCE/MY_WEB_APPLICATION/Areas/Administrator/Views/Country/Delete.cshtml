@@ -1,0 +1,43 @@
+﻿@model Models.Country
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DeleteOf,
+		Resources.Models.Country.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxDelete()
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Details,
+	MVC.Administrator.Country.Details(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.Country.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.Country.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

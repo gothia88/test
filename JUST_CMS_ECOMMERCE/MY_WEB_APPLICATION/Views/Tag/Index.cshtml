@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ViewModels.Areas.Cms.Tag.IndexViewModel>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.Common.Tag.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<ul>
+	@foreach (var varTag in Model)
+	{
+		<li>
+			@Html.DtxActionLink(varTag.Name, MVC.Tag.Display(varTag.Id))
+			(
+			@Resources.Models.Cms.Page.EntitiesName
+			:
+			@Dtx.Text.Convert.DisplayFormattedNumber(varTag.PageCount)
+			-
+			@Resources.Models.Cms.Post.EntitiesName
+			:
+			@Dtx.Text.Convert.DisplayFormattedNumber(varTag.PostCount)
+			)
+		</li>
+	}
+</ul>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

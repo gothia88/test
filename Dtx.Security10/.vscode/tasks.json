@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-api",
+      "type": "process",
+      "command": "D:\\dotnet\\dotnet.exe",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/Api/Api.csproj",
+        "--nologo"
+      ],
+      "options": {
+        "env": {
+          "DOTNET_ROOT": "D:\\dotnet",
+          "DOTNET_CLI_HOME": "D:\\dotnet-cli-home",
+          "NUGET_PACKAGES": "D:\\nuget-packages"
+        }
+      },
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build-solution",
+      "type": "process",
+      "command": "D:\\dotnet\\dotnet.exe",
+      "args": [
+        "build",
+        "${workspaceFolder}/Dtx.Security10.slnx",
+        "--nologo"
+      ],
+      "options": {
+        "env": {
+          "DOTNET_ROOT": "D:\\dotnet",
+          "DOTNET_CLI_HOME": "D:\\dotnet-cli-home",
+          "NUGET_PACKAGES": "D:\\nuget-packages"
+        }
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

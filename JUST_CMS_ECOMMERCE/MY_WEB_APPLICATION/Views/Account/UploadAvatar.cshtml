@@ -1,0 +1,48 @@
+﻿@model Models.User
+
+@{
+	string strTitle =
+		Resources.Actions.UploadAvatar;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm("UploadAvatar", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<div class="form-group">
+		<label for="fileContent" class="control-label">@Resources.Models.User.Avatar</label>
+		<div class="col-sm-10">
+			<input type="file" id="fileContent" name="fileContent" />
+		</div>
+	</div>
+
+	if (Model.HasAvatar)
+	{
+		<div class="form-group">
+			<div class="col-sm-10">
+				<img src="~/Account/DisplayUserAvatar/@Model.Id?width=100" alt="@Model.FullName" />
+			</div>
+		</div>
+	}
+
+	@Html.DtxSubmit(Resources.Buttons.Send)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

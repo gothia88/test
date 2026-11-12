@@ -1,0 +1,94 @@
+﻿@model Models.Cms.Layout
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.Cms.Layout.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+	{
+		@Html.DtxCheckBoxFor(model => model.IsSystem)
+	}
+	else
+	{
+		@Html.HiddenFor(model => model.IsSystem)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.IsSystem)
+	}
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	if ((Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer) ||
+		((Infrastructure.Sessions.AuthenticatedUser.Role != Models.Enums.Roles.Programmer) &&
+		(Model.IsSystem == false)))
+	{
+		@Html.DtxLabelTextBoxFor(model => model.Name, leftToRight: true)
+	}
+	else
+	{
+		@Html.HiddenFor(model => model.Name)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.Name)
+	}
+
+	@Html.DtxLabelTextBoxFor(model => model.Title)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Cms.Layout.Details(Model.Id))
+
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+
+	int intDynamicPageCount =
+		oUnitOfWork.CmsUnitOfWork.PageRepository
+		.GetPageCountByLayoutId(Model.Id);
+
+	int intStaticPageCount =
+		oUnitOfWork.ProjectActionRepository
+		.GetProjectActionCountByLayoutId(Model.Id);
+
+	if ((Model.IsSystem == false) &&
+		(intStaticPageCount == 0) &&
+		(intDynamicPageCount == 0))
+	{
+		@Html.DtxActionLink(Resources.Actions.Delete,
+			MVC.Cms.Layout.Delete(Model.Id))
+	}
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Cms.Layout.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

@@ -1,0 +1,268 @@
+﻿@{
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+
+	System.DateTime dtmNow =
+		Models.Utility.Now;
+
+	System.DateTime dtmToday =
+		new DateTime(dtmNow.Year, dtmNow.Month, dtmNow.Day);
+
+	System.DateTime dtmYesterday = dtmNow.AddDays(-1);
+
+	System.DateTime dtmWeek = dtmNow.AddDays(-7);
+
+	System.DateTime dtmMonth = dtmNow.AddDays(-30);
+
+	System.DateTime dtmThreeMonth = dtmNow.AddDays(-90);
+
+	System.DateTime dtmYear = dtmNow.AddDays(-365);
+
+	int intWeek = 0;
+	int intYear = 0;
+	int intToday = 0;
+	int intMonth = 0;
+	int intYesterday = 0;
+	int intThreeMonth = 0;
+
+	intToday =
+		oUnitOfWork.UserRepository.Get()
+		.Where(current => current.InsertDateTime.Value >= dtmToday)
+		.Where(current => current.Role.Code == (int)Models.Enums.Roles.User)
+		.Count()
+		;
+
+	intYesterday =
+		oUnitOfWork.UserRepository.Get()
+		.Where(current => current.InsertDateTime.Value < dtmToday)
+		.Where(current => current.InsertDateTime.Value >= dtmYesterday)
+		.Where(current => current.Role.Code == (int)Models.Enums.Roles.User)
+		.Count()
+		;
+
+	intWeek =
+		oUnitOfWork.UserRepository.Get()
+		.Where(current => current.InsertDateTime.Value >= dtmWeek)
+		.Where(current => current.Role.Code == (int)Models.Enums.Roles.User)
+		.Count()
+		;
+
+	intMonth =
+		oUnitOfWork.UserRepository.Get()
+		.Where(current => current.InsertDateTime.Value >= dtmMonth)
+		.Where(current => current.Role.Code == (int)Models.Enums.Roles.User)
+		.Count()
+		;
+
+	intThreeMonth =
+		oUnitOfWork.UserRepository.Get()
+		.Where(current => current.InsertDateTime.Value >= dtmThreeMonth)
+		.Where(current => current.Role.Code == (int)Models.Enums.Roles.User)
+		.Count()
+		;
+
+	intYear =
+		oUnitOfWork.UserRepository.Get()
+		.Where(current => current.InsertDateTime.Value >= dtmYear)
+		.Where(current => current.Role.Code == (int)Models.Enums.Roles.User)
+		.Count()
+		;
+}
+
+<div class="row">
+	<div class="col-sm-6">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active">
+				<a href="#">
+					<span class="badge pull-left">
+						@Dtx.Text.Convert.DisplayFormattedNumber(intToday)
+					</span>
+					ثبت‌نام‌های امروز
+				</a>
+			</li>
+
+			<li class="active">
+				<a href="#">
+					<span class="badge pull-left">
+						@Dtx.Text.Convert.DisplayFormattedNumber(intYesterday)
+					</span>
+					ثبت‌نام‌های ديروز
+				</a>
+			</li>
+
+			<li class="active">
+				<a href="#">
+					<span class="badge pull-left">
+						@Dtx.Text.Convert.DisplayFormattedNumber(intWeek)
+					</span>
+					ثبت‌نام‌ها از هفته گذشته
+				</a>
+			</li>
+
+			<li class="active">
+				<a href="#">
+					<span class="badge pull-left">
+						@Dtx.Text.Convert.DisplayFormattedNumber(intMonth)
+					</span>
+					ثبت‌نام‌ها از يک مـاه گذشته
+				</a>
+			</li>
+
+			<li class="active">
+				<a href="#">
+					<span class="badge pull-left">
+						@Dtx.Text.Convert.DisplayFormattedNumber(intThreeMonth)
+					</span>
+					ثبت‌نام‌ها از سه مـاه گذشته
+				</a>
+			</li>
+
+			<li class="active">
+				<a href="#">
+					<span class="badge pull-left">
+						@Dtx.Text.Convert.DisplayFormattedNumber(intYear)
+					</span>
+					ثبت‌نام‌ها از يک سـال گذشته
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="col-sm-6">
+		<div dir="ltr" style="direction: ltr; text-align: left;">
+			<div id="chart2"></div>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<div class="row">
+	<div dir="ltr" style="direction: ltr; text-align: left;">
+		<div id="chart1"></div>
+	</div>
+</div>
+
+<hr />
+
+<div class="row">
+	<div dir="ltr" style="direction: ltr; text-align: left;">
+		<div id="chart3"></div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+
+		var varDataSource2 =
+			new kendo.data.DataSource({
+				transport: {
+					read: {
+						dataType: "json",
+						url: "/Chart/GetGendersCount",
+					}
+				},
+				//schema: {
+				//	data: "result",
+				//},
+			});
+
+		$("div#chart2").kendoChart({
+
+			//title: {
+			//	text: "وضعيت پيشرفت تکميل اطلاعات فردی و شرکتی",
+			//},
+
+			dataSource: varDataSource2,
+
+			seriesDefaults: {
+				pie: {
+					color: "Green",
+					opacity: 0.8,
+				}
+			},
+
+			plotArea: {
+				padding: 10,
+			},
+
+			series: [{
+				type: "pie",
+
+				padding: 10,
+
+				startAngle: 0,
+
+				visibleInLegend: true,
+				visibleInLegendField: "visible",
+
+				tooltip: {
+					padding: 20,
+					visible: true,
+					color: "Black",
+					font: "8pt Tahoma",
+					background: "White",
+					border: {
+						width: 2,
+						color: "Black"
+					},
+					template: function (e) {
+						var varResult =
+							e.dataItem.Name + " (" + e.value + " نفر)";
+
+						return (varResult);
+					},
+				},
+
+				overlay: {
+					gradient: "roundedBevel",
+				},
+
+				labels: {
+					distance: 10,
+					visible: true,
+					align: "circle",
+					font: "10pt Tahoma",
+
+					template: "#= value # نفر",
+
+					//template: function (e) {
+					//	var varResult =
+					//		e.dataItem.Name;
+
+					//	return (varResult);
+					//},
+
+					//template: function (e) {
+					//	var varResult =
+					//		e.dataItem.Name + " (" + e.value + "%)";
+
+					//	return (varResult);
+					//},
+				},
+
+				highlight: {
+					visible: true,
+					border: {
+						width: 1,
+						opacity: 1.0,
+						color: "Black",
+						dashType: "dash",
+					},
+				},
+
+				connectors: {
+					width: 0,
+					padding: 0,
+					color: "White",
+				},
+
+				//name: "Status",
+				field: "UserCount",
+			}],
+
+			categoryAxis: {
+				field: "Name",
+			},
+		});
+	})
+</script>

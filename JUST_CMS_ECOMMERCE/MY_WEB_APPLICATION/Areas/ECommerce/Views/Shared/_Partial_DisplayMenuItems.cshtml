@@ -1,0 +1,11 @@
+﻿@if (Infrastructure.ApplicationSettings.Instance.IsECommerceSystemEnabled)
+{
+	if (Infrastructure.ECommerce.Settings.Instance.IsPlansServiceEnabled)
+	{
+		<li>
+			@Html.DtxActionLink(Resources.Models.ECommerce.Plan.EntitiesName,
+			 MVC.ECommerce.Plan.DisplayPlans(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+		</li>
+	}
+}

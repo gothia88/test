@@ -1,0 +1,44 @@
+﻿@model Models.Common.IFileContainer
+
+@if ((Model == null) || (Model.HasAttachment == false))
+{
+	return;
+}
+
+<hr />
+
+@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Info)
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(Resources.Models.General.File)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.DownloadCount,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.AttachmentLength,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.FileName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Sha1OfAttachment)
+
+@{
+	string strLinkText =
+		string.Format("<span class='glyphicon glyphicon-download-alt' aria-hidden='true' data-toggle='tooltip' data-placement='top' title='{0}'></span> دانلود فايل",
+		Resources.Models.General.Download);
+}
+
+<div class="row">
+	<div class="col-sm-9 col-sm-offset-3">
+		@if (Model is Models.Cms.Post)
+		{
+			@Html.DtxActionLink(strLinkText,
+				MVC.Cms.General.Download(Model.Id))
+		}
+	</div>
+</div>
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

@@ -1,0 +1,236 @@
+﻿@model Models.User
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		// **************************************************
+		var varDataSourceActiveUserPosts =
+			new kendo.data.DataSource({
+
+				pageSize: 10,
+
+				serverPaging: true,
+				serverSorting: true,
+				serverGrouping: false,
+				serverFiltering: false,
+				serverAggregates: false,
+
+				transport: {
+					read: {
+						type: "GET",
+						dataType: "json",
+						url: "/Cms/User/GetActiveUserPosts?UserId=@Model.Id",
+					},
+				},
+
+				schema: {
+					data: function (e) {
+						return (e.Data);
+					},
+					total: function (e) {
+						return (e.Total);
+					},
+				},
+
+			});
+		// **************************************************
+
+		$("div#grdActiveUserPosts").kendoGrid({
+
+			// **************************************************
+			sortable: {
+				//mode: "single",
+				mode: "multiple",
+				allowUnsort: true,
+			},
+
+			pageable: {
+				info: true,
+				input: true,
+				refresh: true,
+				numeric: true,
+				buttonCount: 5,
+				previousNext: true,
+				pageSizes: [5, 10, 25, 50, 100],
+				messages: {
+					morePages: "صفحات بيشتر",
+					page: "شماره صفحه",
+				}
+			},
+
+			groupable: false,
+			filterable: false,
+			scrollable: false,
+			reorderable: true,
+
+			columnMenu: {
+				columns: true,
+				sortable: true,
+				filterable: false,
+				messages: {
+					lock: "قفل شده",
+					unlock: "قفل نشده",
+				}
+			},
+
+			navigatable: true,
+			selectable: "multiple row",
+
+			dataSource: varDataSourceActiveUserPosts,
+
+			dataBinding: function () {
+
+				rowNumber =
+					(this.dataSource.page() - 1) * this.dataSource.pageSize();
+
+			},
+
+			dataBound: function () {
+
+				doSomeEffects();
+
+			},
+			// **************************************************
+
+			columns:
+			[
+				{
+					width: "50px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "رديف",
+					template: "#= ++rowNumber #",
+				},
+
+				{
+					width: "100px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "@(Resources.Models.General.IsFeatured)",
+					field: "@(Resources.Models.Strings.GeneralKeys.IsFeatured)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.IsFeatured)) {
+
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.IsFeatured)" class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "100px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "@(Resources.Models.General.IsVerified)",
+					field: "@(Resources.Models.Strings.GeneralKeys.IsVerified)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.IsVerified)) {
+
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.IsVerified)" class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "@(Resources.Models.General.Title)",
+					template: function(dataItem) {
+
+						var strResult =
+							'<a href="/Cms/General/DisplayPost/' + dataItem.Id + '">' + dataItem.Title + '</a>';
+
+						return(strResult);
+
+					},
+				},
+
+				{
+					width: "100px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: true,
+					title: "@(Resources.Models.General.HasAttachment)",
+					field: "@(Resources.Models.Strings.GeneralKeys.HasAttachment)",
+					template: function (dataItem) {
+
+						var strTemplate =
+							'<span class="glyphicon glyphicon-unchecked"></span>';
+
+						if (dataItem.@(Resources.Models.Strings.GeneralKeys.HasAttachment)) {
+
+							strTemplate =
+								'<span data-toggle="tooltip" data-placement="top" title="@(Resources.Models.General.HasAttachment)" class="glyphicon glyphicon-check"></span>';
+
+						}
+
+						return (strTemplate);
+
+					},
+				},
+
+				{
+					width: "150px",
+					hidden: false,
+					locked: false,
+					lockable: false,
+					sortable: false,
+					title: "@Resources.Models.General.LastUpdateDateTime",
+					template: function(dataItem) {
+
+						var strResult =
+							dataItem.UpdateDateTime.DisplayDateTime;
+
+						return(strResult);
+
+					},
+				},
+
+			]
+		});
+	})
+</script>
+
+@{
+	string strTitle =
+		"فهرست مطالب کاربر";
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxGrid(id: "grdActiveUserPosts")
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

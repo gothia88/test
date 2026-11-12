@@ -1,0 +1,7 @@
+<Project>
+  <!-- Shields the Dtx port from the parent Clean Architecture template's
+       central package version management. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>

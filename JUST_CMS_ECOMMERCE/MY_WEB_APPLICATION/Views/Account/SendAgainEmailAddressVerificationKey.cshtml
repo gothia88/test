@@ -1,0 +1,36 @@
+﻿@model ViewModels.Account.SendAgainEmailAddressVerificationKeyViewModel
+
+@{
+	string strTitle =
+		Resources.Actions.SendAgainEmailAddressVerificationKey;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<div class="row">
+		<div class="col-sm-9">
+			@Html.ValidationSummary(excludePropertyErrors: true)
+
+			@Html.DtxLabelTextBoxFor(model => model.EmailAddress, leftToRight: true)
+
+			@Html.DtxSubmit(Resources.Buttons.Send)
+		</div>
+		<div class="col-sm-3">
+			<img src="~/Content/Images/EmailVerification.png" alt="Forgot Password" title="Forgot Password" class="img-rounded img-responsive" />
+		</div>
+	</div>
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

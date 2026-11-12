@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Dtx.Security.SharedKernel</RootNamespace>
+    <AssemblyName>Dtx.Security.SharedKernel</AssemblyName>
+  </PropertyGroup>
+
+</Project>

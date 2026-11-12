@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{BCD89127-48D8-4A1E-A8FC-7E063E4B41EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtx", "..\MY_MVC_5_APPLICATION\Dtx\Dtx.csproj", "{9049AB6A-2427-4350-AE36-DA1D5BEFEE88}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 1
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://iranianexperts.visualstudio.com/defaultcollection
+		SccProjectUniqueName0 = ..\\MY_MVC_5_APPLICATION\\Dtx\\Dtx.csproj
+		SccProjectName0 = $/MY_MVC_5_APPLICATION/MY_MVC_APPLICATION/Dtx
+		SccAuxPath0 = https://iranianexperts.visualstudio.com/defaultcollection
+		SccLocalPath0 = ..\\MY_MVC_5_APPLICATION\\Dtx
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCD89127-48D8-4A1E-A8FC-7E063E4B41EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD89127-48D8-4A1E-A8FC-7E063E4B41EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD89127-48D8-4A1E-A8FC-7E063E4B41EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD89127-48D8-4A1E-A8FC-7E063E4B41EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9049AB6A-2427-4350-AE36-DA1D5BEFEE88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9049AB6A-2427-4350-AE36-DA1D5BEFEE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9049AB6A-2427-4350-AE36-DA1D5BEFEE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9049AB6A-2427-4350-AE36-DA1D5BEFEE88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

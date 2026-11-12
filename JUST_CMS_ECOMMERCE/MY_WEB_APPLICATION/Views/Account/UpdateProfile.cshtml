@@ -1,0 +1,84 @@
+﻿@model ViewModels.Account.UpdateProfileViewModel
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.UpdateProfile,
+		Resources.Models.User.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	// نوشتن دستور ذيل الزامی است
+	@Html.HiddenFor(model => model.EmailAddress)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsProfilePublic)
+
+	<hr />
+	
+	@Html.DtxCheckBoxFor(model => model.IsAvatarPublic)
+
+	@Html.DtxDisplayNameAndValueFor(model => model.EmailAddress,
+		Infrastructure.Enums.DisplayValueTypes.EmailAddress)
+
+	@Html.DtxCheckBoxFor(model => model.IsEmailAddressPublic)
+
+	@Html.DtxLabelDropDownListFor(current => current.GenderId)
+
+	@Html.DtxLabelTextBoxFor(model => model.FirstName)
+
+	@Html.DtxLabelTextBoxFor(model => model.LastName)
+
+	@Html.DtxLabelTextBoxFor(model => model.CellPhoneNumber,
+		leftToRight: true, hint: "[00989121087461]")
+
+	@Html.DtxDisplayNameAndValueFor(model => model.IsCellPhoneNumberVerified)
+
+	@Html.DtxCheckBoxFor(model => model.IsCellPhoneNumberPublic)
+
+	@Html.DtxLabelDateFor(model => model.BirthDate)
+
+	@Html.DtxCheckBoxFor(model => model.IsBirthDatePublic)
+
+	@Html.DtxLabelTextBoxFor(model => model.NationalCode,
+		leftToRight: true, hint: Resources.Hints.Hint001)
+
+	@Html.DtxLabelTextBoxFor(model => model.HomePageUrl,
+		leftToRight: true, hint: "http://www.Google.com")
+
+	@Html.DtxLabelTextBoxFor(model => model.CompanyName,
+		hint: Resources.Hints.Hint002)
+
+	@Html.DtxLabelTextBoxFor(model => model.JobTitle,
+		hint: Resources.Hints.Hint002)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

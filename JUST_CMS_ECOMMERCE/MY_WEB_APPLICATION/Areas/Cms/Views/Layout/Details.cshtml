@@ -1,0 +1,57 @@
+﻿@model Models.Cms.Layout
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.Cms.Layout.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Title)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Cms.Layout.Edit(Model.Id))
+
+@{
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+
+	int intDynamicPageCount =
+		oUnitOfWork.CmsUnitOfWork.PageRepository
+		.GetPageCountByLayoutId(Model.Id);
+
+	int intStaticPageCount =
+		oUnitOfWork.ProjectActionRepository
+		.GetProjectActionCountByLayoutId(Model.Id);
+
+	if ((Model.IsSystem == false) &&
+		(intStaticPageCount == 0) &&
+		(intDynamicPageCount == 0))
+	{
+		@Html.DtxActionLink(Resources.Actions.Delete,
+			MVC.Cms.Layout.Delete(Model.Id))
+	}
+}
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Cms.Layout.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

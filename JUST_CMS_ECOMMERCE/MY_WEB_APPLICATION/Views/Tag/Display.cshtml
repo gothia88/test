@@ -1,0 +1,78 @@
+﻿@model Models.Common.Tag
+
+@{
+	string strTitle = Model.Name;
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@if (Model.Pages.Count != 0)
+{
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Models.Cms.Page.EntitiesName)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<ul>
+		@foreach (var varPage in Model.Pages)
+		{
+			<li>
+				@Html.DtxActionLink(varPage.Title,
+					MVC.Cms.General.DisplayPage(varPage.Name))
+			</li>
+		}
+	</ul>
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}
+
+@if (Model.Posts.Count != 0)
+{
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Models.Cms.Post.EntitiesName)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<ul>
+		@foreach (var varPost in Model.Posts)
+		{
+			<li>
+				@Html.DtxActionLink(varPost.Title,
+					MVC.Cms.General.DisplayPost(varPost.Id))
+			</li>
+		}
+	</ul>
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

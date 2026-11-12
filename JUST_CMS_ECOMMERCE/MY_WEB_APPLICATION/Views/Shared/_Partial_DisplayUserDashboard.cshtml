@@ -1,0 +1,14 @@
+﻿@if (Infrastructure.ApplicationSettings.Instance.IsECommerceSystemEnabled)
+{
+	if (Infrastructure.Sessions.AuthenticatedUser.IsSiteResponsible == false)
+	{
+		<div class="row">
+			<div class="col-sm-6">
+				@Html.Partial(MVC.ECommerce.Shared.Views._Partial_DisplayUserCredit)
+			</div>
+			<div class="col-sm-6">
+				@Html.Partial(MVC.ECommerce.Shared.Views._Partial_DisplayUserPlan)
+			</div>
+		</div>
+	}
+}

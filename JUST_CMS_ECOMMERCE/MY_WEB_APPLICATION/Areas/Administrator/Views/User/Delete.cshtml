@@ -1,0 +1,143 @@
+﻿@model Models.User
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DeleteOf,
+		Resources.Models.User.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.FullName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.EmailAddress,
+	Infrastructure.Enums.DisplayValueTypes.EmailAddress)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsEmailAddressVerified)
+
+@Html.DtxDisplayNameAndValueFor(model => model.EmailAddressVerificationKey)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Role.Name,
+	caption: Resources.Models.Role.EntityName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.CellPhoneNumber,
+	Infrastructure.Enums.DisplayValueTypes.PhoneNumber)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsCellPhoneNumberVerified)
+
+@Html.DtxDisplayNameAndValueFor(model => model.CellPhoneNumberVerificationKey)
+
+@Html.DtxDisplayNameAndValueFor(model => model.NationalCode,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.BirthDate,
+	Infrastructure.Enums.DisplayValueTypes.Date)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsAccountExpirable)
+
+@Html.DtxDisplayNameAndValueFor(model => model.AccountExpireDate,
+	Infrastructure.Enums.DisplayValueTypes.Date)
+
+@Html.DtxDisplayNameAndValueFor(model => model.ProfileLevel,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsProfilePublic)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsInBlackList)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsDirectContactable)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsAccountExpirable)
+
+@if (Model.IsAccountExpirable)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.AccountExpireDate,
+		Infrastructure.Enums.DisplayValueTypes.Date)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.AccountTerminateDateTime,
+	Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+@if (Model.IsAccountTerminated)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.AccountTerminateDateTime,
+		Infrastructure.Enums.DisplayValueTypes.DateTime)
+}
+
+@if (Infrastructure.ApplicationSettings.Instance.IsECommerceSystemEnabled)
+{
+	if (Infrastructure.ECommerce.Settings.Instance.IsPlansServiceEnabled)
+	{
+		<hr />
+
+		@Html.DtxDisplayNameAndValueFor(model => model.Plan.Name)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.StartPlanDateTime,
+	Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.FinishPlanDateTime,
+	Infrastructure.Enums.DisplayValueTypes.DateTime)
+	}
+}
+
+<hr />
+
+@Html.DtxDisplayNameAndValueFor(model => model.CompanyName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.JobTitle)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.DtxDisplayNameAndValueFor(model => model.AdministratorDescription,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Hits,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.LoginCount,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.HasAvatar)
+
+@Html.DtxDisplayNameAndValueFor(model => model.HasResume)
+
+@Html.DtxDisplayNameAndValueFor(model => model.RegisterIP)
+
+@Html.DtxDisplayNameAndValueFor(model => model.HttpReferer,
+	Infrastructure.Enums.DisplayValueTypes.Url)
+
+@Html.DtxDisplayNameAndValueFor(model => model.LastLoginDateTime,
+	Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxDelete()
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Details,
+	MVC.Administrator.User.Details(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.User.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.User.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

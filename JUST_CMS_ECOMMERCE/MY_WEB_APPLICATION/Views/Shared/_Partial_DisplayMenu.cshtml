@@ -1,0 +1,1085 @@
+﻿@helper DisplayAdministratorControlPanelMenu()
+{
+	IHtmlString oItemValue = null;
+	var varItems =
+		new System.Collections.Generic.List<string>();
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_Dashboard,
+		MVC.Administrator.Dashboard.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_User,
+		MVC.Administrator.User.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.Role.EntitiesName,
+		MVC.Administrator.Role.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_Group,
+		MVC.Administrator.Group.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.Gender.EntitiesName,
+		MVC.Administrator.Gender.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.User.DeleteNotVerifiedEmailAddressUsers,
+		MVC.Administrator.User.DeleteNotVerifiedEmailAddressUsers(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.OnlineUsers,
+		MVC.Administrator.UserLoginLog.DisplayOnlineUsers(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.UserLoginLogs,
+		MVC.Administrator.UserLoginLog.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_ProjectArea,
+		MVC.Administrator.ProjectArea.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_LocalizedTemplates,
+		MVC.Administrator.LocalizedTemplates.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_AccessType,
+		MVC.Administrator.AccessType.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_Culture,
+		MVC.Administrator.Culture.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_WebDownloader,
+		MVC.Administrator.WebDownloader.Download(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_HttpReferer,
+		MVC.Administrator.HttpReferer.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_GlobalApplicationSettings,
+		MVC.Administrator.GlobalApplicationSettings.Edit(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_ApplicationSettings,
+		MVC.Administrator.ApplicationSettings.Edit(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	if (varItems.Count > 0)
+	{
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.MenuItems.AdministratorControlPanel<b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu">
+					@foreach (var varItem in varItems)
+					{
+						@Html.Raw(varItem)
+					}
+				</ul>
+			</li>
+		</ul>
+	}
+}
+
+@helper DisplayCmsControlPanelMenu()
+{
+	IHtmlString oItemValue = null;
+	var varItems =
+		new System.Collections.Generic.List<string>();
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.Cms.Settings.EntityName,
+		MVC.Cms.Settings.Edit(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Cms_Tag,
+		MVC.Cms.Tag.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Cms_Page,
+		MVC.Cms.Page.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Cms_Layout,
+		MVC.Cms.Layout.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Cms_Post,
+		MVC.Cms.Post.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Cms_PostCategory,
+		MVC.Cms.PostCategory.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.Cms.General.GenerateRandomData,
+		MVC.Cms.General.GenerateRandomData(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	if (varItems.Count > 0)
+	{
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.MenuItems.Cms<b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu">
+					@foreach (var varItem in varItems)
+					{
+						@Html.Raw(varItem)
+					}
+				</ul>
+			</li>
+		</ul>
+	}
+}
+
+@helper DisplayECommerceControlPanelMenu()
+{
+	IHtmlString oItemValue = null;
+	var varItems =
+		new System.Collections.Generic.List<string>();
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.ECommerce.Settings.EntityName,
+		MVC.ECommerce.Settings.Edit(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.ECommerce.Plan.EntitiesName,
+		MVC.ECommerce.Plan.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.ECommerce.Transaction.EntitiesName,
+		MVC.ECommerce.Transaction.DisplayDataForAdmin(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.ECommerce.Transaction.DeletePendingTransactions,
+		MVC.ECommerce.Transaction.DeletePendingTransactions(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	if (varItems.Count > 0)
+	{
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.MenuItems.ECommerceSystem<b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu">
+					@foreach (var varItem in varItems)
+					{
+						@Html.Raw(varItem)
+					}
+				</ul>
+			</li>
+		</ul>
+	}
+}
+
+@helper DisplayProgrammerControlPanelMenu()
+{
+	IHtmlString oItemValue = null;
+	var varItems =
+		new System.Collections.Generic.List<string>();
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.MenuItems.SendingEmailControlPanel,
+		MVC.Administrator.MailSettings.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.Sync,
+		MVC.Administrator.Programmer.SyncAreasControllersActionsWithSourceCode(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_FileManager,
+		MVC.Administrator.FileManager.List(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Controllers.Administrator_ApplicationLog,
+		MVC.Administrator.ApplicationLog.Edit(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	if (Models.Utility.DatabaseProvider == Models.Enums.DatabaseProviders.SqlServer)
+	{
+		oItemValue =
+			Html.DtxActionLink(Resources.Actions.BackupDatabase,
+			MVC.Administrator.Programmer.BackupDatabase(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+		if (oItemValue != null)
+		{
+			string strMenuItem = string.Empty;
+
+			strMenuItem +=
+				string.Format("<li>{0}</li>",
+				oItemValue.ToHtmlString());
+
+			varItems.Add(strMenuItem);
+		}
+	}
+	// **************************************************
+
+	if (varItems.Count > 0)
+	{
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.MenuItems.ProgrammerControlPanel<b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu">
+					@foreach (var varItem in varItems)
+					{
+						@Html.Raw(varItem)
+					}
+				</ul>
+			</li>
+		</ul>
+	}
+}
+
+@helper DisplayUserControlPanelMenu()
+{
+	IHtmlString oItemValue = null;
+	var varItems =
+		new System.Collections.Generic.List<string>();
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.UploadResume,
+		MVC.Account.UploadResume(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.UploadAvatar,
+		MVC.Account.UploadAvatar(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.ChangePassword,
+		MVC.Account.ChangePassword(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.DisplayProfile,
+		MVC.Account.DisplayProfile(Infrastructure.Sessions.AuthenticatedUser.Id),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.UpdateProfile,
+		MVC.Account.UpdateProfile(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.UserAddress.MenuItem,
+		MVC.UserAddress.Index(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	if (Infrastructure.ApplicationSettings.Instance.IsCmsEnabled)
+	{
+		oItemValue =
+			Html.DtxActionLink(Resources.Models.Cms.Post.DisplayMyPosts,
+			MVC.Cms.User.DisplayPosts(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+		if (oItemValue != null)
+		{
+			string strMenuItem = string.Empty;
+
+			strMenuItem +=
+				"<li class='divider'></li>";
+
+			strMenuItem +=
+				string.Format("<li>{0}</li>",
+				oItemValue.ToHtmlString());
+
+			varItems.Add(strMenuItem);
+		}
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+	if ((Infrastructure.ApplicationSettings.Instance.IsSmsServiceEnabled) &&
+		(Infrastructure.Sessions.AuthenticatedUser.IsCellPhoneNumberVerified == false))
+	{
+		oItemValue =
+			Html.DtxActionLink(Resources.Actions.VerifyUserCellPhoneNumber,
+			MVC.Account.VerifyUserCellPhoneNumber(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+		if (oItemValue != null)
+		{
+			string strMenuItem = string.Empty;
+
+			strMenuItem +=
+				"<li class='divider'></li>";
+
+			strMenuItem +=
+				string.Format("<li>{0}</li>",
+				oItemValue.ToHtmlString());
+
+			varItems.Add(strMenuItem);
+		}
+		// **************************************************
+
+		// **************************************************
+		oItemValue =
+			Html.DtxActionLink(Resources.Actions.SendAgainCellPhoneVerificationKey,
+			MVC.Account.SendAgainCellPhoneVerificationKey(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+		if (oItemValue != null)
+		{
+			string strMenuItem = string.Empty;
+
+			strMenuItem +=
+				string.Format("<li>{0}</li>",
+				oItemValue.ToHtmlString());
+
+			varItems.Add(strMenuItem);
+		}
+	}
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.DisplayUserLoginLogs,
+		MVC.Administrator.UserLoginLog.DisplayUserLoginLogs(Infrastructure.Sessions.AuthenticatedUser.Id),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Actions.TerminateAccount,
+		MVC.Account.TerminateAccount(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	if (varItems.Count > 0)
+	{
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.MenuItems.UserControlPanel<b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu">
+					@foreach (var varItem in varItems)
+					{
+						@Html.Raw(varItem)
+					}
+				</ul>
+			</li>
+		</ul>
+	}
+}
+
+@helper DisplayECommerceControlPanelForUserMenu()
+{
+	IHtmlString oItemValue = null;
+	var varItems =
+		new System.Collections.Generic.List<string>();
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.User.UpdateUserBankInformation,
+			MVC.Account.UpdateUserBankInformation(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.ECommerce.Transaction.DisplayMyTransaction,
+			MVC.ECommerce.Transaction.DisplayDataForUser(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			"<li class='divider'></li>";
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	// **************************************************
+	if (Infrastructure.ECommerce.Settings.Instance.IsCreditTransferEnabled)
+	{
+		oItemValue =
+			Html.DtxActionLink(Resources.Models.ECommerce.Transaction.TransferCreditToAnotherUser,
+				MVC.ECommerce.Transaction.TransferCreditToAnotherUser(),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+		if (oItemValue != null)
+		{
+			string strMenuItem = string.Empty;
+
+			strMenuItem +=
+				string.Format("<li>{0}</li>",
+				oItemValue.ToHtmlString());
+
+			varItems.Add(strMenuItem);
+		}
+	}
+	// **************************************************
+
+	// **************************************************
+	oItemValue =
+		Html.DtxActionLink(Resources.Models.ECommerce.Transaction.IncreaseCreditByOnlinePayment,
+			MVC.ECommerce.Transaction.IncreaseCreditByOnlinePayment(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink);
+
+	if (oItemValue != null)
+	{
+		string strMenuItem = string.Empty;
+
+		strMenuItem +=
+			string.Format("<li>{0}</li>",
+			oItemValue.ToHtmlString());
+
+		varItems.Add(strMenuItem);
+	}
+	// **************************************************
+
+	if (varItems.Count > 0)
+	{
+		<ul class="nav navbar-nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.MenuItems.ECommerceSystem<b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu">
+					@foreach (var varItem in varItems)
+					{
+						@Html.Raw(varItem)
+					}
+				</ul>
+			</li>
+		</ul>
+	}
+}
+
+@helper DisplayMenu()
+{
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation" style="z-index: 900">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarSub" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div id="navbarSub" class="navbar-collapse collapse">
+					@DisplayUserControlPanelMenu()
+
+					@if (Infrastructure.ApplicationSettings.Instance.IsECommerceSystemEnabled)
+					{
+						if (Infrastructure.Sessions.AuthenticatedUser.IsSiteResponsible == false)
+						{
+							@DisplayECommerceControlPanelForUserMenu()
+						}
+					}
+
+					@DisplayAdministratorControlPanelMenu()
+
+					@if (Infrastructure.ApplicationSettings.Instance.IsCmsEnabled)
+					{
+						@DisplayCmsControlPanelMenu()
+					}
+
+					@if (Infrastructure.ApplicationSettings.Instance.IsECommerceSystemEnabled)
+					{
+						@DisplayECommerceControlPanelMenu()
+					}
+
+					@DisplayProgrammerControlPanelMenu()
+				</div>
+			</div>
+		</nav>
+	</div>
+}
+
+@if (Infrastructure.AuthenticatedUser.IsAuthenticated)
+{
+	@DisplayMenu()
+}

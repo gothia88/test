@@ -1,0 +1,98 @@
+﻿@model Models.User
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.User.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+	@Html.HiddenFor(model => model.Password)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelDropDownListFor(model => model.CultureLcid)
+
+	@Html.DtxLabelDropDownListFor(model => model.GenderId)
+
+	@Html.DtxLabelTextBoxFor(model => model.FirstName)
+
+	@Html.DtxLabelTextBoxFor(model => model.LastName)
+
+	@Html.DtxLabelTextBoxFor(model => model.EmailAddress, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsEmailAddressVerified)
+
+	@Html.DtxLabelDropDownListFor(model => model.RoleId)
+
+	@Html.DtxLabelTextBoxFor(model => model.CellPhoneNumber, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsCellPhoneNumberVerified)
+
+	if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+	{
+		@Html.DtxCheckBoxFor(model => model.IsSystem)
+	}
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxCheckBoxFor(model => model.IsVerified)
+
+	@Html.DtxCheckBoxFor(model => model.IsInBlackList)
+
+	@Html.DtxCheckBoxFor(model => model.IsDirectContactable)
+
+	@Html.DtxCheckBoxFor(model => model.IsAccountTerminated)
+
+	@Html.DtxCheckBoxFor(model => model.IsDeleted)
+
+	<hr />
+
+	@Html.DtxCheckBoxFor(model => model.IsAccountExpirable)
+
+	@Html.DtxLabelDateFor(model => model.AccountExpireDate)
+
+	<hr />
+
+	@Html.DtxLabelTextBoxFor(model => model.JobTitle)
+
+	@Html.DtxLabelTextAreaFor(model => model.AdministratorDescription)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Administrator.User.Details(Model.Id))
+
+	if (Model.IsSystem == false)
+	{
+		@Html.DtxActionLink(Resources.Actions.Delete,
+			MVC.Administrator.User.Delete(Model.Id))
+	}
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.User.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

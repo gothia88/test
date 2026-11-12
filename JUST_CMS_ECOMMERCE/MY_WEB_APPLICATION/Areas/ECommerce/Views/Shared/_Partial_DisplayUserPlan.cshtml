@@ -1,0 +1,34 @@
+﻿@if (Infrastructure.ECommerce.Settings.Instance.IsPlansServiceEnabled)
+{
+	<div style="background-color: white; border: thin solid darkgray; margin: 8px; padding: 8px">
+		@if (Infrastructure.Sessions.AuthenticatedUser.PlanId.HasValue)
+		{
+			<text>
+				نام طرح جاری:
+				@Html.ActionLink(Infrastructure.Sessions.AuthenticatedUser.PlanName, MVC.ECommerce.Plan.DisplayPlan(Infrastructure.Sessions.AuthenticatedUser.PlanId))
+			</text>
+			<br />
+			<text>
+				تاريخ و زمان انقضای طرح جاری:
+			</text>
+			@Html.DisplayDateTime(Infrastructure.Sessions.AuthenticatedUser.FinishPlanDateTime, displayTime: true)
+			<br />
+			<br />
+			<text>
+				کاربر گرامی، برای مشاهده و انتخاب ديگر طرح‌ها، می‌توانيد بر روی اين
+				@Html.ActionLink("[" + "لينک" + "]", MVC.ECommerce.Plan.DisplayPlans())
+				کليک نماييد.
+			</text>
+		}
+		else
+		{
+			<span style="color: red">توجه:</span>
+			<text>
+				کاربر گرامی، شما در حال حاضر هيچ طرحی را انتخاب نکرده‌ايد!
+				لطفا قبل از هر اقدامی، و برای دسترسی کامل به امکانات و خدمات پايگاه، از طريق گزينه
+				@Html.ActionLink("طرح‌ها", MVC.ECommerce.Plan.DisplayPlans())،
+				طرح مورد نظر خود را در صورت رايگان بودن، انتخاب و در غير اين صورت، خريداری نماييد.
+			</text>
+		}
+	</div>
+}

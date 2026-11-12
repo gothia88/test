@@ -1,0 +1,78 @@
+﻿@model Models.User
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.SelectPages,
+		Resources.Models.User.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.Partial(MVC.Administrator.User.Views._Partial_DisplayUserInformation, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<input type="hidden" id="id" value="@Model.Id" />
+
+	var varPages =
+				(IEnumerable<Models.Cms.Page>)ViewBag.Pages;
+
+	foreach (Models.Cms.Page oPage in varPages)
+	{
+		bool blnChecked = false;
+
+		foreach (Models.Cms.Page oCurrentPage in Model.Pages)
+		{
+			if (oCurrentPage.Id == oPage.Id)
+			{
+				blnChecked = true;
+				break;
+			}
+		}
+
+		<br />
+
+		if (blnChecked)
+		{
+			<input type="checkbox" name="checkBoxes" value="@oPage.Id" checked="checked" />
+		}
+		else
+		{
+			<input type="checkbox" name="checkBoxes" value="@oPage.Id" />
+		}
+
+		@oPage.Title
+		<text>(</text>
+		@Html.DtxActionLink(oPage.Name,
+			MVC.Cms.Page.Details(oPage.Id),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+		<text>)</text>
+
+		if (oPage.IsActive == false)
+		{
+			<text>- غير فعال</text>
+		}
+	}
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.BackToList + " " +
+	Resources.Models.User.EntitiesName, MVC.Administrator.User.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

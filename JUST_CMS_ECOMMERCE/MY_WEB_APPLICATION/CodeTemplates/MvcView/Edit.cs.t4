@@ -1,0 +1,209 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<#
+	var areaName = GetAreaName(ViewDataTypeName);
+	var fullyViewDataTypeShortName = ViewDataTypeShortName;
+	if(string.IsNullOrEmpty(areaName) == false)
+	{
+		fullyViewDataTypeShortName =
+			areaName + "." + fullyViewDataTypeShortName;
+	}
+#>
+@model <#= ViewDataTypeName #>
+<#
+	if(IsPartialView)
+	{
+#>
+
+<#
+	}
+	else if(IsLayoutPageSelected)
+	{
+#>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.<#= ViewName #>,
+		Resources.Models.<#= fullyViewDataTypeShortName #>.EntityName);
+
+	ViewBag.Title = strTitle;
+<#
+	if (!String.IsNullOrEmpty(LayoutPageFile))
+	{
+#>
+	Layout = "<#= LayoutPageFile #>";
+<#
+	}
+#>
+}
+
+<#
+}
+else
+{
+#>
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<title><#= ViewName #></title>
+	</head>
+	<body>
+<#
+	PushIndent("	");
+}
+#>
+<#
+	if (ReferenceScriptLibraries)
+	{
+#>
+<#
+		if (!IsLayoutPageSelected && IsBundleConfigPresent)
+		{
+#>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<#
+		}
+#>
+<#
+		else if (!IsLayoutPageSelected)
+		{
+#>
+<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<#
+		}
+#>
+
+<#
+	}
+#>
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			@strTitle
+		</div>
+		<div class="panel-body">
+			<div class="form-horizontal">
+				@Html.ValidationSummary(excludePropertyErrors: true)
+<#
+	foreach (PropertyMetadata property in ModelMetadata.Properties)
+	{
+		if (property.Scaffold && !property.IsAssociation)
+		{
+			if (property.IsPrimaryKey)
+			{
+#>
+
+				@Html.HiddenFor(model => model.<#= property.PropertyName #>)
+<#
+			}
+			else if (!property.IsReadOnly)
+			{
+#>
+
+				<div class="form-group">
+<#
+				if (property.IsForeignKey)
+				{
+#>
+					@Html.DtxLabelFor(model => model.<#= property.PropertyName #>, "<#= GetAssociationName(property) #>", 2)
+<#
+				}
+				else
+				{
+#>
+					@Html.DtxLabelFor(model => model.<#= property.PropertyName #>, 2)
+<#
+				}
+#>
+					<div class="col-sm-10">
+<#
+				if (property.IsForeignKey)
+				{
+#>
+						@Html.DropDownListFor(model => model.<#= property.PropertyName #>,
+						null, Resources.Captions.SelectAnItem, new { @class = "form-control" })
+<#
+				}
+				else
+				{
+#>
+						@Html.EditorFor(model => model.<#= property.PropertyName #>, new { @class = "form-control" })
+<#
+			}
+#>
+						@Html.ValidationMessageFor(model => model.<#= property.PropertyName #>)
+					</div>
+				</div>
+<#
+		}
+	}
+}
+#>
+
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						@Html.Submit(Resources.Buttons.Save)
+						@Html.Reset(Resources.Buttons.Reset)
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			@Html.DtxActionLink(Resources.Actions.Details,
+				MVC.<#= fullyViewDataTypeShortName #>.Details(Model.Id))
+
+			@Html.DtxActionLink(Resources.Actions.Delete,
+				MVC.<#= fullyViewDataTypeShortName #>.Delete(Model.Id))
+
+			@Html.DtxActionLink(Resources.Actions.BackToList,
+				MVC.<#= fullyViewDataTypeShortName #>.Index())
+		</div>
+	</div>
+}
+<#
+if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent)
+{
+#>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+<#
+	}
+	else if(IsLayoutPageSelected && ReferenceScriptLibraries)
+	{
+#>
+
+<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<#
+	}
+
+	if(!IsPartialView && !IsLayoutPageSelected)
+	{
+		ClearIndent();
+#>
+	</body>
+</html>
+<#
+	}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

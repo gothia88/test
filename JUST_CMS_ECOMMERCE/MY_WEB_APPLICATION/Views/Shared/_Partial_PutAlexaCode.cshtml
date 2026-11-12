@@ -1,0 +1,10 @@
+﻿@if (Infrastructure.GlobalApplicationSettings.Instance != null)
+{
+	string strAlexaCode =
+		Infrastructure.GlobalApplicationSettings.Instance.AlexaCode;
+
+	if (string.IsNullOrWhiteSpace(strAlexaCode) == false)
+	{
+		<meta name="alexaVerifyID" content="@strAlexaCode" />
+	}
+}

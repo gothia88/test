@@ -1,0 +1,71 @@
+﻿body {
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	background-position: left top;
+	background-image: url(Images/Background.gif);
+	/* It is necessary for navbar-fixed-top */
+	/*padding-top: 60px;*/
+}
+
+div.grid tbody tr:hover {
+	color: white;
+	background: #ff6a00;
+}
+
+	div.grid tbody tr:hover a {
+		color: white;
+	}
+
+div.grid .k-state-selected {
+	color: blue;
+	background-color: khaki;
+}
+
+div.grid {
+	overflow: auto;
+	font-size: 8pt;
+}
+
+pre {
+	direction: ltr;
+	text-align: left;
+}
+
+input.city, input.education-place, input.education-branch {
+	background-color: khaki;
+}
+
+/*nav.navbar-inverse {
+	background-color: #ec2127;
+}
+
+.navbar-inverse .navbar-brand {
+	color: black;
+}
+
+nav.navbar-inverse .navbar-nav > li > a {
+	color: black;
+}*/
+
+/* Styles for validation helpers */
+.field-validation-error {
+	color: #ff0000;
+}
+
+.field-validation-valid {
+	display: none;
+}
+
+.input-validation-error {
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+	color: #ff0000;
+}
+
+.validation-summary-valid {
+	display: none;
+}
+/* /Styles for validation helpers */

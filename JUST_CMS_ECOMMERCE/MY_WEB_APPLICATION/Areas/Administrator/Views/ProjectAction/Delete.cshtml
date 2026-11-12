@@ -1,0 +1,57 @@
+﻿@model Models.ProjectAction
+
+@{
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.DeleteOf,
+		Resources.Models.ProjectAction.EntityName,
+		Model.ProjectController.DisplayName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+{
+	@Html.DtxDisplayNameAndValueFor(model => model.IsVisibleJustForProgrammer)
+
+	@Html.DtxDisplayNameAndValueFor(model => model.Name)
+}
+
+@Html.DtxDisplayNameAndValueFor(model => model.DisplayName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.AccessType.Name,
+	caption: Resources.Models.AccessType.EntityName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.AccessType.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxDelete()
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Details,
+	MVC.Administrator.ProjectAction.Details(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.ProjectAction.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.ProjectAction.Index(Model.ProjectControllerId))
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

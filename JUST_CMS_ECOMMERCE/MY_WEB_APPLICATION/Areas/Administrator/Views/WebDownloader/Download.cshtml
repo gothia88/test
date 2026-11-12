@@ -1,0 +1,118 @@
+﻿@model ViewModels.Areas.Administrator.WebDownloader.DownloadViewModel
+
+@{
+	string strTitle =
+		Resources.Controllers.Administrator_WebDownloader;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.SourceFileUrl,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.TargetFileName,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxCheckBoxFor(model => model.Flush,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.FlushLength,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.PocketSize,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.SourceTimeout,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.TargetTimeout,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxSubmit(Resources.Buttons.Download,
+		columnOffset: 4)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}
+
+@using (Html.BeginForm(MVC.Administrator.WebDownloader.Delete()))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Captions.DownloadedFiles)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+
+	string strPath =
+		Server.MapPath("~/App_Data_Public/Downloads");
+
+	System.IO.DirectoryInfo oDirectoryInfo = new DirectoryInfo(strPath);
+
+	var varFiles =
+		oDirectoryInfo.GetFiles()
+		.OrderByDescending(current => current.CreationTime).ToList();
+
+		<ul>
+			@foreach (System.IO.FileInfo oFileInfo in varFiles)
+			{
+				<li>
+					<input type="checkbox" name="chkSelect" value="@oFileInfo.Name" />
+
+					<a href="~/App_Data_Public/Downloads/@oFileInfo.Name">@oFileInfo.Name</a>
+
+					<ul>
+						<li>
+							سايز:
+							@Dtx.Text.Convert.DisplayFormattedNumber(oFileInfo.Length)
+							بايت
+						</li>
+						<li>
+							زمان ايجاد:
+							@Html.DisplayDateTime(oFileInfo.CreationTime, displayTime: true)
+						</li>
+					</ul>
+				</li>
+			}
+		</ul>
+
+	if (varFiles.Count != 0)
+	{
+		@Html.DtxSubmit(Resources.Buttons.Delete)
+	}
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

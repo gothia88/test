@@ -1,0 +1,57 @@
+﻿@using CaptchaMvc.HtmlHelpers
+
+@model ViewModels.Account.LoginViewModel
+
+@{
+	string strTitle =
+		Resources.Actions.Login;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<div class="row">
+		<div class="col-sm-8">
+			@Html.ValidationSummary(excludePropertyErrors: true)
+
+			@Html.DtxLabelTextBoxFor(model => model.EmailAddress,
+				leftToRight: true)
+
+			@Html.DtxLabelPasswordFor(model => model.Password)
+
+			@Html.DtxCheckBoxFor(model => model.IsHidden)
+
+			@Html.DtxCaptcha()
+
+			@Html.DtxSubmit(Resources.Buttons.Login)
+		</div>
+		<div class="col-sm-4">
+			<img src="~/Content/Images/Login.png" alt="Login" title="Login" class="img-rounded img-responsive" />
+		</div>
+	</div>
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.ResetPassword,
+		MVC.Account.ResetPassword(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+
+	<br />
+
+	@Html.DtxActionLink(Resources.Actions.SendAgainEmailAddressVerificationKey,
+		MVC.Account.SendAgainEmailAddressVerificationKey(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

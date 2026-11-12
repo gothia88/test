@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Models.ECommerce.Plan>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.ECommerce.Plan.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@foreach (Models.ECommerce.Plan oPlan in Model)
+{
+	@Html.Partial(MVC.ECommerce.Plan.Views._Partial_DisplayPlan, model: oPlan)
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

@@ -1,0 +1,25 @@
+﻿@{
+	string strCopyright = string.Empty;
+
+	Models.ApplicationSettings oApplicationSettings =
+		Infrastructure.ApplicationSettings.Instance;
+
+	if (string.IsNullOrWhiteSpace(oApplicationSettings.ApplicationCopyrightText) == false)
+	{
+		strCopyright =
+			oApplicationSettings.ApplicationCopyrightText;
+	}
+
+	if (string.IsNullOrWhiteSpace(oApplicationSettings.ApplicationVersion) == false)
+	{
+		string strVersion =
+			Dtx.Text.Convert.DigitsToUnicode
+			(oApplicationSettings.ApplicationVersion);
+
+		strCopyright =
+			string.Format("{0} ({1}: {2})",
+			strCopyright, Resources.Captions.Version, strVersion);
+	}
+}
+
+<a class="navbar-brand" href="#">@strCopyright</a>

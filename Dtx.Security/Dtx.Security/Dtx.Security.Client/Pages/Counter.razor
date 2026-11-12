@@ -1,0 +1,29 @@
+﻿@page "/counter"
+
+<h3>
+	Counter
+</h3>
+
+<p>
+	Current Count: @(currentCount)
+</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click Me!</button>
+
+@code {
+
+	private int currentCount = 0;
+
+	// برای تعریف پارامتر خارجی سه شرط وجود دارد
+	// 1. Public
+	// 2. Property
+	// 3. Use Attribute: [Parameter]
+	[Parameter]
+	public int IncrementalValue { get; set; } = 1;
+
+	private void IncrementCount()
+	{
+		currentCount += IncrementalValue;
+	}
+
+}

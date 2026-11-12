@@ -1,0 +1,49 @@
+﻿@using CaptchaMvc.HtmlHelpers
+
+@model ViewModels.Account.RegisterViewModel
+
+@{
+	string strTitle =
+		Resources.Actions.Register;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	<div class="row">
+		<div class="col-sm-8">
+			@Html.ValidationSummary(excludePropertyErrors: true)
+
+			@Html.DtxLabelTextBoxFor(model => model.EmailAddress,
+				leftToRight: true)
+
+			@Html.DtxLabelTextBoxFor(model => model.CellPhoneNumber,
+				leftToRight: true,
+				hint: "[00989121087461]")
+
+			@Html.DtxLabelPasswordFor(model => model.Password)
+
+			@Html.DtxLabelPasswordFor(model => model.ConfirmPassword)
+
+			@Html.DtxCaptcha()
+
+			@Html.DtxSubmit(Resources.Buttons.Register)
+		</div>
+		<div class="col-sm-4">
+			<img src="~/Content/Images/Register.jpg" alt="Register" title="Register" class="img-rounded img-responsive" />
+		</div>
+	</div>
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

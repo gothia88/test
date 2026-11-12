@@ -1,0 +1,80 @@
+﻿@model Models.Cms.Post
+
+@{
+	string strLayoutName = "_default";
+
+	if ((Model.Layout != null) &&
+		(string.IsNullOrEmpty(Model.Layout.Name) == false))
+	{
+		strLayoutName = Model.Layout.Name;
+	}
+
+	string strRootRelativePathName =
+		string.Format("~/Views/Shared/_Layouts/{0}.{1}/_Site.cshtml",
+		strLayoutName, Culture);
+
+	string strPathName =
+		Server.MapPath(strRootRelativePathName);
+
+	if (System.IO.File.Exists(strPathName) == false)
+	{
+		strRootRelativePathName =
+			string.Format("~/Views/Shared/_Layouts/default.{0}/_Site.cshtml",
+			Culture);
+	}
+
+	Layout = strRootRelativePathName;
+
+	string strTitle =
+		"{" +
+		Html.DtxActionLink(Model.PostCategory.Name,
+		MVC.Cms.General.DisplayPostsOfPostCategory(Model.PostCategoryId),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink).ToHtmlString() +
+		"}" + " " +
+		Model.Title;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.Raw(Model.Introduction)
+
+@Html.Raw(Model.Body)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayFileInformation,
+	model: Model, viewData: new ViewDataDictionary())
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Resources.Models.General.InsertDateTime
+	:
+@Html.DisplayDateTime(Model.InsertDateTime, displayTime: true)
+
+	|
+
+@Resources.Models.General.UpdateDateTime
+	:
+@Html.DisplayDateTime(Model.UpdateDateTime, displayTime: true)
+
+	|
+
+@Resources.Models.Cms.Post.AuthorUser
+	:
+@Html.DtxActionLink(Model.CreatorUser.FullName,
+	MVC.Account.DisplayProfile(Model.CreatorUserId),
+	Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+
+	|
+
+@Resources.Models.General.Hits
+	:
+@Dtx.Text.Convert.DisplayFormattedNumber(Model.Hits)
+
+@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayPostTags, Model)
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

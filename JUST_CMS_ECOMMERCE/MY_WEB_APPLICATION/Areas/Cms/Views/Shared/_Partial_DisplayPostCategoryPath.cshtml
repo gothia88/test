@@ -1,0 +1,63 @@
+﻿@model Models.Cms.PostCategory
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strHomeTitle =
+		"<span class='glyphicon glyphicon-home' aria-hidden='true'></span>";
+}
+
+@Html.DtxActionLink(strHomeTitle,
+	MVC.Cms.PostCategory.Index(),
+	Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+	checkPermission: false)
+
+@{
+	if (Model != null)
+	{
+		var varPostCategories =
+			new System.Collections.Generic.List<Models.Cms.PostCategory>();
+
+		{
+			Models.Cms.PostCategory oCurrent = Model;
+
+			while (oCurrent != null)
+			{
+				varPostCategories.Add(oCurrent);
+
+				oCurrent = oCurrent.ParentPostCategory;
+			}
+		}
+
+		varPostCategories.Reverse();
+
+		for (int intIndex = 0; intIndex <= varPostCategories.Count - 1; intIndex++)
+		{
+			Models.Cms.PostCategory oCurrent = varPostCategories[intIndex];
+
+			switch (Infrastructure.Utility.CultureLcid)
+			{
+				case 1065:
+				{
+					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+					break;
+				}
+
+				default:
+				{
+					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+					break;
+				}
+			}
+
+			@Html.DtxActionLink(oCurrent.Name,
+				MVC.Cms.PostCategory.Index(oCurrent.Id),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+				checkPermission: false)
+		}
+	}
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

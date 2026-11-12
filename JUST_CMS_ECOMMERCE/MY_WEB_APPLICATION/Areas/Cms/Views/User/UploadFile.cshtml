@@ -1,0 +1,71 @@
+﻿@model Models.Cms.Post
+
+@{
+	string strTitle =
+		string.Format("{0} - {1}",
+		Resources.Actions.UploadFile, Model.Title);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm("UploadFile", "User", routeValues: new { Area = "Cms" }, method: FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<label for="fileContent" class="control-label col-sm-2">
+				@Resources.Models.General.SelectFile
+			</label>
+			<div class="col-sm-10">
+				<input type="file" id="fileContent" name="fileContent" />
+			</div>
+		</div>
+	</div>
+
+	@Html.DtxSubmit(Resources.Buttons.Send)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Cms.User.DisplayPosts())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayFileInformation,
+	model: Model, viewData: new ViewDataDictionary())
+
+@if (Model.HasAttachment)
+{
+	using (Html.BeginForm("DeleteFile", "User", routeValues: new { Area = "Cms" }, method: FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+
+		@Html.HiddenFor(model => model.Id)
+
+		@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Danger)
+
+		@Html.DtxBeginPanelHeading()
+		@Html.DtxPanelTitle(Resources.Buttons.DeleteFile)
+		@Html.DtxEndPanelHeading()
+
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxSimpleSubmit(Resources.Buttons.DeleteFile)
+		@Html.DtxEndPanelFooter()
+
+		@Html.DtxEndPanel()
+	}
+}

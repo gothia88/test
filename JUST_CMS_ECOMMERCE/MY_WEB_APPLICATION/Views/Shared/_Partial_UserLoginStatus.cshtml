@@ -1,0 +1,44 @@
+﻿@{
+	if (Infrastructure.AuthenticatedUser.IsAuthenticated)
+	{
+		string strDisplayName =
+			Infrastructure.Sessions.AuthenticatedUser.FullName;
+
+		if (string.IsNullOrWhiteSpace(strDisplayName) == false)
+		{
+			strDisplayName =
+				strDisplayName.Trim();
+		}
+		else
+		{
+			strDisplayName =
+				Infrastructure.Sessions.AuthenticatedUser.EmailAddress;
+		}
+
+		<li>
+			@Html.DtxActionLink(strDisplayName,
+				MVC.Account.Index(),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+		</li>
+
+		<li>
+			@Html.DtxActionLink(Resources.Actions.Logout,
+				MVC.Account.Logout(),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+		</li>
+	}
+	else
+	{
+		<li>
+			@Html.DtxActionLink(Resources.Actions.Login,
+				MVC.Account.Login(),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+		</li>
+
+		<li>
+			@Html.DtxActionLink(Resources.Actions.Register,
+				MVC.Account.Register(),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+		</li>
+	}
+}

@@ -1,0 +1,115 @@
+﻿@model Models.Cms.Post
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.Cms.Post.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Title)
+
+	@Html.DtxLabelDropDownListFor(model => model.PostCategoryId)
+
+	@Html.DtxLabelDropDownListFor(model => model.LayoutId)
+
+	@Html.DtxLabelDropDownListFor(model => model.AccessTypeId)
+
+	@Html.DtxLabelTextBoxFor(model => model.ImageUrl,
+		leftToRight: true)
+
+	@Html.DtxLabelTextAreaFor(model => model.Introduction)
+
+	@Html.DtxLabelTextAreaFor(model => model.Body)
+
+	@Html.DtxLabelDateFor(model => model.StartPublishingDateTime)
+
+	@Html.DtxLabelDateFor(model => model.FinishPublishingDateTime)
+
+	@Html.DtxCheckBoxFor(model => model.DisplayCreatorUser)
+
+	@Html.DtxCheckBoxFor(model => model.IsCommentingEnabled)
+	
+	<hr />
+
+	@Html.DtxCheckBoxFor(model => model.IsDraft)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxCheckBoxFor(model => model.IsVerified)
+
+	@Html.DtxCheckBoxFor(model => model.IsFeatured)
+
+	@Html.DtxCheckBoxFor(model => model.IsDeleted)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Hits,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.Password,
+		leftToRight: true)
+
+
+
+	@Html.DtxBeginPanel(Infrastructure.Enums.PanelTypes.Info)
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Models.Cms.Post.SeoInformationForPost)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.DtxCheckBoxFor(model => model.DoesSearchEnginesIndexIt)
+
+	@Html.DtxCheckBoxFor(model => model.DoesSearchEnginesFollowIt)
+
+	@Html.DtxLabelTextBoxFor(model => model.Copyright)
+
+	@Html.DtxLabelTextBoxFor(model => model.Author)
+
+	@Html.DtxLabelTextBoxFor(model => model.Description)
+
+	@Html.DtxLabelTextBoxFor(model => model.Classification)
+
+	@Html.DtxLabelTextBoxFor(model => model.Keywords)
+
+	<hr />
+
+	@Html.DtxLabelTextBoxFor(model => model.Tags)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+
+
+
+	@Html.DtxSubmit(Resources.Buttons.Create)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Cms.Post.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

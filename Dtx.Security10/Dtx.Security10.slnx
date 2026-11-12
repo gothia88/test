@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="src/SharedKernel/SharedKernel.csproj" />
+  <Project Path="src/Application/Application.csproj" />
+  <Project Path="src/Modules/Identity/Identity.csproj" />
+  <Project Path="src/Modules/Authorization/Authorization.csproj" />
+  <Project Path="src/Modules/Orders/Orders.csproj" />
+  <Project Path="src/Api/Api.csproj" />
+  <Project Path="tests/Dtx.Security.ArchitectureTests/Dtx.Security.ArchitectureTests.csproj" />
+  <Project Path="tests/Dtx.Security.UnitTests/Dtx.Security.UnitTests.csproj" />
+</Solution>

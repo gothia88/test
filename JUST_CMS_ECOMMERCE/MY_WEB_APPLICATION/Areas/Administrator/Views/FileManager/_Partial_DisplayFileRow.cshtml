@@ -1,0 +1,34 @@
+﻿@model Dtx.FileManager.ViewModels.DisplayFileRowViewModel
+
+<tr>
+	<td>
+		<a href="#" id="@Model.FileInfo.Name" data-rename onclick="return (false);"><span class="glyphicon glyphicon-pencil"></span></a>
+	</td>
+	<td>
+		<input type="checkbox" name="checkBoxes" value="@Model.FileInfo.Name" />
+	</td>
+	<td>
+		<span class="glyphicon glyphicon-file"></span>
+	</td>
+	<td style="direction: ltr">
+		@Html.DtxActionLink(Model.FileInfo.Name,
+			MVC.Administrator.FileManager.Download(Model.RootRelativePath + "/" + Model.FileInfo.Name),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+	</td>
+	<td>
+		@Dtx.Text.Convert.DisplayFormattedNumber(Model.FileInfo.Length)
+	</td>
+	<td>
+		@Html.DisplayDateTime(Model.FileInfo.CreationTime,
+			displayTime: true)
+	</td>
+	<td>
+		@Html.DisplayDateTime(Model.FileInfo.LastWriteTime,
+			displayTime: true)
+	</td>
+	<td>
+		@Html.DisplayDateTime(Model.FileInfo.LastAccessTime,
+			displayTime: true)
+	</td>
+</tr>

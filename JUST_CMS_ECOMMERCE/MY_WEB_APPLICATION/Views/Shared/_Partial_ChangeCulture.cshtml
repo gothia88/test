@@ -1,0 +1,52 @@
+﻿@{
+	DAL.UnitOfWork oUnitOfWork = null;
+
+	try
+	{
+		oUnitOfWork = new DAL.UnitOfWork();
+
+		var varCultures =
+			oUnitOfWork.CultureRepository.GetActive().ToList();
+
+		if (varCultures.Count >= 2)
+		{
+			foreach (Models.Culture oCulture in varCultures)
+			{
+				if (oCulture.Lcid == 1065)
+				{
+					<li>
+						@Html.DtxActionLink("فا",
+							MVC.Home.ChangeCulture(oCulture.Name),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink, checkPermission: false)
+					</li>
+				}
+
+				if (oCulture.Lcid == 1033)
+				{
+					<li>
+						@Html.DtxActionLink("EN",
+							MVC.Home.ChangeCulture(oCulture.Name),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink, checkPermission: false)
+					</li>
+				}
+
+				@*<li>
+					@Html.DtxActionLink(oCulture.DisplayName,
+						MVC.Home.ChangeCulture(oCulture.Name),
+						Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+				</li>*@
+			}
+		}
+	}
+	catch
+	{
+	}
+	finally
+	{
+		if (oUnitOfWork != null)
+		{
+			oUnitOfWork.Dispose();
+			oUnitOfWork = null;
+		}
+	}
+}

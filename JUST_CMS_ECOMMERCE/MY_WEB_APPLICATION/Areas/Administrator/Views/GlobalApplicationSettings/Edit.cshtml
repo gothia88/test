@@ -1,0 +1,96 @@
+﻿@model Models.GlobalApplicationSettings
+
+@{
+	string strTitle =
+		Resources.Controllers.Administrator_ApplicationSettings;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+	{
+		@Html.DtxLabelTextBoxFor(model => model.MasterPassword,
+			leftToRight: true,
+			labelColumn: 4)
+
+		@Html.DtxLabelTextBoxFor(model => model.CurrentUserProfileLevel,
+			leftToRight: true,
+			labelColumn: 4)
+
+		@Html.DtxCheckBoxFor(model => model.IsSslEnabled,
+			labelColumn: 4)
+
+		@Html.DtxLabelTextBoxFor(model => model.SmsCenterNumber,
+			leftToRight: true,
+			labelColumn: 4)
+
+		@Html.DtxLabelTextBoxFor(model => model.SmsCenterUsername,
+			leftToRight: true,
+			labelColumn: 4)
+
+		@Html.DtxLabelTextBoxFor(model => model.SmsCenterPassword,
+			leftToRight: true,
+			labelColumn: 4)
+
+		@Html.DtxLabelTextBoxFor(model => model.TotalUserCount,
+			leftToRight: true,
+			labelColumn: 4)
+
+		@Html.DtxCheckBoxFor(model => model.IsApplicationInDemoVersion,
+			labelColumn: 4)
+
+		@Html.DtxLabelTextBoxFor(model => model.SleepTimeoutInDemoVersion,
+			leftToRight: true,
+			labelColumn: 4)
+
+		<hr />
+	}
+
+	@Html.DtxLabelTextBoxFor(model => model.SiteUrl,
+		leftToRight: true,
+		labelColumn: 4,
+		hint: Resources.Models.General.WithoutSlashAtTheEnd)
+
+	@Html.DtxLabelTextBoxFor(model => model.AlexaCode,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.GoogleCode,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.RssItemCount,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxLabelTextBoxFor(model => model.RssImageUrl,
+		leftToRight: true,
+		labelColumn: 4)
+
+	@Html.DtxSubmit(Resources.Buttons.Save,
+		columnOffset: 4)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

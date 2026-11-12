@@ -1,0 +1,70 @@
+﻿@model Models.MailSettings
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DeleteOf,
+		Resources.Models.MailSettings.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SenderDisplayName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SenderEmailAddress)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SenderEmailPassword)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SupportDisplayName)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SupportEmailAddress)
+
+@Html.DtxDisplayNameAndValueFor(model => model.EmailSubjectTemplate)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SmtpClientPortNumber,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SmtpClientTimeout,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SmtpClientEnableSsl)
+
+@Html.DtxDisplayNameAndValueFor(model => model.SmtpClientHostAddress)
+
+@Html.DtxDisplayNameAndValueFor(model => model.BccAddresses)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxDelete()
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Details,
+	MVC.Administrator.MailSettings.Details(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.MailSettings.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.MailSettings.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

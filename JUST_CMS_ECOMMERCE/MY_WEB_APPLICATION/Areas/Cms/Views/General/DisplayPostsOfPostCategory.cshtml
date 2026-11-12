@@ -1,0 +1,127 @@
+﻿@model Models.Cms.PostCategory
+
+@section headSection
+{
+	<style>
+		button#btnDisplayMoreData, div#loading {
+			display: none;
+		}
+	</style>
+
+	<script>
+		$(document).ready(function () {
+
+			getData();
+
+			$("button#btnDisplayMoreData").click(function () {
+
+				getData();
+
+			});
+
+		});
+
+		function getData() {
+
+			$("div#loading").show();
+			$("button#btnDisplayMoreData").hide();
+
+			var varData =
+				{
+					id: function () {
+						return ($("input#id").val());
+					},
+					pageIndex: function () {
+						return ($("input#pageIndex").val());
+					},
+				};
+
+			$.ajax({
+				type: "POST",
+				dataType: "html",
+
+				url: "/Cms/General/GetPostsOfPostCategory",
+
+				data: varData,
+				//contentType: "application/json; charset=utf-8",
+
+				success: function (response) {
+
+					if (response == "") {
+						$("button#btnDisplayMoreData").attr("disabled", "disabled");
+						$("button#btnDisplayMoreData").text("@Resources.Buttons.ThereIsNoMorePostForDisplaying");
+					}
+					else {
+						$("div#postList").append(response);
+					}
+
+					var varPageIndex =
+						parseInt($("input#pageIndex").val());
+
+					varPageIndex++;
+
+					$("input#pageIndex").val(varPageIndex);
+
+				},
+
+				error: function (response) {
+
+					alert(response);
+
+				},
+
+				complete: function (response) {
+
+					$("div#loading").hide();
+					$("button#btnDisplayMoreData").show();
+
+				},
+			});
+		}
+
+	</script>
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Models.Cms.Post.RelatedPostsOf, Model.Name);
+
+	ViewBag.Title = strTitle;
+
+	//string strPageTitle =
+	//	string.Format("{0} <a href='{1}'><img src='{2}' alt='{0}' title='{0}' style='border: 0' width='80' /></a>",
+	//	strTitle, Url.Content("~/Rss/" + Model.MasterDataCode), Url.Content("~/Content/Images/RSS.png"));
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<div id="postList">
+</div>
+
+<div id="loading" class="panel panel-danger">
+	<div class="panel-heading">
+		<img src="~/Content/Images/Loading.gif" alt="Loading..." title="Loading..." />
+		@Resources.Messages.Loading
+	</div>
+</div>
+
+<div class="row">
+	<input type="hidden" id="pageIndex" value="0" />
+	<input type="hidden" id="id" value="@Model.Id" />
+
+	<button type="button" id="btnDisplayMoreData" class="btn btn-primary btn-block">@Resources.Buttons.DisplayMorePosts</button>
+</div>
+@Html.DtxEndPanelBody()
+
+@*
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxEndPanelFooter()
+*@
+
+@Html.DtxEndPanel()

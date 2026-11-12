@@ -1,0 +1,34 @@
+﻿@model ViewModels.Account.VerifyUserCellPhoneNumberViewModel
+
+@{
+	string strTitle =
+		Resources.Actions.VerifyUserCellPhoneNumber;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.VerificationKey, leftToRight: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Send)
+	@Html.DtxEndPanelBody()
+
+	@*
+		@Html.DtxBeginPanelFooter()
+		@Html.DtxEndPanelFooter()
+	*@
+
+	@Html.DtxEndPanel()
+}

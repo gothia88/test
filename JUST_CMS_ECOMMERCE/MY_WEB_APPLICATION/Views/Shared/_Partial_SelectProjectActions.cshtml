@@ -1,0 +1,248 @@
+﻿@model ViewModels.Shared._Partial_SelectProjectActionsViewModel
+
+@functions{
+}
+
+@helper DisplayProjectArea(Models.ProjectArea projectArea, DAL.UnitOfWork unitOfWork)
+{
+	if ((projectArea == null) || (unitOfWork == null))
+	{
+		return;
+	}
+
+	var varProjectControllers =
+		unitOfWork.ProjectControllerRepository.GetByProjectAreaAndRole
+		(projectArea, Infrastructure.Sessions.AuthenticatedUser.Role);
+
+	if (varProjectControllers.Count() == 0)
+	{
+		return;
+	}
+
+	@Html.Raw("<li>")
+
+	string strProjectAreaDisplayName =
+		Models.ProjectArea.GetDisplayName(projectArea);
+
+	@Html.DtxActionLink(strProjectAreaDisplayName,
+		MVC.Administrator.ProjectArea.Details(projectArea.Id),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+		checkPermission: false)
+
+	<br />
+	<a class="btn btn-success btn-xs selectAll">انتخاب همه</a>
+	<a class="btn btn-success btn-xs deselectAll">خارج کردن همه از حالت انتخاب شده</a>
+	<br />
+	<br />
+
+	@Html.Raw("<ul>")
+
+	foreach (Models.ProjectController oProjectController in varProjectControllers)
+	{
+		@DisplayProjectController(oProjectController, unitOfWork)
+	}
+
+	@Html.Raw("</ul>")
+	@Html.Raw("</li>")
+}
+
+@helper DisplayProjectController(Models.ProjectController projectController, DAL.UnitOfWork unitOfWork)
+{
+	if ((projectController == null) || (unitOfWork == null))
+	{
+		return;
+	}
+
+	IOrderedEnumerable<Models.ProjectAction> oProjectActions = null;
+
+	if (Model.DisplayAllActions)
+	{
+		oProjectActions =
+			unitOfWork.ProjectActionRepository.GetByProjectControllerAndRole
+			(projectController, Infrastructure.Sessions.AuthenticatedUser.Role);
+	}
+	else
+	{
+		oProjectActions =
+			unitOfWork.ProjectActionRepository.GetSpecialByProjectControllerAndRole
+			(projectController, Infrastructure.Sessions.AuthenticatedUser.Role);
+	}
+
+	if (oProjectActions.Count() == 0)
+	{
+		return;
+	}
+
+	@Html.Raw("<li>")
+
+	string strProjectControllerDisplayName =
+		Models.ProjectController.GetDisplayName(projectController);
+
+	@Html.DtxActionLink(strProjectControllerDisplayName,
+		MVC.Administrator.ProjectControll_er.Details(projectController.Id),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+		checkPermission: false)
+
+	<br />
+	<a class="btn btn-info btn-xs selectAll">انتخاب همه</a>
+	<a class="btn btn-info btn-xs deselectAll">خارج کردن همه از حالت انتخاب شده</a>
+	<br />
+	<br />
+
+	@Html.Raw("<ul>")
+
+	foreach (Models.ProjectAction oProjectAction in oProjectActions)
+	{
+		@DisplayProjectAction(oProjectAction)
+	}
+
+	@Html.Raw("</ul>")
+	@Html.Raw("</li>")
+}
+
+@helper DisplayProjectAction(Models.ProjectAction projectAction)
+{
+	if (projectAction == null)
+	{
+		return;
+	}
+
+	@Html.Raw("<li>")
+
+	bool blnChecked = false;
+
+	foreach (Models.ProjectAction oCurrentSelectedProjectAction in Model.SelectedProjectActions)
+	{
+		if (oCurrentSelectedProjectAction.Id == projectAction.Id)
+		{
+			blnChecked = true;
+			break;
+		}
+	}
+
+	string strProjectActionDisplayName =
+		Models.ProjectAction.GetDisplayName(projectAction);
+
+	if (blnChecked)
+	{
+		<input type="checkbox" name="checkBoxes" value="@projectAction.Id" checked="checked" />
+
+		@Html.DtxActionLink(strProjectActionDisplayName,
+			MVC.Administrator.ProjectAction.Details(projectAction.Id),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+	}
+	else
+	{
+		<input type="checkbox" name="checkBoxes" value="@projectAction.Id" />
+
+		@Html.DtxActionLink(strProjectActionDisplayName,
+			MVC.Administrator.ProjectAction.Details(projectAction.Id),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+	}
+
+	if (Model.DisplayAllActions)
+	{
+		if (projectAction.Layout != null)
+		{
+			<text>[</text>@Html.DtxActionLink(projectAction.Layout.Title,
+				MVC.Cms.Layout.Details(projectAction.LayoutId),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+				checkPermission: false)
+			<text>-</text>
+			@Html.DtxActionLink(projectAction.Layout.Name,
+				MVC.Cms.Layout.Details(projectAction.LayoutId),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+				checkPermission: false)<text>]</text>
+		}
+	}
+
+	@Html.Raw("</li>")
+}
+
+<script>
+	$(document).ready(function () {
+		$("a.selectAll").click(function (e) {
+
+			e.preventDefault();
+
+			var varCheckBoxes =
+				$(this).nextAll('ul').first().find("input[type='checkbox']");
+
+			$(varCheckBoxes).each(function (e) {
+
+				this.checked = true;
+
+			});
+
+		});
+
+		$("a.deselectAll").click(function (e) {
+
+			e.preventDefault();
+
+			var varCheckBoxes =
+				$(this).nextAll('ul').first().find("input[type='checkbox']");
+
+			$(varCheckBoxes).each(function (e) {
+
+				this.checked = false;
+
+			});
+
+		});
+	});
+</script>
+
+@{
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.SelectActionsOf, Model.EntityName, Model.Name);
+
+	ViewBag.Title = strTitle;
+
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<input type="hidden" id="id" value="@Model.Id" />
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<div class="form-group">
+		<br />
+		<a class="btn btn-warning btn-sm selectAll">انتخاب همه</a>
+		<a class="btn btn-warning btn-sm deselectAll">خارج کردن همه از حالت انتخاب شده</a>
+		<br />
+		<br />
+
+		@Html.Raw("<ul>")
+
+		@foreach (Models.ProjectArea oProjectArea in Model.ProjectAreas)
+		{
+			@DisplayProjectArea(oProjectArea, oUnitOfWork)
+		}
+
+		@Html.Raw("</ul>")
+	</div>
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.Raw(Model.ReturnLink)
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

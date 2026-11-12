@@ -1,0 +1,123 @@
+﻿@model Models.Cms.Page
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.EditOf,
+		Resources.Models.Cms.Page.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsDraft)
+
+	if ((Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer) ||
+		((Infrastructure.Sessions.AuthenticatedUser.Role != Models.Enums.Roles.Programmer) &&
+		(Model.IsSystem == false)))
+	{
+		@Html.DtxLabelTextBoxFor(model => model.Name, leftToRight: true)
+	}
+	else
+	{
+		@Html.HiddenFor(model => model.Name)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.Name)
+	}
+
+	@Html.DtxLabelTextBoxFor(model => model.Title)
+
+	@Html.DtxLabelDropDownListFor(model => model.LayoutId)
+
+	@Html.DtxLabelTextAreaFor(model => model.PageContent.Content)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	if (Infrastructure.Sessions.AuthenticatedUser.Role == Models.Enums.Roles.Programmer)
+	{
+		@Html.DtxCheckBoxFor(model => model.IsSystem)
+	}
+	else
+	{
+		@Html.HiddenFor(model => model.IsSystem)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.IsSystem)
+	}
+
+	@Html.DtxCheckBoxFor(model => model.IsVerified)
+
+	@Html.DtxCheckBoxFor(model => model.IsDeleted)
+
+	@Html.DtxLabelDropDownListFor(model => model.AccessTypeId)
+
+	<div class="form-group">
+		@Html.DtxLabelFor(model => model.StartPublishingDateTime, 3)
+		<div class="col-sm-9">
+			@Html.EditorFor(model => model.StartPublishingDateTime)
+			@Html.ValidationMessageFor(model => model.StartPublishingDateTime)
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.DtxLabelFor(model => model.FinishPublishingDateTime, 3)
+		<div class="col-sm-9">
+			@Html.EditorFor(model => model.FinishPublishingDateTime)
+			@Html.ValidationMessageFor(model => model.FinishPublishingDateTime)
+		</div>
+	</div>
+
+	@Html.DtxLabelTextBoxFor(model => model.Description)
+
+	@Html.DtxLabelTextBoxFor(model => model.Tags)
+
+	@Html.DtxLabelTextBoxFor(model => model.Keywords)
+
+	@Html.DtxCheckBoxFor(model => model.DoesSearchEnginesIndexIt)
+
+	@Html.DtxCheckBoxFor(model => model.DoesSearchEnginesFollowIt)
+
+	@Html.DtxLabelTextBoxFor(model => model.Author)
+
+	@Html.DtxLabelTextBoxFor(model => model.Classification)
+
+	@Html.DtxLabelTextBoxFor(model => model.Copyright)
+
+	@Html.DtxLabelTextBoxFor(model => model.Hits, leftToRight: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Cms.Page.Details(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.Delete,
+		MVC.Cms.Page.Delete(Model.Id))
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Cms.Page.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

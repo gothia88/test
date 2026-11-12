@@ -1,0 +1,38 @@
+﻿@model ViewModels.Account.UpdateUserBankInformationViewModel
+
+@{
+	string strTitle =
+		Resources.Models.User.UpdateUserBankInformation;
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.BankName)
+
+	@Html.DtxLabelTextBoxFor(model => model.BankCardNumber,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.BankAccountNumber,
+		leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.BankShabaNumber,
+		leftToRight: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

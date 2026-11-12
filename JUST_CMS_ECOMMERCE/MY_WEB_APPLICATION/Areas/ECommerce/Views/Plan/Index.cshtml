@@ -1,0 +1,111 @@
+﻿@model IEnumerable<ViewModels.Areas.ECommerce.Plan.IndexViewModel>
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.ECommerce.Plan.EntitiesName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@{
+	string strCreate =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.ECommerce.Plan.EntityName);
+}
+
+@Html.DtxActionLink(strCreate,
+	MVC.ECommerce.Plan.Create())
+
+<br />
+<br />
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th style="width: 70px;">
+				&nbsp;
+			</th>
+			<th style="width: 80px;">
+				@Resources.Models.General.IsActive
+			</th>
+			@*<th style="width: 80px;">
+				@Resources.Models.General.IsDeleted
+			</th>*@
+			<th style="width: 80px;">
+				@Resources.Models.General.Ordering
+			</th>
+			<th>
+				@Resources.Models.General.Name
+			</th>
+			<th style="width: 150px;">
+				@Resources.Models.General.Price
+				(@Resources.Models.General.Currency)
+			</th>
+			<th style="width: 80px;">
+				@Resources.Models.ECommerce.Plan.DurationInMonth
+			</th>
+			<th style="width: 100px;">
+				@Resources.Models.ECommerce.Plan.UserCount
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			string strRowStyle =
+				Infrastructure.Utility.GetRowStyle(item);
+
+			<tr class="@strRowStyle">
+				<td>
+					@Html.DtxActionLink(Resources.Actions.Details,
+						MVC.ECommerce.Plan.Details(item.Id),
+						Infrastructure.Enums.ActionLinksTypes.Details)
+
+					@if (item.UserCount == 0)
+					{
+						@Html.DtxActionLink(Resources.Actions.Edit,
+							MVC.ECommerce.Plan.Edit(item.Id),
+							Infrastructure.Enums.ActionLinksTypes.Edit)
+
+						@Html.DtxActionLink(Resources.Actions.Delete,
+							MVC.ECommerce.Plan.Delete(item.Id),
+							Infrastructure.Enums.ActionLinksTypes.Delete)
+					}
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				@*<td>
+					@Html.DisplayFor(modelItem => item.IsDeleted)
+				</td>*@
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.Ordering)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.Price)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.DurationInMonth)
+				</td>
+				<td>
+					@Dtx.Text.Convert.DisplayFormattedNumber(item.UserCount)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

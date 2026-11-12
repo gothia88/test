@@ -1,0 +1,120 @@
+﻿@model Models.User
+
+@{
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.SelectGroupsOf,
+		Resources.Models.User.EntityName, Model.FullName);
+
+	ViewBag.Title = strTitle;
+}
+
+<script>
+	$(document).ready(function () {
+
+		$("a.selectAll").click(function (e) {
+
+			e.preventDefault();
+
+			var varCheckBoxes =
+				$(this).nextAll('ul').first().find("input[type='checkbox']");
+
+			$(varCheckBoxes).each(function (e) {
+
+				this.checked = true;
+
+			});
+		});
+
+		$("a.deselectAll").click(function (e) {
+
+			e.preventDefault();
+
+			var varCheckBoxes =
+				$(this).nextAll('ul').first().find("input[type='checkbox']");
+
+			$(varCheckBoxes).each(function (e) {
+
+				this.checked = false;
+
+			});
+		});
+	});
+</script>
+
+@{
+	var varGroups =
+		(IEnumerable<Models.Group>)ViewBag.Groups;
+
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	<div class="form-group">
+		<br />
+		<a class="btn btn-warning btn-sm selectAll">انتخاب همه</a>
+		<a class="btn btn-warning btn-sm deselectAll">خارج کردن همه از حالت انتخاب شده</a>
+		<br />
+		<br />
+
+		@Html.Raw("<ul>")
+
+		@foreach (Models.Group oGroup in varGroups)
+		{
+			@Html.Raw("<li>")
+
+			bool blnChecked = false;
+
+			foreach (Models.Group oCurrentGroup in Model.Groups)
+			{
+				if (oGroup.Id == oCurrentGroup.Id)
+				{
+					blnChecked = true;
+					break;
+				}
+			}
+
+			if (blnChecked)
+			{
+				<input type="checkbox" name="checkBoxes" value="@oGroup.Id" checked="checked" />
+			}
+			else
+			{
+				<input type="checkbox" name="checkBoxes" value="@oGroup.Id" />
+			}
+
+			@Html.DtxActionLink(oGroup.Name,
+				MVC.Administrator.Group.Details(oGroup.Id),
+				Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+				checkPermission: false)
+
+			@Html.Raw("</li>")
+		}
+
+		@Html.Raw("</ul>")
+	</div>
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Controllers.Administrator_User,
+		MVC.Administrator.User.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

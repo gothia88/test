@@ -1,0 +1,31 @@
+﻿@if (string.IsNullOrWhiteSpace(ViewBag.Author) == false)
+{
+	<meta name="author" content="@(ViewBag.Author)" />
+}
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Robots) == false)
+{
+	<meta name="robots" content="@(ViewBag.Robots)" />
+}
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Keywords) == false)
+{
+	<meta name="keywords" content="@(ViewBag.Keywords)" />
+}
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Copyright) == false)
+{
+	<meta name="copyright" content="@(ViewBag.Copyright)" />
+}
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Description) == false)
+{
+	<meta name="description" content="@(ViewBag.Description)" />
+}
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Classification) == false)
+{
+	<meta name="classification" content="@(ViewBag.Classification)" />
+}
+
+<meta name="generator" content="Mr. Dariush Tasdighi" />

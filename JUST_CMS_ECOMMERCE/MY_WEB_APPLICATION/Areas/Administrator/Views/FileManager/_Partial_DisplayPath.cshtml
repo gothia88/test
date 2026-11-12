@@ -1,0 +1,49 @@
+﻿@model string
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(Resources.Titles.Path)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody(style: "direction: ltr")
+@if (Model == "~")
+{
+	<text>/</text>
+	@Html.DtxActionLink("~",
+		MVC.Administrator.FileManager.List(),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+		checkPermission: false)
+}
+else
+{
+	string[] strPaths = Model.Split('/');
+
+	for (int intIndex = 0; intIndex <= strPaths.Length - 1; intIndex++)
+	{
+		string strLastPath = string.Empty;
+		string strSubPaths = string.Empty;
+
+		for (int intNewIndex = 0; intNewIndex <= intIndex; intNewIndex++)
+		{
+			strLastPath = strPaths[intNewIndex];
+
+			strSubPaths += strLastPath;
+
+			if (intNewIndex != intIndex)
+			{
+				strSubPaths += "/";
+			}
+		}
+		
+		<text>/</text>
+
+		@Html.DtxActionLink(strLastPath,
+			MVC.Administrator.FileManager.List(strSubPaths),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false)
+	}
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxEndPanel()

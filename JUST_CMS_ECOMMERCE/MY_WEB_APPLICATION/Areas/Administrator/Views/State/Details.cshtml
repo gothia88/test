@@ -1,0 +1,53 @@
+﻿@model Models.State
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.State.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(Resources.Models.Country.EntityName)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxActionLink(Model.Country.Name,
+	MVC.Administrator.Country.Details(Model.Country.Id))
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Models.Country.EntitiesName,
+	MVC.Administrator.Country.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Administrator.State.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Delete,
+	MVC.Administrator.State.Delete(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Administrator.State.Index(Model.CountryId))
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

@@ -1,0 +1,77 @@
+﻿@using System.Linq;
+
+@{
+	string strTitle =
+		Resources.Actions.Search;
+
+	ViewBag.Title = strTitle;
+
+	string strSearchKeywords = ViewBag.SearchKeywords;
+
+	if (string.IsNullOrWhiteSpace(strSearchKeywords))
+	{
+		return;
+	}
+
+	DAL.UnitOfWork oUnitOfWork = null;
+
+	try
+	{
+		oUnitOfWork =
+			new DAL.UnitOfWork();
+
+		if (Infrastructure.ApplicationSettings.Instance.IsCmsEnabled)
+		{
+			@DisplayPosts(oUnitOfWork, strSearchKeywords)
+		}
+	}
+	catch
+	{
+	}
+	finally
+	{
+		if (oUnitOfWork != null)
+		{
+			oUnitOfWork.Dispose();
+			oUnitOfWork = null;
+		}
+	}
+}
+
+@helper DisplayPosts(DAL.UnitOfWork unitOfWork, string searchKeywords)
+{
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(Resources.Captions.SearchResult + " " + Resources.Captions.In + " " + Resources.Models.Cms.Post.EntitiesName + " [" + searchKeywords + "]")
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	var varPosts =
+		unitOfWork.CmsUnitOfWork.PostRepository
+		.Search(System.Threading.Thread.CurrentThread.CurrentCulture.LCID, keywords: searchKeywords, take: 20);
+
+	if ((varPosts == null) || (varPosts.Count == 0))
+	{
+		<div style="color: red;">
+			مطلبی يافت نشد!
+		</div>
+	}
+	else
+	{
+		<ol>
+			@foreach (Models.Cms.Post oCurrentPost in varPosts)
+			{
+				<li>
+					@Html.DtxActionLink(oCurrentPost.Title,
+						MVC.Cms.General.DisplayPost(oCurrentPost.Id),
+						Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+						checkPermission: false)
+				</li>
+			}
+		</ol>
+	}
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxEndPanel()
+}

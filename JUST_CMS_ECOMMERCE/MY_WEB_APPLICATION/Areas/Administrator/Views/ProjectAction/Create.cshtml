@@ -1,0 +1,59 @@
+﻿@model Models.ProjectAction
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	Models.ProjectController oProjectController =
+		ViewBag.ProjectController as Models.ProjectController;
+
+	string strTitle =
+		string.Format("{0} {1} [{2}]",
+		Resources.Actions.CreateOf,
+		Resources.Models.ProjectAction.EntityName,
+		oProjectController.DisplayName);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.ProjectControllerId)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering, leftToRight: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsVisibleJustForProgrammer)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name, leftToRight: true)
+
+	@Html.DtxLabelTextBoxFor(model => model.DisplayName)
+
+	@Html.DtxLabelDropDownListFor(model => model.AccessTypeId)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description)
+
+	@Html.DtxSubmit(Resources.Buttons.Create)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Administrator.ProjectAction.Index(oProjectController.Id))
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

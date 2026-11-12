@@ -1,0 +1,62 @@
+﻿@model ViewModels.Areas.Cms.Layout.EditLayoutContentViewModel
+
+@{
+	string strTitle =
+		string.Format("{0} [{1}] [{2}]",
+		Resources.Actions.EditLayoutContent,
+		Model.Layout.Name, Model.Layout.Title);
+
+	ViewBag.Title = strTitle;
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(model => model.Layout.Id)
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxLabelTextAreaFor(model => model.Content, leftToRight: true)
+
+	@Html.DtxSubmit(Resources.Buttons.Save)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.Details,
+		MVC.Cms.Layout.Details(Model.Layout.Id))
+
+	@Html.DtxActionLink(Resources.Actions.Edit,
+		MVC.Cms.Layout.Edit(Model.Layout.Id))
+
+	DAL.UnitOfWork oUnitOfWork = new DAL.UnitOfWork();
+
+	int intDynamicPageCount =
+		oUnitOfWork.CmsUnitOfWork.PageRepository
+		.GetPageCountByLayoutId(Model.Layout.Id);
+
+	int intStaticPageCount =
+		oUnitOfWork.ProjectActionRepository
+		.GetProjectActionCountByLayoutId(Model.Layout.Id);
+
+	if ((Model.Layout.IsSystem == false) &&
+		(intStaticPageCount == 0) &&
+		(intDynamicPageCount == 0))
+	{
+		@Html.DtxActionLink(Resources.Actions.Delete,
+		MVC.Cms.Layout.Delete(Model.Layout.Id))
+	}
+
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.Cms.Layout.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

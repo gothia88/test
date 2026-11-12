@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Dtx.Security.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/src/Api/bin/Debug/net10.0/Dtx.Security.Api.dll",
+      "cwd": "${workspaceFolder}/src/Api",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5080",
+        "DOTNET_ROOT": "D:\\dotnet",
+        "NUGET_PACKAGES": "D:\\nuget-packages"
+      }
+    },
+    {
+      "name": "Run Dtx.Security.Api (apphost .exe)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/src/Api/bin/Debug/net10.0/Dtx.Security.Api.exe",
+      "cwd": "${workspaceFolder}/src/Api",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5080",
+        "DOTNET_ROOT": "D:\\dotnet",
+        "NUGET_PACKAGES": "D:\\nuget-packages"
+      }
+    },
+    {
+      "name": "Attach to Dtx.Security.Api",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ]
+}

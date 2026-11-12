@@ -1,0 +1,55 @@
+﻿@model Models.Cms.PostCategory
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.Cms.PostCategory.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayPostCategoryPath,
+	Model.ParentPostCategory, new ViewDataDictionary())
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name)
+
+@Html.DtxDisplayNameAndValueFor(model => model.IsFeatured)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Hits,
+	Infrastructure.Enums.DisplayValueTypes.Number)
+
+@Html.DtxDisplayNameAndValueFor(model => model.ImageUrl,
+	Infrastructure.Enums.DisplayValueTypes.Url)
+
+@Html.DtxDisplayNameAndValueFor(model => model.Description,
+	Infrastructure.Enums.DisplayValueTypes.Raw)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+
+@if (string.IsNullOrWhiteSpace(Model.ImageUrl) == false)
+{
+	<hr />
+	<img src="@Model.ImageUrl" class="img-responsive img-rounded" alt="@Model.Name" title="@Model.Name" />
+}
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Cms.PostCategory.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Delete,
+	MVC.Cms.PostCategory.Delete(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Cms.PostCategory.Index(Model.ParentPostCategoryId))
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

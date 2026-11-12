@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<link href="~/favicon.ico" rel="shortcut icon" />
+
+	@Html.Partial(MVC.Shared.Views._Partial_PutAlexaCode)
+	@Html.Partial(MVC.Shared.Views._Partial_PutGoogleCode)
+
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<meta name="author" content="@ViewBag.Author" />
+	<meta name="robots" content="@ViewBag.Robots" />
+	<meta name="keywords" content="@ViewBag.Keywords" />
+	<meta name="copyright" content="@ViewBag.Copyright" />
+	<meta name="description" content="@ViewBag.Description" />
+	<meta name="classification" content="@ViewBag.Classification" />
+
+	<meta name="generator" content="Mr. Dariush Tasdighi" />
+
+	<title>@ViewBag.Title</title>
+
+	<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+
+	<link href="~/Content/kendo/lastVersion/kendo.common-bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/kendo/lastVersion/kendo.bootstrap.min.css" rel="stylesheet" />
+
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+	<link href="~/Content/_Layouts/default.en-US/Site.css" rel="stylesheet" />
+
+	<link href="~/Content/SyntaxHighlighter/shCore.css" rel="stylesheet" />
+	<link href="~/Content/SyntaxHighlighter/shThemeDefault.css" rel="stylesheet" />
+
+	@if (IsSectionDefined(name: "headSection"))
+	{
+		@RenderSection(name: "headSection")
+	}
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="z-index: 1000">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				@{
+					string strApplicationName =
+						Infrastructure.ApplicationSettings.Instance.ApplicationName;
+
+					if (string.IsNullOrWhiteSpace(strApplicationName))
+					{
+						strApplicationName =
+							Resources.Captions.ApplicationName;
+					}
+				}
+
+				<a class="navbar-brand" href="#">@strApplicationName</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li>
+						@Html.DtxActionLink(Resources.Actions.Home,
+							MVC.Home.Index(),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+					</li>
+					<li>
+						@Html.DtxActionLink(Resources.Models.User.EntitiesName,
+							MVC.User.Index(),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+					</li>
+
+					@Html.Partial(MVC.Cms.Shared.Views._Partial_DisplayMenuItems)
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					@Html.Partial(MVC.Shared.Views._Partial_ChangeCulture)
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					@Html.Partial(MVC.Shared.Views._Partial_UserLoginStatus)
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	@Html.Partial(MVC.Shared.Views._Partial_DisplayMenu)
+
+	<div class="container">
+		@Html.Partial(MVC.Shared.Views._Partial_DisplayLocalizedPageContent)
+	</div>
+
+	<div class="container">
+		@Html.Partial(MVC.Shared.Views._Partial_DisplayPageMessages)
+
+		@RenderBody()
+	</div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation" style="z-index: 100">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarBottom" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				@{
+					string strBrandTitle = string.Empty;
+
+					if (string.IsNullOrWhiteSpace(Infrastructure.ApplicationSettings.Instance.ApplicationCopyrightText) == false)
+					{
+						strBrandTitle =
+							Infrastructure.ApplicationSettings.Instance.ApplicationCopyrightText;
+					}
+
+					if (string.IsNullOrWhiteSpace(Infrastructure.ApplicationSettings.Instance.ApplicationVersion) == false)
+					{
+						string strVersion =
+							Dtx.Text.Convert.DisplayNumber
+							(Infrastructure.ApplicationSettings.Instance.ApplicationVersion);
+
+						strBrandTitle =
+							string.Format("{0} ({1}: {2})", strBrandTitle, Resources.Captions.Version, strVersion);
+					}
+				}
+
+				<a class="navbar-brand" href="#">@strBrandTitle</a>
+			</div>
+
+			<div id="navbarBottom" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					@Html.Partial(MVC.Shared.Views._Partial_DisplayRssLinks)
+
+					<li>
+						@Html.DtxActionLink(Resources.Actions.About,
+							MVC.Home.About(),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+					</li>
+					<li>
+						@Html.DtxActionLink(Resources.Actions.Contact,
+							MVC.Home.Contact(),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+					</li>
+					<li>
+						@Html.DtxActionLink(Resources.Actions.Help,
+							MVC.Home.Help(),
+							Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<script src="~/Scripts/kendo/lastVersion/kendo.all.min.js"></script>
+
+	<script src="~/Scripts/jquery.maskedinput.min.js"></script>
+
+	<script src="~/Scripts/jquery.validate.min.js"></script>
+	<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+	<script src="~/Scripts/accounting.min.js"></script>
+
+	<script src="~/Scripts/dtx-required.js"></script>
+	<script src="~/Scripts/dtx-display-page-messages.js"></script>
+
+	<script src="~/Scripts/SyntaxHighlighter/shCore.js"></script>
+	<script src="~/Scripts/SyntaxHighlighter/shBrushCss.js"></script>
+	<script src="~/Scripts/SyntaxHighlighter/shBrushSql.js"></script>
+	<script src="~/Scripts/SyntaxHighlighter/shBrushXml.js"></script>
+	<script src="~/Scripts/SyntaxHighlighter/shBrushCSharp.js"></script>
+
+	<script type="text/javascript">
+
+		$(function () {
+
+			doSomeEffects();
+
+		});
+
+		function doSomeEffects() {
+
+			SyntaxHighlighter.all();
+			$("[data-toggle='tooltip']").tooltip();
+
+		}
+
+		$.validator.setDefaults({
+			ignore: [],
+		});
+
+	</script>
+</body>
+</html>

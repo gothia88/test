@@ -1,0 +1,79 @@
+﻿@model ViewModels.Areas.Cms.Shared.DisplayPostsViewModel
+
+@{
+	// **************************************************
+	bool blnDisplayPostCategory = false;
+	if ((ViewBag.DisplayPostCategory != null) && (ViewBag.DisplayPostCategory is bool))
+	{
+		blnDisplayPostCategory = (bool)ViewBag.DisplayPostCategory;
+	}
+	// **************************************************
+
+	string strTitle = string.Empty;
+
+	if (blnDisplayPostCategory)
+	{
+		strTitle = "{";
+
+		strTitle +=
+			Html.DtxActionLink(Model.PostCategoryName,
+			MVC.Cms.General.DisplayPostsOfPostCategory(Model.PostCategoryId),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+			checkPermission: false).ToHtmlString();
+
+		strTitle += "} ";
+	}
+
+	strTitle +=
+		Html.DtxActionLink(Model.Title,
+		MVC.Cms.General.DisplayPost(Model.Id),
+		Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+		checkPermission: false).ToHtmlString();
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.Raw(Model.Introduction)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+{@Html.DtxActionLink(Resources.Actions.More,
+	MVC.Cms.General.DisplayPost(Model.Id),
+	Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+	checkPermission: false)}
+
+|
+
+@(Resources.Models.Common.BaseSeo.Author):
+@Model.Author
+|
+
+@(Resources.Models.General.CreatorUserId):
+@Html.DtxActionLink(Model.CreatorUserFullName,
+	MVC.Account.DisplayProfile(Model.CreatorUserId),
+	Infrastructure.Enums.ActionLinksTypes.SimpleLink,
+	checkPermission: false)
+|
+
+@(Resources.Models.General.Hits):
+@Dtx.Text.Convert.DisplayFormattedNumber(Model.Hits)
+
+|
+
+@(Resources.Models.General.CommentCount):
+@Dtx.Text.Convert.DisplayFormattedNumber(Model.CommentCount)
+
+|
+
+@(Resources.Models.General.UpdateDateTime):
+@Html.DisplayDateTime(Model.UpdateDateTime, displayTime: true)
+
+@*@Html.Partial(MVC.Shared.Views._Partial_DisplayPostTags, Model)*@
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()

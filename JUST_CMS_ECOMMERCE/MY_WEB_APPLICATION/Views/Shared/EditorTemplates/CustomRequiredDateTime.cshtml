@@ -1,0 +1,55 @@
+﻿@model Models.ComplexTypes.CustomRequiredDateTime
+
+@{
+	System.Web.Mvc.SelectList oDays = null;
+	System.Web.Mvc.SelectList oYears = null;
+	System.Web.Mvc.SelectList oMonths = null;
+
+	if (Model == null)
+	//if ((Model == null) || (Model.Value == null))
+	{
+		oDays =
+			new System.Web.Mvc.SelectList
+				(Dtx.Calendar.Day.Days, "Value", "Text");
+
+		oYears =
+			new System.Web.Mvc.SelectList
+				(Dtx.Calendar.Year.Years, "Value", "Text");
+
+		oMonths =
+			new System.Web.Mvc.SelectList
+				(Dtx.Calendar.Month.Months, "Value", "Text");
+	}
+	else
+	{
+		oDays =
+			new System.Web.Mvc.SelectList
+				(Dtx.Calendar.Day.Days, "Value", "Text", Model.Day);
+
+		oYears =
+			new System.Web.Mvc.SelectList
+				(Dtx.Calendar.Year.Years, "Value", "Text", Model.Year);
+
+		oMonths =
+			new System.Web.Mvc.SelectList
+				(Dtx.Calendar.Month.Months, "Value", "Text", Model.Month);
+	}
+}
+
+<div class="col-sm-3">
+	@Html.DropDownListFor(model => model.Day,
+	oDays, Resources.Models.General.Day, new { @class = "form-control" })
+	@Html.ValidationMessageFor(model => model.Day)
+</div>
+
+<div class="col-sm-6">
+	@Html.DropDownListFor(model => model.Month,
+	oMonths, Resources.Models.General.Month, new { @class = "form-control" })
+	@Html.ValidationMessageFor(model => model.Month)
+</div>
+
+<div class="col-sm-3">
+	@Html.DropDownListFor(model => model.Year,
+	oYears, Resources.Models.General.Year, new { @class = "form-control" })
+	@Html.ValidationMessageFor(model => model.Year)
+</div>

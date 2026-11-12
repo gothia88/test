@@ -1,0 +1,31 @@
+﻿@model Models.ProjectAction
+
+<fieldset>
+	<legend>
+		@Html.DtxActionLink(Model.DisplayName,
+			MVC.Administrator.ProjectAction.Details(Model.Id))
+	</legend>
+
+	<div class="field">
+		<div class="caption">
+			@Html.DisplayNameFor(model => model.IsActive)
+		</div>
+		<div class="controls">
+			@Html.DisplayFor(model => model.IsActive)
+		</div>
+	</div>
+
+	@{
+		if (string.IsNullOrEmpty(Model.Description) == false)
+		{
+		<div class="field">
+			<div class="caption">
+				@Html.DisplayNameFor(model => model.Description)
+			</div>
+			<div class="controls">
+				@Html.DisplayFor(model => model.Description)
+			</div>
+		</div>
+		}
+	}
+</fieldset>

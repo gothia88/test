@@ -1,0 +1,37 @@
+﻿@model Models.Common.Tag
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.DetailsOf,
+		Resources.Models.Common.Tag.EntityName);
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+@Html.DtxDisplayNameAndValueFor(model => model.Name)
+
+@Html.Partial(MVC.Shared.Views._Partial_DisplayEntityDetails, Model)
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxActionLink(Resources.Actions.Edit,
+	MVC.Cms.Tag.Edit(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.Delete,
+	MVC.Cms.Tag.Delete(Model.Id))
+
+@Html.DtxActionLink(Resources.Actions.BackToList,
+	MVC.Cms.Tag.Index())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
+
+@Html.Partial(MVC.Cms.Tag.Views._Partial_DisplayPages, Model)

@@ -1,0 +1,393 @@
+﻿@model string
+
+<script>
+
+	function ApplyEventForRenameAnchors(selector) {
+
+		$("a[data-rename]").unbind("click", RenameAnchorClickListener);
+		$("a[data-rename]").bind("click", RenameAnchorClickListener);
+
+	}
+
+	function RenameAnchorClickListener(e)
+	{
+
+		var varId = $(this).attr("id");
+
+		$("input#oldName").val(varId);
+		$("input#newName").val(varId);
+
+		$('div#myRenameDialog').modal({ keyboard: true, backdrop: true, });
+
+	}
+
+	$(document).ready(function () {
+
+		ApplyEventForRenameAnchors();
+
+		$("button#btnDelete").click(function () {
+
+			$('div#myLoadingDialog').modal({ keyboard: false, backdrop: false, });
+
+			var varData =
+				$("form#frmMain").serialize();
+
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+
+				data: varData,
+				url: "/Administrator/FileManager/Delete",
+
+				error: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html("@(Resources.Messages.ErrorOnJson)");
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+				},
+
+				success: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html(response.Message);
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+					// Success
+					if (response.State == 0) {
+
+						$("input[type='checkbox']:checked").parent().parent().fadeOut(1000, function () {
+
+							$("input[type='checkbox']:checked").parent().parent().remove();
+
+						});
+
+					}
+
+				},
+
+				complete: function (response) {
+				},
+
+			});
+
+		});
+
+		$("button#btnCompress").click(function () {
+
+			$('div#myLoadingDialog').modal({ keyboard: false, backdrop: false, });
+
+			var varData =
+				$("form#frmMain").serialize();
+
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+
+				data: varData,
+				url: "/Administrator/FileManager/Compress",
+
+				error: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html("@(Resources.Messages.ErrorOnJson)");
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+				},
+
+				success: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html(response.Message);
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+					// Success
+					if (response.State == 0) {
+
+						$("table#tblItems").append(response.View);
+
+						ApplyEventForRenameAnchors();
+
+					}
+
+				},
+
+				complete: function (response) {
+				},
+
+			});
+
+		});
+
+		$("button#btnCreateFolder").click(function () {
+
+			$("input#folderName").val("");
+
+			$('div#myCreateFolderDialog').modal({ keyboard: true, backdrop: true, });
+
+		});
+
+		$("button#btnDoCreateFolder").click(function () {
+
+			$('div#myLoadingDialog').modal({ keyboard: false, backdrop: false, });
+
+			var varData =
+				{
+					FolderName: $("input#folderName").val(),
+					RootRelativePath: $("input#rootRelativePath").val(),
+				};
+
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+
+				data: varData,
+				url: "/Administrator/FileManager/CreateFolder",
+
+				error: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html("@(Resources.Messages.ErrorOnJson)");
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+				},
+
+				success: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html(response.Message);
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+					// Success
+					if (response.State == 0) {
+
+						$("table#tblItems tr.header").after(response.View);
+
+						$('div#myCreateFolderDialog').modal("toggle");
+
+						ApplyEventForRenameAnchors();
+
+					}
+
+				},
+
+				complete: function (response) {
+				},
+
+			});
+
+		});
+
+		$("button#btnDoRename").click(function () {
+
+			$('div#myLoadingDialog').modal({ keyboard: false, backdrop: false, });
+
+			var varOldName = $("input#oldName").val();
+
+			var varData =
+				{
+					OldName: varOldName,
+					NewName: $("input#newName").val(),
+					RootRelativePath: $("input#rootRelativePath").val(),
+				};
+
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+
+				data: varData,
+				url: "/Administrator/FileManager/Rename",
+
+				error: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html("@(Resources.Messages.ErrorOnJson)");
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+				},
+
+				success: function (response) {
+
+					$('div#myLoadingDialog').modal('toggle');
+
+					$("div#myDisplayingMessageDialog div.message").html(response.Message);
+					$("div#myDisplayingMessageDialog").modal({ keyboard: true, backdrop: true, });
+
+					// Success
+					if (response.State == 0) {
+
+						var varNewRow = $(response.View);
+
+						$(varNewRow).hide();
+
+						$("a[id='" + varOldName + "']").parent().parent().after(varNewRow);
+
+						$("a[id='" + varOldName + "']").parent().parent().fadeOut(1000, function () {
+
+							$("a[id='" + varOldName + "']").parent().parent().remove();
+
+						});
+
+						$(varNewRow).fadeIn(1000);
+
+						ApplyEventForRenameAnchors();
+
+						$('div#myRenameDialog').modal("toggle");
+
+					}
+
+				},
+
+				complete: function (response) {
+				},
+
+			});
+
+		});
+
+	});
+</script>
+
+@Html.Partial(MVC.Administrator.FileManager.Views._Partial_DisplayPath, model: Model)
+
+@{
+	string strTitle =
+		Resources.Actions.ManageFoldersAndFiles;
+
+	ViewBag.Title = strTitle;
+
+	string strPath =
+		Server.MapPath(Model);
+
+	System.IO.DirectoryInfo oDirectoryInfo =
+		new System.IO.DirectoryInfo(strPath);
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<form id="frmMain" name="frmMain">
+	<input type="hidden" id="rootRelativePath" name="rootRelativePath" value="@Model" />
+
+	<div class="table-responsive" style="font-size: 8pt">
+		<table id="tblItems" class="data table table-striped table-bordered table-hover table-condensed">
+			<tr class="header">
+				<th style="width: 60px;">
+					@Dtx.Resources.FileManager.Rename
+				</th>
+				<th style="width: 60px;">
+					@Dtx.Resources.FileManager.Select
+				</th>
+				<th style="width: 60px;">
+					@Dtx.Resources.FileManager.Type
+				</th>
+				<th>
+					@Dtx.Resources.FileManager.Name
+				</th>
+				<th style="width: 140px;">
+					@Dtx.Resources.FileManager.Length
+				</th>
+				<th style="width: 140px;">
+					@Dtx.Resources.FileManager.CreateDateTime
+				</th>
+				<th style="width: 140px;">
+					@Dtx.Resources.FileManager.ModifyDateTime
+				</th>
+				<th style="width: 140px;">
+					@Dtx.Resources.FileManager.AccessDateTime
+				</th>
+			</tr>
+
+			@foreach (var item in oDirectoryInfo.GetDirectories().OrderBy(current => current.Name))
+			{
+				Dtx.FileManager.ViewModels.DisplayDirectoryRowViewModel oModel =
+					new Dtx.FileManager.ViewModels.DisplayDirectoryRowViewModel(Model, item);
+
+				@Html.Partial(MVC.Administrator.FileManager.Views._Partial_DisplayDirectoryRow, model: oModel)
+			}
+
+			@foreach (var item in oDirectoryInfo.GetFiles().OrderBy(current => current.Name))
+			{
+				Dtx.FileManager.ViewModels.DisplayFileRowViewModel oModel =
+					new Dtx.FileManager.ViewModels.DisplayFileRowViewModel(Model, item);
+
+				@Html.Partial(MVC.Administrator.FileManager.Views._Partial_DisplayFileRow, model: oModel)
+			}
+		</table>
+	</div>
+</form>
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@Html.DtxSimpleButton(id: "btnCreateFolder", caption: Dtx.Resources.FileManager.CreateFolder)
+@Html.DtxSimpleButton(id: "btnDelete", caption: Resources.Buttons.Delete)
+@Html.DtxSimpleButton(id: "btnCompress", caption: Resources.Buttons.Compress)
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
+
+@Html.Partial(MVC.Shared.Views._Partial_LoadingDialog)
+@Html.Partial(MVC.Shared.Views._Partial_DisplayingMessageDialog)
+
+<div style="z-index: 100000" class="modal fade" id="myCreateFolderDialog" tabindex="-1" role="dialog" aria-labelledby="myCreateFolderDialogLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myCreateFolderDialogLabel">@Dtx.Resources.FileManager.CreateFolder</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="folderName" class="control-label col-sm-3">@Dtx.Resources.FileManager.FolderName</label>
+						<div class="col-sm-9">
+							<input type="search" id="folderName" class="form-control ltr" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">@Dtx.Resources.FileManager.Close</button>
+				<button type="button" class="btn btn-primary" id="btnDoCreateFolder">@Dtx.Resources.FileManager.CreateFolder</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="z-index: 100000" class="modal fade" id="myRenameDialog" tabindex="-1" role="dialog" aria-labelledby="myRenameDialogLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myRenameDialogLabel">@Dtx.Resources.FileManager.Rename</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-horizontal">
+					<input type="hidden" id="oldName" />
+
+					<div class="form-group">
+						<label for="NewName" class="control-label col-sm-3">@Dtx.Resources.FileManager.NewName</label>
+						<div class="col-sm-9">
+							<input type="search" id="newName" class="form-control ltr" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">@Dtx.Resources.FileManager.Close</button>
+				<button type="button" class="btn btn-primary" id="btnDoRename">@Dtx.Resources.FileManager.Rename</button>
+			</div>
+		</div>
+	</div>
+</div>

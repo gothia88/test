@@ -1,0 +1,13 @@
+﻿@if (Infrastructure.ApplicationSettings.Instance.IsCmsEnabled)
+{
+	<li>
+		@Html.DtxActionLink(Resources.Models.Cms.Post.EntitiesName,
+			MVC.Cms.General.DisplayPosts(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+	</li>
+	<li>
+		@Html.DtxActionLink(Resources.Models.Cms.PostCategory.EntitiesName,
+			MVC.Cms.General.DisplayPostCategories(),
+			Infrastructure.Enums.ActionLinksTypes.SimpleLink)
+	</li>
+}

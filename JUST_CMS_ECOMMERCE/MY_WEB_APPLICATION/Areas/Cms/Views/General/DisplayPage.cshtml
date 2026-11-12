@@ -1,0 +1,34 @@
+﻿@model Models.Cms.Page
+
+@{
+	string strLayoutName = "_default";
+
+	if ((Model.Layout != null) &&
+		(string.IsNullOrEmpty(Model.Layout.Name) == false))
+	{
+		strLayoutName = Model.Layout.Name;
+	}
+
+	string strRootRelativePathName =
+		string.Format("~/Views/Shared/_Layouts/{0}.{1}/_Site.cshtml",
+		strLayoutName, Culture);
+
+	string strPathName =
+		Server.MapPath(strRootRelativePathName);
+
+	if (System.IO.File.Exists(strPathName) == false)
+	{
+		strRootRelativePathName =
+			string.Format("~/Views/Shared/_Layouts/default.{0}/_Site.cshtml",
+			Culture);
+	}
+
+	Layout = strRootRelativePathName;
+
+	Models.Cms.PageContent oPageContent = Model.PageContent;
+
+	if (oPageContent != null)
+	{
+		@Html.Raw(oPageContent.Content)
+	}
+}

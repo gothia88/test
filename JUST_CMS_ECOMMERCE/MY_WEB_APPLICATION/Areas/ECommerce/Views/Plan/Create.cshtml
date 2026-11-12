@@ -1,0 +1,82 @@
+﻿@model Models.ECommerce.Plan
+
+@section headSection
+{
+	@Html.Partial(MVC.Shared.Views._Partial_TinyMce)
+}
+
+@{
+	string strTitle =
+		string.Format("{0} {1}",
+		Resources.Actions.CreateOf,
+		Resources.Models.ECommerce.Plan.EntityName);
+
+	ViewBag.Title = strTitle;
+};
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	@Html.DtxBeginPanel()
+
+	@Html.DtxBeginPanelHeading()
+	@Html.DtxPanelTitle(strTitle)
+	@Html.DtxEndPanelHeading()
+
+	@Html.DtxBeginPanelBody()
+	@Html.ValidationSummary(excludePropertyErrors: true)
+
+	@Html.DtxCheckBoxFor(model => model.IsActive,
+		labelColumn: 5)
+
+	@*@Html.DtxCheckBoxFor(model => model.IsDeleted,
+		labelColumn: 5)*@
+
+	@Html.DtxCheckBoxFor(model => model.SmsNotification,
+		labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.Ordering,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.Name,
+		labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.Price,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.DurationInMonth,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.MaxDownloadSpeedInKB,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.MaxFileLengthForUploadingInMB,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.MinCreditForPayment,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.MaxTimeForPaymentInHour,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.SiteCommissionRate,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextBoxFor(model => model.ExtraSiteCommissionRateForIsFeaturedProducts,
+		leftToRight: true, labelColumn: 5)
+
+	@Html.DtxLabelTextAreaFor(model => model.Description,
+		labelColumn: 5)
+
+	@Html.DtxSubmit(Resources.Buttons.Create,
+		columnOffset: 5)
+	@Html.DtxEndPanelBody()
+
+	@Html.DtxBeginPanelFooter()
+	@Html.DtxActionLink(Resources.Actions.BackToList,
+		MVC.ECommerce.Plan.Index())
+	@Html.DtxEndPanelFooter()
+
+	@Html.DtxEndPanel()
+}

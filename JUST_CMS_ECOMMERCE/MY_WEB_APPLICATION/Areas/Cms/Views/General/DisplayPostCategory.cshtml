@@ -1,0 +1,65 @@
+﻿@model Models.Cms.PostCategory
+
+@{
+	string strTitle = Model.Name;
+
+	ViewBag.Title = strTitle;
+}
+
+@Html.DtxBeginPanel()
+
+@Html.DtxBeginPanelHeading()
+@Html.DtxPanelTitle(strTitle)
+@Html.DtxEndPanelHeading()
+
+@Html.DtxBeginPanelBody()
+<div class="row">
+	<div class="col-sm-2">
+		@if (string.IsNullOrWhiteSpace(Model.ImageUrl) == false)
+		{
+			<img src="@Model.ImageUrl" class="img-responsive img-rounded" alt="@Model.Name" title="@Model.Name" />
+		}
+		else
+		{
+			<img src="~/Content/Images/NoPhoto.png" class="img-responsive img-rounded" alt="@Model.Name" title="@Model.Name" />
+		}
+	</div>
+	<div class="col-sm-10">
+		@if (Model.IsFeatured)
+		{
+			@Html.DtxDisplayNameAndValueFor(model => model.IsFeatured)
+		}
+
+		@if (string.IsNullOrWhiteSpace(Model.Description) == false)
+		{
+			<hr />
+
+			@Html.Raw(Model.Description)
+		}
+
+		<hr />
+
+		@Html.DtxDisplayNameAndValueFor(model => model.InsertDateTime,
+			Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.UpdateDateTime,
+			Infrastructure.Enums.DisplayValueTypes.DateTime)
+
+		@Html.DtxDisplayNameAndValueFor(model => model.Hits,
+			Infrastructure.Enums.DisplayValueTypes.Number)
+	</div>
+</div>
+@Html.DtxEndPanelBody()
+
+@Html.DtxBeginPanelFooter()
+@{
+	string strCaption =
+		string.Format("{0} {1}",
+		Resources.Actions.ListOf,
+		Resources.Models.Cms.PostCategory.EntitiesName);
+}
+@Html.DtxActionLink(strCaption,
+	MVC.Cms.General.DisplayPostCategories())
+@Html.DtxEndPanelFooter()
+
+@Html.DtxEndPanel()
